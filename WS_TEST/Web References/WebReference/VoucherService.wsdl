@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="VoucherOO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="trans_tp" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="voucher_no" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="voucher_qty" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="voucher_bcd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bizdt_ord" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="net_no_ord" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cust_name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cust_tel" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cust_rmk" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="rmk" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherOOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherOOResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnTransTp" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsgNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnVoucherBcd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnVoucherItem" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherCheckResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DisNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsgNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherCheckNew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherCheckNewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherCheckNewResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherItemNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DisNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NetAmt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsgNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherCheckReturn">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherCheckReturnResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherCheckReturnResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DisNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NetAmt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TenderNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsgNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherCheck_OO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherCheck_OOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherCheck_OOResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DisNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsgNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Test">
+        <s:complexType />
+      </s:element>
+      <s:element name="TestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherTransaction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsSale" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TillNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SaleId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SaleDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherTransactionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherTransactionResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsgNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherTransactionNew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsSale" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TillNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SaleId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SaleDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NetAmt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Distcount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Tender" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TtransNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherTransactionNewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherTransactionNewResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsgNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherTransactionReturn">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsRtn" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TillNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SaleId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="StaffNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TtransNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherTransactionReturnResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherTransactionReturnResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsgNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherSalesCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherSalesCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherSalesCheckResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsgNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherCheck_BCP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherCheck_BCPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherCheck_BCPResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DisNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsgNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherCheck_BCPNew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherCheck_BCPNewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherCheck_BCPNewResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherItemNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DisNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NetAmt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsgNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherQuery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherQueryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherQueryResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsgNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherQueryNew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Sign" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoucherQueryNewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherQueryNewResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherItemNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherNos" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VoucherStatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ActivedTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CertificatedTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RtnMsgNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="VoucherOOSoapIn">
+    <wsdl:part name="parameters" element="tns:VoucherOO" />
+  </wsdl:message>
+  <wsdl:message name="VoucherOOSoapOut">
+    <wsdl:part name="parameters" element="tns:VoucherOOResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoucherCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:VoucherCheck" />
+  </wsdl:message>
+  <wsdl:message name="VoucherCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:VoucherCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoucherCheckNewSoapIn">
+    <wsdl:part name="parameters" element="tns:VoucherCheckNew" />
+  </wsdl:message>
+  <wsdl:message name="VoucherCheckNewSoapOut">
+    <wsdl:part name="parameters" element="tns:VoucherCheckNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoucherCheckReturnSoapIn">
+    <wsdl:part name="parameters" element="tns:VoucherCheckReturn" />
+  </wsdl:message>
+  <wsdl:message name="VoucherCheckReturnSoapOut">
+    <wsdl:part name="parameters" element="tns:VoucherCheckReturnResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoucherCheck_OOSoapIn">
+    <wsdl:part name="parameters" element="tns:VoucherCheck_OO" />
+  </wsdl:message>
+  <wsdl:message name="VoucherCheck_OOSoapOut">
+    <wsdl:part name="parameters" element="tns:VoucherCheck_OOResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestSoapIn">
+    <wsdl:part name="parameters" element="tns:Test" />
+  </wsdl:message>
+  <wsdl:message name="TestSoapOut">
+    <wsdl:part name="parameters" element="tns:TestResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoucherTransactionSoapIn">
+    <wsdl:part name="parameters" element="tns:VoucherTransaction" />
+  </wsdl:message>
+  <wsdl:message name="VoucherTransactionSoapOut">
+    <wsdl:part name="parameters" element="tns:VoucherTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoucherTransactionNewSoapIn">
+    <wsdl:part name="parameters" element="tns:VoucherTransactionNew" />
+  </wsdl:message>
+  <wsdl:message name="VoucherTransactionNewSoapOut">
+    <wsdl:part name="parameters" element="tns:VoucherTransactionNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoucherTransactionReturnSoapIn">
+    <wsdl:part name="parameters" element="tns:VoucherTransactionReturn" />
+  </wsdl:message>
+  <wsdl:message name="VoucherTransactionReturnSoapOut">
+    <wsdl:part name="parameters" element="tns:VoucherTransactionReturnResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoucherSalesCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:VoucherSalesCheck" />
+  </wsdl:message>
+  <wsdl:message name="VoucherSalesCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:VoucherSalesCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoucherCheck_BCPSoapIn">
+    <wsdl:part name="parameters" element="tns:VoucherCheck_BCP" />
+  </wsdl:message>
+  <wsdl:message name="VoucherCheck_BCPSoapOut">
+    <wsdl:part name="parameters" element="tns:VoucherCheck_BCPResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoucherCheck_BCPNewSoapIn">
+    <wsdl:part name="parameters" element="tns:VoucherCheck_BCPNew" />
+  </wsdl:message>
+  <wsdl:message name="VoucherCheck_BCPNewSoapOut">
+    <wsdl:part name="parameters" element="tns:VoucherCheck_BCPNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoucherQuerySoapIn">
+    <wsdl:part name="parameters" element="tns:VoucherQuery" />
+  </wsdl:message>
+  <wsdl:message name="VoucherQuerySoapOut">
+    <wsdl:part name="parameters" element="tns:VoucherQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoucherQueryNewSoapIn">
+    <wsdl:part name="parameters" element="tns:VoucherQueryNew" />
+  </wsdl:message>
+  <wsdl:message name="VoucherQueryNewSoapOut">
+    <wsdl:part name="parameters" element="tns:VoucherQueryNewResponse" />
+  </wsdl:message>
+  <wsdl:portType name="VoucherServiceSoap">
+    <wsdl:operation name="VoucherOO">
+      <wsdl:input message="tns:VoucherOOSoapIn" />
+      <wsdl:output message="tns:VoucherOOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheck">
+      <wsdl:input message="tns:VoucherCheckSoapIn" />
+      <wsdl:output message="tns:VoucherCheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheckNew">
+      <wsdl:input message="tns:VoucherCheckNewSoapIn" />
+      <wsdl:output message="tns:VoucherCheckNewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheckReturn">
+      <wsdl:input message="tns:VoucherCheckReturnSoapIn" />
+      <wsdl:output message="tns:VoucherCheckReturnSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheck_OO">
+      <wsdl:input message="tns:VoucherCheck_OOSoapIn" />
+      <wsdl:output message="tns:VoucherCheck_OOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <wsdl:input message="tns:TestSoapIn" />
+      <wsdl:output message="tns:TestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoucherTransaction">
+      <wsdl:input message="tns:VoucherTransactionSoapIn" />
+      <wsdl:output message="tns:VoucherTransactionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoucherTransactionNew">
+      <wsdl:input message="tns:VoucherTransactionNewSoapIn" />
+      <wsdl:output message="tns:VoucherTransactionNewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoucherTransactionReturn">
+      <wsdl:input message="tns:VoucherTransactionReturnSoapIn" />
+      <wsdl:output message="tns:VoucherTransactionReturnSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoucherSalesCheck">
+      <wsdl:input message="tns:VoucherSalesCheckSoapIn" />
+      <wsdl:output message="tns:VoucherSalesCheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheck_BCP">
+      <wsdl:input message="tns:VoucherCheck_BCPSoapIn" />
+      <wsdl:output message="tns:VoucherCheck_BCPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheck_BCPNew">
+      <wsdl:input message="tns:VoucherCheck_BCPNewSoapIn" />
+      <wsdl:output message="tns:VoucherCheck_BCPNewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoucherQuery">
+      <wsdl:input message="tns:VoucherQuerySoapIn" />
+      <wsdl:output message="tns:VoucherQuerySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoucherQueryNew">
+      <wsdl:input message="tns:VoucherQueryNewSoapIn" />
+      <wsdl:output message="tns:VoucherQueryNewSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="VoucherServiceSoap" type="tns:VoucherServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="VoucherOO">
+      <soap:operation soapAction="http://tempuri.org/VoucherOO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheck">
+      <soap:operation soapAction="http://tempuri.org/VoucherCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheckNew">
+      <soap:operation soapAction="http://tempuri.org/VoucherCheckNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheckReturn">
+      <soap:operation soapAction="http://tempuri.org/VoucherCheckReturn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheck_OO">
+      <soap:operation soapAction="http://tempuri.org/VoucherCheck_OO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <soap:operation soapAction="http://tempuri.org/Test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherTransaction">
+      <soap:operation soapAction="http://tempuri.org/VoucherTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherTransactionNew">
+      <soap:operation soapAction="http://tempuri.org/VoucherTransactionNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherTransactionReturn">
+      <soap:operation soapAction="http://tempuri.org/VoucherTransactionReturn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherSalesCheck">
+      <soap:operation soapAction="http://tempuri.org/VoucherSalesCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheck_BCP">
+      <soap:operation soapAction="http://tempuri.org/VoucherCheck_BCP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheck_BCPNew">
+      <soap:operation soapAction="http://tempuri.org/VoucherCheck_BCPNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherQuery">
+      <soap:operation soapAction="http://tempuri.org/VoucherQuery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherQueryNew">
+      <soap:operation soapAction="http://tempuri.org/VoucherQueryNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="VoucherServiceSoap12" type="tns:VoucherServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="VoucherOO">
+      <soap12:operation soapAction="http://tempuri.org/VoucherOO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheck">
+      <soap12:operation soapAction="http://tempuri.org/VoucherCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheckNew">
+      <soap12:operation soapAction="http://tempuri.org/VoucherCheckNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheckReturn">
+      <soap12:operation soapAction="http://tempuri.org/VoucherCheckReturn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheck_OO">
+      <soap12:operation soapAction="http://tempuri.org/VoucherCheck_OO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <soap12:operation soapAction="http://tempuri.org/Test" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherTransaction">
+      <soap12:operation soapAction="http://tempuri.org/VoucherTransaction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherTransactionNew">
+      <soap12:operation soapAction="http://tempuri.org/VoucherTransactionNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherTransactionReturn">
+      <soap12:operation soapAction="http://tempuri.org/VoucherTransactionReturn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherSalesCheck">
+      <soap12:operation soapAction="http://tempuri.org/VoucherSalesCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheck_BCP">
+      <soap12:operation soapAction="http://tempuri.org/VoucherCheck_BCP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherCheck_BCPNew">
+      <soap12:operation soapAction="http://tempuri.org/VoucherCheck_BCPNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherQuery">
+      <soap12:operation soapAction="http://tempuri.org/VoucherQuery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoucherQueryNew">
+      <soap12:operation soapAction="http://tempuri.org/VoucherQueryNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VoucherService">
+    <wsdl:port name="VoucherServiceSoap" binding="tns:VoucherServiceSoap">
+      <soap:address location="http://localhost/VoucherService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="VoucherServiceSoap12" binding="tns:VoucherServiceSoap12">
+      <soap12:address location="http://localhost/VoucherService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
