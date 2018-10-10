@@ -3357,7 +3357,7 @@ namespace HexSalesIF_Service
             
             string result = "0";
             SNo = "";
-            string outVoucherQty = "";
+            //string outVoucherQty = "";
             VoucherCodeSyncController c = new VoucherCodeSyncController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
             var resp = c.ExecuteAll(new VoucherCodeSyncReq(VoucherName, VoucherNo, VoucherQty, BarcodeUnit, StartDate,
                     ExpiredDate, UpdateDate, Remarks1, Remarks2, Sign));

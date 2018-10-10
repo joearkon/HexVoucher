@@ -54,7 +54,6 @@ namespace HexSalesIF_Service
         public WebRequestGate(string version)
         {
             this.version = version;
-            IWebRequestWatchDog watchDog = null;
 
             if (!string.IsNullOrEmpty(this.version) && Convert.ToInt32(this.version) == 1)  //新加签方式 
             {
@@ -338,7 +337,7 @@ namespace HexSalesIF_Service
         /// <returns></returns>
         private string GenerateSortedKeyPairs(IDictionary data, char sepChar)
         {
-            if (sepChar == null)
+            if (sepChar == '\0')
             {
                 sepChar = '&';
             }
