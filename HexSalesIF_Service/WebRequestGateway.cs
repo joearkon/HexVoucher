@@ -53,6 +53,7 @@ namespace HexSalesIF_Service
         protected IWebRequestWatchDog watchDog { get; set; }
         public WebRequestGate(string version)
         {
+
             this.version = version;
 
             if (!string.IsNullOrEmpty(this.version) && Convert.ToInt32(this.version) == 1)  //新加签方式 
