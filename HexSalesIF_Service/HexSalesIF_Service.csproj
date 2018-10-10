@@ -76,8 +76,8 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\ConsoleTs\bin\Debug\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net20-full\log4net.dll</HintPath>
@@ -95,6 +95,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="sk\CustomPrivateKey.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sk\CustomPublicKey.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sk\VendorPrivateKey.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sk\VendorPublicKey.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="VoucherService.asmx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -106,10 +118,18 @@
     <Compile Include="controller\VoucherCodeSync.cs" />
     <Compile Include="controller\VoucherObsolete.cs" />
     <Compile Include="controller\VoucherOO.cs" />
+    <Compile Include="controller\VoucherQuery.cs" />
+    <Compile Include="controller\VoucherRetreatRefund.cs" />
     <Compile Include="controller\VoucherStoreSync.cs" />
+    <Compile Include="controller\VoucherTransaction.cs" />
+    <Compile Include="controller\VoucherTransRefund.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="model\VoucherNumberAttr.cs" />
+    <Compile Include="model\VoucherQuery.cs" />
+    <Compile Include="model\VoucherTransaction.cs" />
+    <Compile Include="model\VoucherTransRefund.cs" />
     <Compile Include="model\VoucherBase.cs" />
     <Compile Include="model\VoucherCheck.cs" />
     <Compile Include="model\VoucherCodeSync.cs" />
@@ -117,6 +137,7 @@
     <Compile Include="model\VoucherOO.cs" />
     <Compile Include="model\VoucherStoreSync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="util\WebConfigReader.cs" />
     <Compile Include="util\WebLog.cs" />
     <Compile Include="util\WebSecurity.cs" />
     <Compile Include="util\WebServiceLib.cs" />
@@ -132,6 +153,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\HexSalesIFService20181010060555 - Web Deploy.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

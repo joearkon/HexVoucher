@@ -7,38 +7,46 @@ using HexSalesIF_Service.model;
 
 namespace HexSalesIF_Service.controller
 {
-    public class VoucherStoreSyncController : ControllerBase
+    public class VoucherTransRefundController : ControllerBase
     {
-        public VoucherStoreSyncController(IWebRequestGate gate) : base(gate)
+        public VoucherTransRefundController(IWebRequestGate gate) : base(gate)
         {
         }
 
         protected override VoucherBaseResp Execute(VoucherBaseReq baseReq)
         {
-            var newObj = baseReq as VoucherStoreSyncReq; // 强制转换
-            VoucherStoreSyncResp resp = new VoucherStoreSyncResp();
+
+            var newObj = baseReq as VoucherTransRefundReq;
+            var resp = new VoucherTransRefundResp();
             string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
 
             using (OracleConnection dbConn = new OracleConnection(databasedws))
             {
+               
                 dbConn.Open();
 
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_STOREINFO_SYNCHRONIZE", dbConn);//调用存储过程的方法
+
+
+                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERTRANSACTION_REFUND2", dbConn);//调用存储过程的方法
                 oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
                 try
                 {
 
+                    //string[] vous = VoucherNo.Split(',');
+
+                    //for (int i = 0; i < vous.Length; i++)
+                    //{
+
+                    //    if (vous[i].Trim() != "")
+                    //    {
+
                     oralceComm.Parameters.Clear();
-                    oralceComm.Parameters.Add(new OracleParameter("P_PROVINCE", OracleType.VarChar)).Value = newObj.Province;
-                    oralceComm.Parameters.Add(new OracleParameter("P_CITY", OracleType.VarChar)).Value = newObj.City;
-                    oralceComm.Parameters.Add(new OracleParameter("P_COMPANY", OracleType.VarChar)).Value = newObj.Company;
+                    oralceComm.Parameters.Add(new OracleParameter("P_TRANSNO", OracleType.VarChar)).Value = newObj.TransNo;
+                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = newObj.VoucherNo;
                     oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = newObj.StoreNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STORENAME", OracleType.VarChar)).Value = newObj.StoreName;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STOREADDR", OracleType.VarChar)).Value = newObj.StoreAddr;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STOREEMAIL", OracleType.VarChar)).Value = newObj.StoreEmail;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STORETEL", OracleType.VarChar)).Value = newObj.StoreTel;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STOREPOSNUM", OracleType.VarChar)).Value = newObj.StorePosNum;
-                    oralceComm.Parameters.Add(new OracleParameter("P_OPERATETYPE", OracleType.VarChar)).Value = newObj.OperateType;
+                    oralceComm.Parameters.Add(new OracleParameter("P_TILLNO", OracleType.VarChar)).Value = newObj.TillNo;
+                    oralceComm.Parameters.Add(new OracleParameter("P_SALEID", OracleType.Int32)).Value = newObj.SaleId;
+                    oralceComm.Parameters.Add(new OracleParameter("P_SALEDATE", OracleType.VarChar)).Value = newObj.SaleDate;
                     oralceComm.Parameters.Add(new OracleParameter("P_REMARKS1", OracleType.VarChar)).Value = newObj.Remarks1;
                     oralceComm.Parameters.Add(new OracleParameter("P_REMARKS2", OracleType.VarChar)).Value = newObj.Remarks2;
 
@@ -60,22 +68,15 @@ namespace HexSalesIF_Service.controller
 
                     resp.RtnMsgNo = PRTNMSGNO.Value.ToString();
 
-                    //dbConn.Close();
-
-                    //result = "1";
-
-
                 }
                 catch (Exception e)
                 {
-                    //dbConn.Close();
-
                     resp.RtnMsgNo = "99";
                     resp.RtnMsg = "异常情况：" + e.Message.ToString();
-                    //result = "0";
                 }
 
             }
+
             return resp;
         }
     }

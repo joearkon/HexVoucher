@@ -14,5 +14,19 @@ namespace HexSalesIF_Service.util
             data = data.Replace("~", "\n").Replace("\r", "");
             return data;
         }
+
+        public static string SubStr(string s,  int len)
+        {
+            if (string.IsNullOrEmpty(s)) { return ""; }
+
+            if (s.Length < len)
+            {
+                return s;
+            }
+
+            string newStr = s.Substring(0, len);
+            newStr = newStr + "...";
+            return newStr;
+        }
     }
 }

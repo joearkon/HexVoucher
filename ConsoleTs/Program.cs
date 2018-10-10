@@ -54,7 +54,17 @@ namespace ConsoleTs
             var sign5 = Class1.Sign("city=上海&company=test_company_1&operateType=1&province=上海&storeEmail=123@123.com&storeName=1&storeNo=600081", GetXmlString("CustomPrivateKey.xml"));
             var sign6 = Class1.Sign("expiredDate=2018-12-31&remarks1=22&startDate=2018-10-01&voucherName=6吋预约蛋糕券&voucherNo=1609941075&voucherQty=10", GetXmlString("CustomPrivateKey.xml"));
             var sign7 = Class1.Sign("remarks1=理由：冲正&saleDate=2018-08-31&saleId=1&storeNo=600017&tillNo=1&transNo=18082784302100005005&voucherNo=971832690000028430", GetXmlString("CustomPrivateKey.xml"));
+            var sign8 = Class1.Sign("rtnMsg=礼券同步失败: PG_0408_000003&rtnMsgNo=03", GetXmlString("VendorPrivateKey.xml"));
+            var sign9 = Class1.Sign("isRtn=1&rtnDate=2018-09-14&saleId=1&staffNo=123&storeNo=600017&tillNo=1&ttransNo=12345678&voucherNo=401532740000000501", GetXmlString("CustomPrivateKey.xml"));
+            var sign10 = Class1.Sign("distcount=1&isSale=1&netAmt=20&saleDate=2018-09-14&saleId=14&storeNo=600017&tender=123&tillNo=1234&ttransNo=334&userCode=234&voucherNo=401532740000000501", GetXmlString("CustomPrivateKey.xml"));
+            var sign11 = Class1.Sign("isSale=1&saleDate=2018-09-14&saleId=555&storeNo=600017&tillNo=2344&userCode=123&voucherNo=string", GetXmlString("CustomPrivateKey.xml"));
             var voucherService = new HexVoucherService.VoucherService();
+
+            var t2 = Class1.Verify("storeNo=600017&voucherNo=941831670000224191",
+                "VA+57fF0F5Sn31tl/qbueuQI+YOPGjMtwZ11i5lDMz5VlrZngauPhYXdqbRb5aO8OMYxVAEn9h5rqKGQNioQY15muw6hrQ0mtHiyY/J1tyHBhLhxl+gnQCI6Vk6Du7e8S+1Sp2P7tmLYdnnweq3Scb0f+gFtuqgMK0vr586HlxIifAgzGpAPinNfdlwhMNNu2TSxIZnxfimSpjNcXEPtoACT4B5mwXYlYpEhJtwImOK41XWCwFatvZ55Iqt7DgOw4pPbI+eISL2exIaou2GXTtcqmxBKCjgq4L27dQxlFwWLcb7LUjzMOspkH1hqEHvumZdJyNxq55+pGlCd8WSEHg==",
+                 GetXmlString("CustomPublicKey.xml"));
+
+            var sign12 = Class1.Sign("storeNo=600017&voucherNo=941831670000224191", GetXmlString("CustomPrivateKey.xml"));
 
             //string sign4 = GetMD5("941831670000224191" + "~" + "600017" + "~" + "ABCD1234");
             string out1 = "";
@@ -63,8 +73,9 @@ namespace ConsoleTs
             string out4 = "";
             string out5 = "";
             
-            voucherService.VoucherCheckNew("941831670000224191", "600017", ref sign2, out out1, out out2, out out3, out out4, out out5);
-         
+            //voucherService.VoucherCheckNew("941831670000224191", "600017", ref sign2, out out1, out out2, out out3, out out4, out out5);
+
+            var p = AppDomain.CurrentDomain.BaseDirectory;
         }
 
         static void ToDotNet()

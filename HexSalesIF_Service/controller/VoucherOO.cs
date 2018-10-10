@@ -9,7 +9,11 @@ namespace HexSalesIF_Service.controller
 {
     public class VoucherOOController : ControllerBase
     {
-        public override VoucherBaseResp Execute(VoucherBaseReq baseReq)
+        public VoucherOOController(IWebRequestGate gate) : base(gate)
+        {
+        }
+
+        protected override VoucherBaseResp Execute(VoucherBaseReq baseReq)
         {
             var newObj = baseReq as VoucherOOReq; // 强制转换
             VoucherOOResp resp = new VoucherOOResp();
@@ -21,13 +25,13 @@ namespace HexSalesIF_Service.controller
                 oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
                 try
                 {
-                    oralceComm.Parameters.Add(new OracleParameter("P_TRANS_TP", OracleType.VarChar)).Value = newObj.TransTp;
-                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHER_NO", OracleType.VarChar)).Value = newObj.VoucherNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHER_QTY", OracleType.VarChar)).Value = newObj.VoucherQty;
-                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHER_BCD", OracleType.VarChar)).Value = newObj.VoucherBcd;
+                    oralceComm.Parameters.Add(new OracleParameter("P_TRANS_TP", OracleType.VarChar)).Value = newObj.trans_tp;
+                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHER_NO", OracleType.VarChar)).Value = newObj.voucher_no;
+                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHER_QTY", OracleType.VarChar)).Value = newObj.voucher_qty;
+                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHER_BCD", OracleType.VarChar)).Value = newObj.voucher_bcd;
                     try
                     {
-                        oralceComm.Parameters.Add(new OracleParameter("P_BIZDT_ORD", OracleType.DateTime)).Value = System.Convert.ToDateTime(newObj.BizdtOrd);
+                        oralceComm.Parameters.Add(new OracleParameter("P_BIZDT_ORD", OracleType.DateTime)).Value = System.Convert.ToDateTime(newObj.bizdt_ord);
                     }
                     catch
                     {
@@ -35,11 +39,11 @@ namespace HexSalesIF_Service.controller
                     }
 
                     //oralceComm.Parameters.Add(new OracleParameter("P_BIZDT_ORD", OracleType.VarChar)).Value = bizdt_ord;
-                    oralceComm.Parameters.Add(new OracleParameter("P_NET_NO_ORD", OracleType.VarChar)).Value = newObj.NetNoOrd;
-                    oralceComm.Parameters.Add(new OracleParameter("P_CUST_NAME", OracleType.VarChar)).Value = newObj.CustName;
-                    oralceComm.Parameters.Add(new OracleParameter("P_CUST_TEL", OracleType.VarChar)).Value = newObj.CustTel;
-                    oralceComm.Parameters.Add(new OracleParameter("P_CUST_RMK", OracleType.VarChar)).Value = newObj.CustRmk;
-                    oralceComm.Parameters.Add(new OracleParameter("P_RMK", OracleType.VarChar)).Value = newObj.Rmk;
+                    oralceComm.Parameters.Add(new OracleParameter("P_NET_NO_ORD", OracleType.VarChar)).Value = newObj.net_no_ord;
+                    oralceComm.Parameters.Add(new OracleParameter("P_CUST_NAME", OracleType.VarChar)).Value = newObj.cust_name;
+                    oralceComm.Parameters.Add(new OracleParameter("P_CUST_TEL", OracleType.VarChar)).Value = newObj.cust_tel;
+                    oralceComm.Parameters.Add(new OracleParameter("P_CUST_RMK", OracleType.VarChar)).Value = newObj.cust_rmk;
+                    oralceComm.Parameters.Add(new OracleParameter("P_RMK", OracleType.VarChar)).Value = newObj.rmk;
 
                     OracleParameter PRTNtranstp = new OracleParameter("V_TRANS_TP", OracleType.VarChar);
                     PRTNtranstp.Direction = ParameterDirection.Output;
@@ -88,7 +92,7 @@ namespace HexSalesIF_Service.controller
                 }
                 catch (Exception e)
                 {
-                    resp.RtnTransTp = newObj.TransTp;
+                    resp.RtnTransTp = newObj.trans_tp;
                     resp.RtnMsgNo = "99";
                     // RtnMsg = StoreNo;            
                     resp.RtnMsg = "异常情况：" + e.Message.ToString();
@@ -97,6 +101,80 @@ namespace HexSalesIF_Service.controller
                 }
             }
 
+            return resp;
+        }
+    }
+
+    public class VoucherCheckOOController : ControllerBase
+    {
+        public VoucherCheckOOController(IWebRequestGate gate) : base(gate)
+        {
+        }
+
+        protected override VoucherBaseResp Execute(VoucherBaseReq baseReq)
+        {
+            var req = baseReq as VoucherCheckReq; // 强制转换
+            var resp = new VoucherOOCheckResp();
+            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+            // OracleConnection dbConn = new OracleConnection(databasedws);
+
+            using (OracleConnection dbConn = new OracleConnection(databasedws))
+            {
+                dbConn.Open();
+
+                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VoucherCheck_OO", dbConn);//调用存储过程的方法
+                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+                try
+                {
+
+                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = req.VoucherNo;
+                    oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = req.StoreNo;
+
+                    OracleParameter PItemNo = new OracleParameter("V_DISNO", OracleType.VarChar);
+                    PItemNo.Direction = ParameterDirection.Output;
+                    PItemNo.Size = 50;
+                    oralceComm.Parameters.Add(PItemNo);
+
+                    OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+
+                    PRtnMsg.Direction = ParameterDirection.Output;
+                    PRtnMsg.Size = 100;
+                    oralceComm.Parameters.Add(PRtnMsg);
+
+                    OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+                    PRTNMSGNO.Direction = ParameterDirection.Output;
+                    PRTNMSGNO.Size = 50;
+                    oralceComm.Parameters.Add(PRTNMSGNO);
+
+
+                    oralceComm.ExecuteNonQuery();
+
+                    resp.DisNo = PItemNo.Value.ToString();
+
+                    resp.RtnMsg = PRtnMsg.Value.ToString();
+
+                    resp.RtnMsgNo = PRTNMSGNO.Value.ToString();
+
+                    //   dbConn.Close();
+                    //if (DisNo == "")
+                    //{
+                    //    result = "";
+                    //}
+                    //else
+                    //{
+                    //    result = "1";
+                    //}
+
+
+                }
+                catch (Exception e)
+                {
+                    resp.RtnMsgNo = "99";
+                    resp.RtnMsg = "异常情况：" + e.Message.ToString();
+                    
+                }
+                
+            }
             return resp;
         }
     }

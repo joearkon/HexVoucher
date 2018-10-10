@@ -26,7 +26,6 @@ namespace HexSalesIF_Service
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     public class VoucherService : System.Web.Services.WebService
     {
-        //log4net.ILog log = log4net.LogManager.GetLogger(typeof(VoucherService));
         private WebServiceCommon serviceCommon { get; set; }
         public VoucherService()
         {
@@ -58,54 +57,77 @@ namespace HexSalesIF_Service
            out string RtnTransTp, out string RtnMsg, out string RtnMsgNo,
            out string RtnVoucherBcd, out string RtnVoucherItem)
         {
+            //string result = "0";
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary {
+            //    { "trans_tp", trans_tp },
+            //    { "voucher_no", voucher_no},
+            //    { "voucher_qty", voucher_qty},
+            //    { "voucher_bcd",voucher_bcd},
+            //    { "bizdt_ord",bizdt_ord},
+            //    { "net_no_ord",net_no_ord},
+            //    { "cust_name",cust_name},
+            //    { "cust_tel",cust_tel},
+            //    { "cust_rmk",cust_rmk},
+            //    { "rmk",rmk},
+            //};
+
+            //WebRequestGateway gate = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
+            //VoucherOOResp vcResp = new VoucherOOResp();
+            //VoucherOOController c = new VoucherOOController();
+            //if (!gate.VerifyRequestDataSign(voucherQueryDict, Sign))
+            //{
+            //    vcResp.RtnMsg = "验签失败";
+            //    vcResp.RtnMsgNo = "90";
+            //}
+            //else
+            //{
+            //    VoucherBaseResp resp = c.Execute(new VoucherOOReq(trans_tp, voucher_no, voucher_qty, voucher_bcd, bizdt_ord, net_no_ord, cust_name,
+            //        cust_tel, cust_rmk, rmk));
+            //    vcResp = resp as VoucherOOResp;
+            //    result = "1";
+            //}
+
+            //RtnMsg = vcResp.RtnMsg;
+            //RtnMsgNo = vcResp.RtnMsgNo;
+            //RtnTransTp = vcResp.RtnTransTp;
+            //RtnVoucherBcd = vcResp.RtnVoucherBcd;
+            //RtnVoucherItem = vcResp.RtnVoucherItem;
+            //if (RtnMsgNo == "1")
+            //{
+            //    result = "1";
+            //}
+            //Sign = gate.CreateSign(new OrderedDictionary
+            //{
+            //    { "rtnMsg", RtnMsg },
+            //    { "rtnMsgNo", RtnMsgNo},
+            //    { "rtnTransTp",RtnTransTp},
+            //    { "rtnVoucherBcd",RtnVoucherBcd},
+            //    {"rtnVoucherItem", RtnVoucherItem}
+            //});
+            //return result;
+
             string result = "0";
-            OrderedDictionary voucherQueryDict = new OrderedDictionary {
-                { "trans_tp", trans_tp },
-                { "voucher_no", voucher_no},
-                { "voucher_qty", voucher_qty},
-                { "voucher_bcd",voucher_bcd},
-                { "bizdt_ord",bizdt_ord},
-                { "net_no_ord",net_no_ord},
-                { "cust_name",cust_name},
-                { "cust_tel",cust_tel},
-                { "cust_rmk",cust_rmk},
-                { "rmk",rmk},
-            };
+            RtnTransTp = "";
+            RtnVoucherBcd = "";
+            RtnVoucherItem = "";
+            VoucherOOController c = new VoucherOOController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherOOReq(trans_tp, voucher_no, voucher_qty, voucher_bcd, bizdt_ord, net_no_ord, cust_name,
+                    cust_tel, cust_rmk, rmk, Sign));
+            if (resp.isExcuteSuccess())
+            {
+                VoucherOOResp vcResp = resp as VoucherOOResp;
+                if (vcResp.RtnMsgNo == "1") { result = "1"; }
+                RtnTransTp = vcResp.RtnTransTp;
+                RtnVoucherBcd = vcResp.RtnVoucherBcd;
+                RtnVoucherItem = vcResp.RtnVoucherItem;
 
-            WebRequestGateway gate = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
-            VoucherOOResp vcResp = new VoucherOOResp();
-            VoucherOOController c = new VoucherOOController();
-            if (!gate.VerifyRequestDataSign(voucherQueryDict, Sign))
-            {
-                vcResp.RtnMsg = "验签失败";
-                vcResp.RtnMsgNo = "90";
-            }
-            else
-            {
-                VoucherBaseResp resp = c.Execute(new VoucherOOReq(trans_tp, voucher_no, voucher_qty, voucher_bcd, bizdt_ord, net_no_ord, cust_name,
-                    cust_tel, cust_rmk, rmk));
-                vcResp = resp as VoucherOOResp;
-                result = "1";
             }
 
-            RtnMsg = vcResp.RtnMsg;
-            RtnMsgNo = vcResp.RtnMsgNo;
-            RtnTransTp = vcResp.RtnTransTp;
-            RtnVoucherBcd = vcResp.RtnVoucherBcd;
-            RtnVoucherItem = vcResp.RtnVoucherItem;
-            if (RtnMsgNo == "1")
-            {
-                result = "1";
-            }
-            Sign = gate.CreateSign(new OrderedDictionary
-            {
-                { "rtnMsg", RtnMsg },
-                { "rtnMsgNo", RtnMsgNo},
-                { "rtnTransTp",RtnTransTp},
-                { "rtnVoucherBcd",RtnVoucherBcd},
-                {"rtnVoucherItem", RtnVoucherItem}
-            });
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
             return result;
+
             //string parString = "";
 
             //if (trans_tp != null)
@@ -374,6 +396,22 @@ namespace HexSalesIF_Service
         [WebMethod(Description = "礼券检查")]
         public string VoucherCheck(string VoucherNo, string StoreNo, ref string Sign, out string DisNo, out string RtnMsg, out string RtnMsgNo)
         {
+
+            string result = "0";
+            DisNo = "";
+            VoucherCheckController c = new VoucherCheckController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherCheckReq(StoreNo, VoucherNo,Sign));
+            if (resp.isExcuteSuccess())
+            {
+                VoucherCheckResp vcResp = resp as VoucherCheckResp;
+                if (vcResp.DisNo != "") { result = "1"; }
+                DisNo = vcResp.DisNo;
+            }
+
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
+            return result;
             // --- 老验证 注释 开始
             //string parString = "";
 
@@ -401,119 +439,140 @@ namespace HexSalesIF_Service
             //    return "0";
             //}
             // ---老验证 注释 结束
-            string result = "0";
-            DisNo = "";
-            RtnMsg = "";
-            RtnMsgNo = "";
-            OrderedDictionary voucherQueryDict = new OrderedDictionary
-            {
-                { "voucherNo", VoucherNo },
-                { "storeNo", StoreNo}
-            };
+            //string result = "0";
+            //DisNo = "";
+            //RtnMsg = "";
+            //RtnMsgNo = "";
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary
+            //{
+            //    { "voucherNo", VoucherNo },
+            //    { "storeNo", StoreNo}
+            //};
 
 
 
-            LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
-                 Sign, HttpContext.Current.Request.Headers.Get("version")));
+            //LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+            //     Sign, HttpContext.Current.Request.Headers.Get("version")));
 
-            WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
-
-
-            if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
-            {
-                RtnMsg = "参数验证失败";
-                RtnMsgNo = "90";
-                Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                return result;
-            }
+            //WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
 
 
-            //VoucherNo:string;StoreNo:string;var ItemNo:string
-
-            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
-            VoucherCheckResp checkResp = new VoucherCheckResp();
-            using (OracleConnection dbConn = new OracleConnection(databasedws))
-            {
-
-
-                dbConn.Open();
+            //if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
+            //{
+            //    RtnMsg = "参数验证失败";
+            //    RtnMsgNo = "90";
+            //    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    return result;
+            //}
 
 
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VoucherCheck", dbConn);//调用存储过程的方法
-                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
-                try
-                {
+            ////VoucherNo:string;StoreNo:string;var ItemNo:string
+
+            //string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+            //VoucherCheckResp checkResp = new VoucherCheckResp();
+            //using (OracleConnection dbConn = new OracleConnection(databasedws))
+            //{
+
+
+            //    dbConn.Open();
+
+
+            //    OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VoucherCheck", dbConn);//调用存储过程的方法
+            //    oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+            //    try
+            //    {
 
 
 
-                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
 
-                    OracleParameter PItemNo = new OracleParameter("V_DISNO", OracleType.VarChar);
-                    PItemNo.Direction = ParameterDirection.Output;
-                    PItemNo.Size = 50;
-                    oralceComm.Parameters.Add(PItemNo);
+            //        OracleParameter PItemNo = new OracleParameter("V_DISNO", OracleType.VarChar);
+            //        PItemNo.Direction = ParameterDirection.Output;
+            //        PItemNo.Size = 50;
+            //        oralceComm.Parameters.Add(PItemNo);
 
-                    OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+            //        OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
 
-                    PRtnMsg.Direction = ParameterDirection.Output;
-                    PRtnMsg.Size = 100;
-                    oralceComm.Parameters.Add(PRtnMsg);
+            //        PRtnMsg.Direction = ParameterDirection.Output;
+            //        PRtnMsg.Size = 100;
+            //        oralceComm.Parameters.Add(PRtnMsg);
 
-                    OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
-                    PRTNMSGNO.Direction = ParameterDirection.Output;
-                    PRTNMSGNO.Size = 50;
-                    oralceComm.Parameters.Add(PRTNMSGNO);
-
-
-                    oralceComm.ExecuteNonQuery();
-
-                    DisNo = PItemNo.Value.ToString();
-
-                    RtnMsg = PRtnMsg.Value.ToString();
-
-                    RtnMsgNo = PRTNMSGNO.Value.ToString();
-
-                    // dbConn.Close();
-                    if (DisNo == "")
-                    {
-                        result = "";
-                    }
-                    else
-                    {
-                        result = "1";
-                    }
+            //        OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+            //        PRTNMSGNO.Direction = ParameterDirection.Output;
+            //        PRTNMSGNO.Size = 50;
+            //        oralceComm.Parameters.Add(PRTNMSGNO);
 
 
-                }
-                catch (Exception e)
-                {
-                    // dbConn.Close();
+            //        oralceComm.ExecuteNonQuery();
 
-                    RtnMsgNo = "99";
-                    // RtnMsg = StoreNo;            
-                    RtnMsg = "异常情况：" + e.Message.ToString();
-                    result = "0";
-                }
+            //        DisNo = PItemNo.Value.ToString();
 
-                finally
-                {
-                    Sign = requestGateway.CreateSign(new OrderedDictionary{
-                        { "rtnMsg", RtnMsg },
-                        { "rtnMsgNo", RtnMsgNo},
-                        {"disNo", DisNo }
-                    });
-                }
-            }
-            return result;
+            //        RtnMsg = PRtnMsg.Value.ToString();
+
+            //        RtnMsgNo = PRTNMSGNO.Value.ToString();
+
+            //        // dbConn.Close();
+            //        if (DisNo == "")
+            //        {
+            //            result = "";
+            //        }
+            //        else
+            //        {
+            //            result = "1";
+            //        }
+
+
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        // dbConn.Close();
+
+            //        RtnMsgNo = "99";
+            //        // RtnMsg = StoreNo;            
+            //        RtnMsg = "异常情况：" + e.Message.ToString();
+            //        result = "0";
+            //    }
+
+            //    finally
+            //    {
+            //        Sign = requestGateway.CreateSign(new OrderedDictionary{
+            //            { "rtnMsg", RtnMsg },
+            //            { "rtnMsgNo", RtnMsgNo},
+            //            {"disNo", DisNo }
+            //        });
+            //    }
+            //}
+            //return result;
 
 
 
         }
 
         [WebMethod(Description = "礼券检查(新)")]
-        public string VoucherCheckNew(string VoucherNo, string StoreNo, ref string Sign, out string VoucherItemNo, out string DisNo, out string NetAmt, out string RtnMsg, out string RtnMsgNo)
+        public string VoucherCheckNew(string VoucherNo, string StoreNo, ref string Sign, out string VoucherItemNo, out string DisNo, out string NetAmt, 
+            out string RtnMsg, out string RtnMsgNo)
         {
+
+            string result = "0";
+            DisNo = "";
+            NetAmt = "";
+            VoucherItemNo = "";
+            var c = new VoucherCheckNewController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherCheckReq(StoreNo, VoucherNo, Sign));
+            if (resp.isExcuteSuccess())
+            {
+                VoucherCheckNewResp vcResp = resp as VoucherCheckNewResp;
+                if (vcResp.DisNo != "") { result = "1"; }
+                DisNo = vcResp.DisNo;
+                VoucherItemNo = vcResp.VoucherItemNo;
+                NetAmt = vcResp.NetAmt;
+            }
+
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
+            return result;
 
             // ----- 老接口 注释 start
             //string parString = "";
@@ -548,130 +607,130 @@ namespace HexSalesIF_Service
             // ----- 老接口 注释 end
 
 
-            OrderedDictionary voucherQueryDict = new OrderedDictionary
-            {
-                { "voucherNo", VoucherNo },
-                { "storeNo", StoreNo}
-            };
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary
+            //{
+            //    { "voucherNo", VoucherNo },
+            //    { "storeNo", StoreNo}
+            //};
 
-            string result = "0";
-            DisNo = "";
-            VoucherItemNo = "";
-            NetAmt = "";
-            RtnMsg = "";
-            RtnMsgNo = "";
-
-
-            LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
-                Sign, HttpContext.Current.Request.Headers.Get("version")));
-
-            WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
+            //string result = "0";
+            //DisNo = "";
+            //VoucherItemNo = "";
+            //NetAmt = "";
+            //RtnMsg = "";
+            //RtnMsgNo = "";
 
 
-            if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
-            {
-                RtnMsg = "参数验证失败";
-                RtnMsgNo = "90";
-                Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                return result;
-            }
+            //LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+            //    Sign, HttpContext.Current.Request.Headers.Get("version")));
+
+            //WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
+
+
+            //if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
+            //{
+            //    RtnMsg = "参数验证失败";
+            //    RtnMsgNo = "90";
+            //    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    return result;
+            //}
 
 
 
-            //VoucherNo:string;StoreNo:string;var ItemNo:string
+            ////VoucherNo:string;StoreNo:string;var ItemNo:string
 
-            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+            //string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
 
-            using (OracleConnection dbConn = new OracleConnection(databasedws))
-            {
-                dbConn.Open();
+            //using (OracleConnection dbConn = new OracleConnection(databasedws))
+            //{
+            //    dbConn.Open();
 
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERCHECK_NEW", dbConn);//调用存储过程的方法
-                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
-                try
-                {
+            //    OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERCHECK_NEW", dbConn);//调用存储过程的方法
+            //    oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+            //    try
+            //    {
 
-                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
 
-                    OracleParameter PItemNo = new OracleParameter("V_VOUCHERITEMNO", OracleType.VarChar);
-                    PItemNo.Direction = ParameterDirection.Output;
-                    PItemNo.Size = 50;
-                    oralceComm.Parameters.Add(PItemNo);
+            //        OracleParameter PItemNo = new OracleParameter("V_VOUCHERITEMNO", OracleType.VarChar);
+            //        PItemNo.Direction = ParameterDirection.Output;
+            //        PItemNo.Size = 50;
+            //        oralceComm.Parameters.Add(PItemNo);
 
-                    OracleParameter Pdisc = new OracleParameter("V_DISNO", OracleType.VarChar);
-                    Pdisc.Direction = ParameterDirection.Output;
-                    Pdisc.Size = 50;
-                    oralceComm.Parameters.Add(Pdisc);
-
-
-                    OracleParameter PnetAmt = new OracleParameter("V_NETAMT", OracleType.VarChar);
-                    PnetAmt.Direction = ParameterDirection.Output;
-                    PnetAmt.Size = 50;
-                    oralceComm.Parameters.Add(PnetAmt);
-
-                    OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
-
-                    PRtnMsg.Direction = ParameterDirection.Output;
-                    PRtnMsg.Size = 100;
-                    oralceComm.Parameters.Add(PRtnMsg);
-
-                    OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
-                    PRTNMSGNO.Direction = ParameterDirection.Output;
-                    PRTNMSGNO.Size = 50;
-                    oralceComm.Parameters.Add(PRTNMSGNO);
+            //        OracleParameter Pdisc = new OracleParameter("V_DISNO", OracleType.VarChar);
+            //        Pdisc.Direction = ParameterDirection.Output;
+            //        Pdisc.Size = 50;
+            //        oralceComm.Parameters.Add(Pdisc);
 
 
-                    oralceComm.ExecuteNonQuery();
+            //        OracleParameter PnetAmt = new OracleParameter("V_NETAMT", OracleType.VarChar);
+            //        PnetAmt.Direction = ParameterDirection.Output;
+            //        PnetAmt.Size = 50;
+            //        oralceComm.Parameters.Add(PnetAmt);
+
+            //        OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+
+            //        PRtnMsg.Direction = ParameterDirection.Output;
+            //        PRtnMsg.Size = 100;
+            //        oralceComm.Parameters.Add(PRtnMsg);
+
+            //        OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+            //        PRTNMSGNO.Direction = ParameterDirection.Output;
+            //        PRTNMSGNO.Size = 50;
+            //        oralceComm.Parameters.Add(PRTNMSGNO);
 
 
-                    VoucherItemNo = PItemNo.Value.ToString();
-
-                    DisNo = Pdisc.Value.ToString();
-
-                    NetAmt = PnetAmt.Value.ToString();
-
-                    RtnMsg = PRtnMsg.Value.ToString();
-
-                    RtnMsgNo = PRTNMSGNO.Value.ToString();
-
-                    // dbConn.Close();
+            //        oralceComm.ExecuteNonQuery();
 
 
-                    if (DisNo == "")
-                    {
-                        result = "";
-                    }
-                    else
-                    {
-                        result = "1";
-                    }
+            //        VoucherItemNo = PItemNo.Value.ToString();
+
+            //        DisNo = Pdisc.Value.ToString();
+
+            //        NetAmt = PnetAmt.Value.ToString();
+
+            //        RtnMsg = PRtnMsg.Value.ToString();
+
+            //        RtnMsgNo = PRTNMSGNO.Value.ToString();
+
+            //        // dbConn.Close();
 
 
-                }
-                catch (Exception e)
-                {
-                    // dbConn.Close();
-                    VoucherItemNo = "";
-                    RtnMsgNo = "99";
-                    NetAmt = "";
-                    // RtnMsg = StoreNo;            
-                    RtnMsg = "异常情况：" + e.Message.ToString();
-                    result = "0";
-                }
-                finally
-                {
-                    Sign = requestGateway.CreateSign(new OrderedDictionary{
-                        { "rtnMsg", RtnMsg },
-                        { "rtnMsgNo", RtnMsgNo},
-                        {"disNo", DisNo },
-                        {"netAmt",NetAmt },
-                        { "voucherItemNo",VoucherItemNo}
-                    });
+            //        if (DisNo == "")
+            //        {
+            //            result = "";
+            //        }
+            //        else
+            //        {
+            //            result = "1";
+            //        }
 
-                }
-            }
-            return result;
+
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        // dbConn.Close();
+            //        VoucherItemNo = "";
+            //        RtnMsgNo = "99";
+            //        NetAmt = "";
+            //        // RtnMsg = StoreNo;            
+            //        RtnMsg = "异常情况：" + e.Message.ToString();
+            //        result = "0";
+            //    }
+            //    finally
+            //    {
+            //        Sign = requestGateway.CreateSign(new OrderedDictionary{
+            //            { "rtnMsg", RtnMsg },
+            //            { "rtnMsgNo", RtnMsgNo},
+            //            {"disNo", DisNo },
+            //            {"netAmt",NetAmt },
+            //            { "voucherItemNo",VoucherItemNo}
+            //        });
+
+            //    }
+            //}
+            //return result;
 
         }
 
@@ -680,7 +739,27 @@ namespace HexSalesIF_Service
         [WebMethod(Description = ":礼券是否可销退")]
         public string VoucherCheckReturn(string VoucherNo, string StoreNo, ref string Sign, out string DisNo, out string NetAmt, out string ItemNo, out string TenderNo, out string RtnMsg, out string RtnMsgNo)
         {
+            string result = "0";
+            DisNo = "";
+            NetAmt = "";
+            ItemNo = "";
+            TenderNo = "";
+            var c = new VoucherCheckRetrunController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherCheckReq(StoreNo, VoucherNo, Sign));
+            if (resp.isExcuteSuccess())
+            {
+                VoucherCheckRetrunResp vcResp = resp as VoucherCheckRetrunResp;
+                if (vcResp.DisNo != "") { result = "1"; }
+                DisNo = vcResp.DisNo;
+                ItemNo = vcResp.ItemNo;
+                NetAmt = vcResp.NetAmt;
+                TenderNo = vcResp.TenderNo;
+            }
 
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
+            
 
             // -- 老接口 注释
             //string parString = "";
@@ -714,149 +793,149 @@ namespace HexSalesIF_Service
             //    return "0";
             //}
             // -- 老接口 注释结束
-            string result = "0";
-            DisNo = "";
-            RtnMsg = "";
-            RtnMsgNo = "";
-            TenderNo = "";
-            NetAmt = "";
-            ItemNo = "";
-            OrderedDictionary voucherQueryDict = new OrderedDictionary
-            {
-                { "voucherNo", VoucherNo },
-                { "storeNo", StoreNo}
-            };
+            //string result = "0";
+            //DisNo = "";
+            //RtnMsg = "";
+            //RtnMsgNo = "";
+            //TenderNo = "";
+            //NetAmt = "";
+            //ItemNo = "";
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary
+            //{
+            //    { "voucherNo", VoucherNo },
+            //    { "storeNo", StoreNo}
+            //};
 
 
 
-            LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
-                 Sign, HttpContext.Current.Request.Headers.Get("version")));
+            //LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+            //     Sign, HttpContext.Current.Request.Headers.Get("version")));
 
-            WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
-
-
-            if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
-            {
-                RtnMsg = "参数验证失败";
-                RtnMsgNo = "90";
-                Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                return result;
-            }
-            string step = "";
+            //WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
 
 
-            //VoucherNo:string;StoreNo:string;var ItemNo:string
-
-            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
-            //  string databasedws = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionStr"].ToString();   
-
-            using (OracleConnection dbConn = new OracleConnection(databasedws))
-            {
-
-                dbConn.Open();
-
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERCHECK_RETURN", dbConn);//调用存储过程的方法
-                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
-                try
-                {
-                    step = "123";
-
-                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
-
-                    OracleParameter Pdisc = new OracleParameter("V_DISNO", OracleType.VarChar);
-                    Pdisc.Direction = ParameterDirection.Output;
-                    Pdisc.Size = 50;
-                    oralceComm.Parameters.Add(Pdisc);
+            //if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
+            //{
+            //    RtnMsg = "参数验证失败";
+            //    RtnMsgNo = "90";
+            //    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    return result;
+            //}
+            //string step = "";
 
 
-                    OracleParameter PNetAmt = new OracleParameter("V_AMT", OracleType.Int32);
-                    PNetAmt.Direction = ParameterDirection.Output;
-                    PNetAmt.Size = 50;
-                    oralceComm.Parameters.Add(PNetAmt);
+            ////VoucherNo:string;StoreNo:string;var ItemNo:string
 
-                    OracleParameter PItemNo = new OracleParameter("V_ITEM", OracleType.VarChar);
-                    PItemNo.Direction = ParameterDirection.Output;
-                    PItemNo.Size = 50;
-                    oralceComm.Parameters.Add(PItemNo);
+            //string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+            ////  string databasedws = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionStr"].ToString();   
 
+            //using (OracleConnection dbConn = new OracleConnection(databasedws))
+            //{
 
-                    OracleParameter Ptender = new OracleParameter("V_TENDERNO", OracleType.VarChar);
-                    Ptender.Direction = ParameterDirection.Output;
-                    Ptender.Size = 50;
-                    oralceComm.Parameters.Add(Ptender);
+            //    dbConn.Open();
 
-                    step = "457";
+            //    OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERCHECK_RETURN", dbConn);//调用存储过程的方法
+            //    oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+            //    try
+            //    {
+            //        step = "123";
 
-                    OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+            //        oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
 
-                    PRtnMsg.Direction = ParameterDirection.Output;
-                    PRtnMsg.Size = 100;
-                    oralceComm.Parameters.Add(PRtnMsg);
-
-                    OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
-                    PRTNMSGNO.Direction = ParameterDirection.Output;
-                    PRTNMSGNO.Size = 50;
-                    oralceComm.Parameters.Add(PRTNMSGNO);
-
-                    step = "666";
-                    oralceComm.ExecuteNonQuery();
-
-                    DisNo = Pdisc.Value.ToString();
-
-                    // DisNo = "99121";
+            //        OracleParameter Pdisc = new OracleParameter("V_DISNO", OracleType.VarChar);
+            //        Pdisc.Direction = ParameterDirection.Output;
+            //        Pdisc.Size = 50;
+            //        oralceComm.Parameters.Add(Pdisc);
 
 
-                    NetAmt = PNetAmt.Value.ToString();
-                    TenderNo = Ptender.Value.ToString();
-                    ItemNo = PItemNo.Value.ToString();
+            //        OracleParameter PNetAmt = new OracleParameter("V_AMT", OracleType.Int32);
+            //        PNetAmt.Direction = ParameterDirection.Output;
+            //        PNetAmt.Size = 50;
+            //        oralceComm.Parameters.Add(PNetAmt);
 
-                    RtnMsg = PRtnMsg.Value.ToString();
-
-                    RtnMsgNo = PRTNMSGNO.Value.ToString();
-
-                    step = "777";
-
-                    // dbConn.Close();
-                    if (DisNo == "")
-                    {
-                        result = "";
-                    }
-                    else
-                    {
-                        result = "1";
-                    }
+            //        OracleParameter PItemNo = new OracleParameter("V_ITEM", OracleType.VarChar);
+            //        PItemNo.Direction = ParameterDirection.Output;
+            //        PItemNo.Size = 50;
+            //        oralceComm.Parameters.Add(PItemNo);
 
 
-                }
-                catch (Exception e)
-                {
-                    // dbConn.Close();
+            //        OracleParameter Ptender = new OracleParameter("V_TENDERNO", OracleType.VarChar);
+            //        Ptender.Direction = ParameterDirection.Output;
+            //        Ptender.Size = 50;
+            //        oralceComm.Parameters.Add(Ptender);
+
+            //        step = "457";
+
+            //        OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+
+            //        PRtnMsg.Direction = ParameterDirection.Output;
+            //        PRtnMsg.Size = 100;
+            //        oralceComm.Parameters.Add(PRtnMsg);
+
+            //        OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+            //        PRTNMSGNO.Direction = ParameterDirection.Output;
+            //        PRTNMSGNO.Size = 50;
+            //        oralceComm.Parameters.Add(PRTNMSGNO);
+
+            //        step = "666";
+            //        oralceComm.ExecuteNonQuery();
+
+            //        DisNo = Pdisc.Value.ToString();
+
+            //        // DisNo = "99121";
 
 
-                    DisNo = "";
-                    NetAmt = "";
-                    TenderNo = "";
-                    ItemNo = "";
+            //        NetAmt = PNetAmt.Value.ToString();
+            //        TenderNo = Ptender.Value.ToString();
+            //        ItemNo = PItemNo.Value.ToString();
+
+            //        RtnMsg = PRtnMsg.Value.ToString();
+
+            //        RtnMsgNo = PRTNMSGNO.Value.ToString();
+
+            //        step = "777";
+
+            //        // dbConn.Close();
+            //        if (DisNo == "")
+            //        {
+            //            result = "";
+            //        }
+            //        else
+            //        {
+            //            result = "1";
+            //        }
 
 
-                    RtnMsgNo = "99";
-                    // RtnMsg = StoreNo;            
-                    RtnMsg = "异常情况：" + e.Message.ToString() + step;
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        // dbConn.Close();
 
-                }
-                finally
-                {
-                    Sign = requestGateway.CreateSign(new OrderedDictionary{
-                        { "rtnMsg", RtnMsg },
-                        { "rtnMsgNo", RtnMsgNo},
-                        {"disNo", DisNo },
-                        {"netAmt",NetAmt },
-                        {"tenderNo",TenderNo },
-                        {"itemNo",ItemNo}
-                    });
-                }
-            }
+
+            //        DisNo = "";
+            //        NetAmt = "";
+            //        TenderNo = "";
+            //        ItemNo = "";
+
+
+            //        RtnMsgNo = "99";
+            //        // RtnMsg = StoreNo;            
+            //        RtnMsg = "异常情况：" + e.Message.ToString() + step;
+
+            //    }
+            //    finally
+            //    {
+            //        Sign = requestGateway.CreateSign(new OrderedDictionary{
+            //            { "rtnMsg", RtnMsg },
+            //            { "rtnMsgNo", RtnMsgNo},
+            //            {"disNo", DisNo },
+            //            {"netAmt",NetAmt },
+            //            {"tenderNo",TenderNo },
+            //            {"itemNo",ItemNo}
+            //        });
+            //    }
+            //}
             return result;
 
         }
@@ -865,6 +944,21 @@ namespace HexSalesIF_Service
         [WebMethod(Description = "礼券预约")]
         public string VoucherCheck_OO(string VoucherNo, string StoreNo, ref string Sign, out string DisNo, out string RtnMsg, out string RtnMsgNo)
         {
+
+            string result = "0";
+            DisNo = "";
+            var c = new VoucherCheckOOController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherCheckReq(StoreNo, VoucherNo, Sign));
+            if (resp.isExcuteSuccess())
+            {
+                VoucherOOCheckResp vcResp = resp as VoucherOOCheckResp;
+                if (vcResp.DisNo != "") { result = "1"; }
+                DisNo = vcResp.DisNo;
+            }
+
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
             //string parString = "";
 
             //if (VoucherNo != null)
@@ -892,103 +986,103 @@ namespace HexSalesIF_Service
             //    DisNo = "";
             //    return "0";
             //}
-            string result = "0";
-            DisNo = "";
-            RtnMsg = "";
-            RtnMsgNo = "";
+            //string result = "0";
+            //DisNo = "";
+            //RtnMsg = "";
+            //RtnMsgNo = "";
 
 
-            OrderedDictionary voucherQueryDict = new OrderedDictionary
-            {
-                { "voucherNo", VoucherNo },
-                { "storeNo", StoreNo}
-            };
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary
+            //{
+            //    { "voucherNo", VoucherNo },
+            //    { "storeNo", StoreNo}
+            //};
 
 
 
-            LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
-                 Sign, HttpContext.Current.Request.Headers.Get("version")));
+            //LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+            //     Sign, HttpContext.Current.Request.Headers.Get("version")));
 
-            WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
+            //WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
 
-            if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
-            {
-                RtnMsg = "参数验证失败";
-                RtnMsgNo = "90";
-                Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                return result;
-            }
+            //if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
+            //{
+            //    RtnMsg = "参数验证失败";
+            //    RtnMsgNo = "90";
+            //    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    return result;
+            //}
 
 
             //VoucherNo:string;StoreNo:string;var ItemNo:string
 
-            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
-            // OracleConnection dbConn = new OracleConnection(databasedws);
+            //string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+            //// OracleConnection dbConn = new OracleConnection(databasedws);
 
-            using (OracleConnection dbConn = new OracleConnection(databasedws))
-            {
-                dbConn.Open();
+            //using (OracleConnection dbConn = new OracleConnection(databasedws))
+            //{
+            //    dbConn.Open();
 
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VoucherCheck_OO", dbConn);//调用存储过程的方法
-                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
-                try
-                {
+            //    OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VoucherCheck_OO", dbConn);//调用存储过程的方法
+            //    oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+            //    try
+            //    {
 
-                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
 
-                    OracleParameter PItemNo = new OracleParameter("V_DISNO", OracleType.VarChar);
-                    PItemNo.Direction = ParameterDirection.Output;
-                    PItemNo.Size = 50;
-                    oralceComm.Parameters.Add(PItemNo);
+            //        OracleParameter PItemNo = new OracleParameter("V_DISNO", OracleType.VarChar);
+            //        PItemNo.Direction = ParameterDirection.Output;
+            //        PItemNo.Size = 50;
+            //        oralceComm.Parameters.Add(PItemNo);
 
-                    OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+            //        OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
 
-                    PRtnMsg.Direction = ParameterDirection.Output;
-                    PRtnMsg.Size = 100;
-                    oralceComm.Parameters.Add(PRtnMsg);
+            //        PRtnMsg.Direction = ParameterDirection.Output;
+            //        PRtnMsg.Size = 100;
+            //        oralceComm.Parameters.Add(PRtnMsg);
 
-                    OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
-                    PRTNMSGNO.Direction = ParameterDirection.Output;
-                    PRTNMSGNO.Size = 50;
-                    oralceComm.Parameters.Add(PRTNMSGNO);
-
-
-                    oralceComm.ExecuteNonQuery();
-
-                    DisNo = PItemNo.Value.ToString();
-
-                    RtnMsg = PRtnMsg.Value.ToString();
-
-                    RtnMsgNo = PRTNMSGNO.Value.ToString();
-
-                    //   dbConn.Close();
-                    if (DisNo == "")
-                    {
-                        result = "";
-                    }
-                    else
-                    {
-                        result = "1";
-                    }
+            //        OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+            //        PRTNMSGNO.Direction = ParameterDirection.Output;
+            //        PRTNMSGNO.Size = 50;
+            //        oralceComm.Parameters.Add(PRTNMSGNO);
 
 
-                }
-                catch (Exception e)
-                {
-                    RtnMsgNo = "99";
-                    RtnMsg = "异常情况：" + e.Message.ToString();
-                    result = "0";
-                }
-                finally
-                {
-                    Sign = requestGateway.CreateSign(new OrderedDictionary{
-                        { "rtnMsg", RtnMsg},
-                        { "rtnMsgNo", RtnMsgNo},
-                        {"disNo", DisNo }
-                    });
-                }
-            }
+            //        oralceComm.ExecuteNonQuery();
+
+            //        DisNo = PItemNo.Value.ToString();
+
+            //        RtnMsg = PRtnMsg.Value.ToString();
+
+            //        RtnMsgNo = PRTNMSGNO.Value.ToString();
+
+            //        //   dbConn.Close();
+            //        if (DisNo == "")
+            //        {
+            //            result = "";
+            //        }
+            //        else
+            //        {
+            //            result = "1";
+            //        }
+
+
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        RtnMsgNo = "99";
+            //        RtnMsg = "异常情况：" + e.Message.ToString();
+            //        result = "0";
+            //    }
+            //    finally
+            //    {
+            //        Sign = requestGateway.CreateSign(new OrderedDictionary{
+            //            { "rtnMsg", RtnMsg},
+            //            { "rtnMsgNo", RtnMsgNo},
+            //            {"disNo", DisNo }
+            //        });
+            //    }
+            //}
             return result;
         }
 
@@ -1142,7 +1236,7 @@ namespace HexSalesIF_Service
         {
             VoucherOOReq a = new VoucherOOReq();
             
-            a.Rmk = "2222";
+            a.rmk = "2222";
             var b = a.ToStringDictionary(true);
             foreach (DictionaryEntry i in b)
             {
@@ -1158,8 +1252,8 @@ namespace HexSalesIF_Service
                     di.Add(item.ToString());
                 }
             }
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "Bin\\", "VendorPrivateKey.xml");
-            var path2 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "Bin\\", "CustomPublicKey.xml");
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "sk\\", "VendorPrivateKey.xml");
+            var path2 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "sk\\", "CustomPublicKey.xml");
             var path3 = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory);
             var path4 = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent;
 
@@ -1209,7 +1303,23 @@ namespace HexSalesIF_Service
         public string VoucherTransaction(int IsSale, string VoucherNo, string StoreNo, string TillNo, int SaleId, string UserCode, string SaleDate, ref string Sign, out string RtnMsg, out string RtnMsgNo)
         {
 
+            LogHelper.Debug(string.Format("Invoke VoucherTransaction voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+               Sign, HttpContext.Current.Request.Headers.Get("version")));
+            string result = "0";
 
+
+            VoucherTransactionController c = new VoucherTransactionController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherTransactionReq(IsSale,VoucherNo,StoreNo,TillNo,SaleId,UserCode,SaleDate, Sign));
+            if (resp.isExcuteSuccess())
+            {
+                result = "1";
+            }
+
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
+
+            return result;
             //string parString = "";
 
 
@@ -1273,111 +1383,111 @@ namespace HexSalesIF_Service
             //    return "0";
             //}
 
-            string result = "0";
+            //string result = "0";
 
-            RtnMsg = "";
-            RtnMsgNo = "";
-
-
-            OrderedDictionary voucherQueryDict = new OrderedDictionary
-            {
-                { "voucherNo", VoucherNo },
-                { "storeNo", StoreNo},
-                { "isSale",IsSale},
-                { "tillNo",TillNo},
-                {"saleId",SaleId },
-                {"userCode",UserCode },
-                {"saleDate",SaleDate },
-            };
+            //RtnMsg = "";
+            //RtnMsgNo = "";
 
 
-
-            LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
-                 Sign, HttpContext.Current.Request.Headers.Get("version")));
-
-            WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
-
-            if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
-            {
-                RtnMsg = "参数验证失败";
-                RtnMsgNo = "90";
-                Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                return result;
-            }
-
-
-            //VoucherNo:string;StoreNo:string;var ItemNo:string
-
-            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
-
-            using (OracleConnection dbConn = new OracleConnection(databasedws))
-            {
-                //  OracleConnection dbConn = new OracleConnection(databasedws);
-                dbConn.Open();
-
-                RtnMsg = "";
-                RtnMsgNo = "";
-
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERTRANSACTION", dbConn);//调用存储过程的方法
-                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
-                try
-                {
-
-                    string[] vous = VoucherNo.Split(',');
-
-                    for (int i = 0; i < vous.Length; i++)
-                    {
-
-                        if (vous[i].Trim() != "")
-                        {
-                            oralceComm.Parameters.Clear();
-                            oralceComm.Parameters.Add(new OracleParameter("P_ISSALE", OracleType.Int32)).Value = IsSale;
-                            oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = vous[i].Trim();
-                            oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
-                            oralceComm.Parameters.Add(new OracleParameter("P_TILLNO", OracleType.VarChar)).Value = TillNo;
-                            oralceComm.Parameters.Add(new OracleParameter("P_SALEID", OracleType.Int32)).Value = SaleId;
-                            oralceComm.Parameters.Add(new OracleParameter("P_USERCODE", OracleType.VarChar)).Value = UserCode;
-                            oralceComm.Parameters.Add(new OracleParameter("P_SALEDATE", OracleType.VarChar)).Value = SaleDate;
-
-
-                            OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
-                            PRtnMsg.Size = 100;
-                            PRtnMsg.Direction = ParameterDirection.Output;
-                            oralceComm.Parameters.Add(PRtnMsg);
-
-                            OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
-                            PRTNMSGNO.Direction = ParameterDirection.Output;
-                            PRTNMSGNO.Size = 50;
-                            oralceComm.Parameters.Add(PRTNMSGNO);
-
-
-                            oralceComm.ExecuteNonQuery();
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary
+            //{
+            //    { "voucherNo", VoucherNo },
+            //    { "storeNo", StoreNo},
+            //    { "isSale",IsSale},
+            //    { "tillNo",TillNo},
+            //    {"saleId",SaleId },
+            //    {"userCode",UserCode },
+            //    {"saleDate",SaleDate },
+            //};
 
 
 
-                            RtnMsg = PRtnMsg.Value.ToString();
+            //LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+            //     Sign, HttpContext.Current.Request.Headers.Get("version")));
 
-                            RtnMsgNo = PRTNMSGNO.Value.ToString();
+            //WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
 
-                        }
-                    }
+            //if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
+            //{
+            //    RtnMsg = "参数验证失败";
+            //    RtnMsgNo = "90";
+            //    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    return result;
+            //}
 
-                    result = "1";
+
+            ////VoucherNo:string;StoreNo:string;var ItemNo:string
+
+            //string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+
+            //using (OracleConnection dbConn = new OracleConnection(databasedws))
+            //{
+            //    //  OracleConnection dbConn = new OracleConnection(databasedws);
+            //    dbConn.Open();
+
+            //    RtnMsg = "";
+            //    RtnMsgNo = "";
+
+            //    OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERTRANSACTION", dbConn);//调用存储过程的方法
+            //    oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+            //    try
+            //    {
+
+            //        string[] vous = VoucherNo.Split(',');
+
+            //        for (int i = 0; i < vous.Length; i++)
+            //        {
+
+            //            if (vous[i].Trim() != "")
+            //            {
+            //                oralceComm.Parameters.Clear();
+            //                oralceComm.Parameters.Add(new OracleParameter("P_ISSALE", OracleType.Int32)).Value = IsSale;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = vous[i].Trim();
+            //                oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_TILLNO", OracleType.VarChar)).Value = TillNo;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_SALEID", OracleType.Int32)).Value = SaleId;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_USERCODE", OracleType.VarChar)).Value = UserCode;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_SALEDATE", OracleType.VarChar)).Value = SaleDate;
 
 
-                }
-                catch (Exception e)
-                {
-                    RtnMsgNo = "99";
-                    RtnMsg = "异常情况：" + e.Message.ToString();
-                    result = "0";
-                }
-                finally
-                {
-                    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                }
-            }
-            return result;
+            //                OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+            //                PRtnMsg.Size = 100;
+            //                PRtnMsg.Direction = ParameterDirection.Output;
+            //                oralceComm.Parameters.Add(PRtnMsg);
+
+            //                OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+            //                PRTNMSGNO.Direction = ParameterDirection.Output;
+            //                PRTNMSGNO.Size = 50;
+            //                oralceComm.Parameters.Add(PRTNMSGNO);
+
+
+            //                oralceComm.ExecuteNonQuery();
+
+
+
+            //                RtnMsg = PRtnMsg.Value.ToString();
+
+            //                RtnMsgNo = PRTNMSGNO.Value.ToString();
+
+            //            }
+            //        }
+
+            //        result = "1";
+
+
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        RtnMsgNo = "99";
+            //        RtnMsg = "异常情况：" + e.Message.ToString();
+            //        result = "0";
+            //    }
+            //    finally
+            //    {
+            //        Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    }
+            //}
+            //return result;
         }
 
 
@@ -1386,6 +1496,25 @@ namespace HexSalesIF_Service
         public string VoucherTransactionNew(int IsSale, string VoucherNo, string StoreNo, string TillNo, int SaleId, string UserCode, string SaleDate, string NetAmt,
             string Distcount, string Tender, string TtransNo, ref string Sign, out string RtnMsg, out string RtnMsgNo)
         {
+
+            LogHelper.Debug(string.Format("Invoke VoucherTransactionNew voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+               Sign, HttpContext.Current.Request.Headers.Get("version")));
+            string result = "0";
+
+
+            VoucherTransactionNewController c = new VoucherTransactionNewController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherTransactionNewReq(IsSale, VoucherNo, StoreNo, TillNo, UserCode, SaleDate, NetAmt, Distcount, Tender, TtransNo, SaleId, Sign));
+                 ;
+            if (resp.isExcuteSuccess())
+            {
+                result = "1";
+            }
+
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
+
+            return result;
 
             // --- 老接口注释
             //string parString = "";
@@ -1492,120 +1621,120 @@ namespace HexSalesIF_Service
             //    return "0";
             //}
             // ---- 老接口 注释 结束
-            string result = "0";
-            OrderedDictionary voucherQueryDict = new OrderedDictionary
-            {
-                { "voucherNo", VoucherNo },
-                { "storeNo", StoreNo},
-                {"tillNo",TillNo },
-                {"userCode",UserCode },
-                {"saleDate",SaleDate },
-                {"netAmt",NetAmt },
-                {"distcount",Distcount },
-                {"tender",Tender },
-                { "ttransNo",TtransNo},
-                { "isSale",IsSale},
-                { "saleId",SaleId}
-            };
+            //string result = "0";
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary
+            //{
+            //    { "voucherNo", VoucherNo },
+            //    { "storeNo", StoreNo},
+            //    {"tillNo",TillNo },
+            //    {"userCode",UserCode },
+            //    {"saleDate",SaleDate },
+            //    {"netAmt",NetAmt },
+            //    {"distcount",Distcount },
+            //    {"tender",Tender },
+            //    { "ttransNo",TtransNo},
+            //    { "isSale",IsSale},
+            //    { "saleId",SaleId}
+            //};
 
 
 
-            LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
-                 Sign, HttpContext.Current.Request.Headers.Get("version")));
+            //LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+            //     Sign, HttpContext.Current.Request.Headers.Get("version")));
 
 
-            WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
+            //WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
 
 
-            if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
-            {
-                RtnMsg = "验签失败";
-                RtnMsgNo = "90";
-                Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                return result;
-            }
+            //if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
+            //{
+            //    RtnMsg = "验签失败";
+            //    RtnMsgNo = "90";
+            //    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    return result;
+            //}
 
 
-            //VoucherNo:string;StoreNo:string;var ItemNo:string
+            ////VoucherNo:string;StoreNo:string;var ItemNo:string
 
-            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+            //string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
 
-            using (OracleConnection dbConn = new OracleConnection(databasedws))
-            {
-                //  OracleConnection dbConn = new OracleConnection(databasedws);
-                dbConn.Open();
+            //using (OracleConnection dbConn = new OracleConnection(databasedws))
+            //{
+            //    //  OracleConnection dbConn = new OracleConnection(databasedws);
+            //    dbConn.Open();
 
-                RtnMsg = "";
-                RtnMsgNo = "";
+            //    RtnMsg = "";
+            //    RtnMsgNo = "";
 
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERTRANSACTION_NEW", dbConn);//调用存储过程的方法
-                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
-                try
-                {
+            //    OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERTRANSACTION_NEW", dbConn);//调用存储过程的方法
+            //    oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+            //    try
+            //    {
 
-                    string[] vous = VoucherNo.Split(',');
-                    string[] amt = NetAmt.Split(',');
-                    string[] disc = Distcount.Split(',');
-
-
-                    for (int i = 0; i < vous.Length; i++)
-                    {
-
-                        if (vous[i].Trim() != "")
-                        {
-                            oralceComm.Parameters.Clear();
-                            oralceComm.Parameters.Add(new OracleParameter("P_ISSALE", OracleType.Int32)).Value = IsSale;
-                            oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = vous[i].Trim();
-                            oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
-                            oralceComm.Parameters.Add(new OracleParameter("P_TILLNO", OracleType.VarChar)).Value = TillNo;
-                            oralceComm.Parameters.Add(new OracleParameter("P_SALEID", OracleType.Int32)).Value = SaleId;
+            //        string[] vous = VoucherNo.Split(',');
+            //        string[] amt = NetAmt.Split(',');
+            //        string[] disc = Distcount.Split(',');
 
 
-                            oralceComm.Parameters.Add(new OracleParameter("P_USERCODE", OracleType.VarChar)).Value = UserCode;
-                            oralceComm.Parameters.Add(new OracleParameter("P_SALEDATE", OracleType.VarChar)).Value = SaleDate;
+            //        for (int i = 0; i < vous.Length; i++)
+            //        {
+
+            //            if (vous[i].Trim() != "")
+            //            {
+            //                oralceComm.Parameters.Clear();
+            //                oralceComm.Parameters.Add(new OracleParameter("P_ISSALE", OracleType.Int32)).Value = IsSale;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = vous[i].Trim();
+            //                oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_TILLNO", OracleType.VarChar)).Value = TillNo;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_SALEID", OracleType.Int32)).Value = SaleId;
 
 
-                            oralceComm.Parameters.Add(new OracleParameter("P_NEAMT", OracleType.Double)).Value = System.Convert.ToDecimal(amt[i].ToString());
-                            oralceComm.Parameters.Add(new OracleParameter("P_DISTCOUNT", OracleType.VarChar)).Value = disc[i].Trim(); ;
-                            oralceComm.Parameters.Add(new OracleParameter("P_TENDER", OracleType.VarChar)).Value = Tender;
-                            oralceComm.Parameters.Add(new OracleParameter("P_TRANSNO", OracleType.VarChar)).Value = TtransNo;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_USERCODE", OracleType.VarChar)).Value = UserCode;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_SALEDATE", OracleType.VarChar)).Value = SaleDate;
 
 
-                            OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
-                            PRtnMsg.Size = 100;
-                            PRtnMsg.Direction = ParameterDirection.Output;
-                            oralceComm.Parameters.Add(PRtnMsg);
-
-                            OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
-                            PRTNMSGNO.Direction = ParameterDirection.Output;
-                            PRTNMSGNO.Size = 50;
-                            oralceComm.Parameters.Add(PRTNMSGNO);
+            //                oralceComm.Parameters.Add(new OracleParameter("P_NEAMT", OracleType.Double)).Value = System.Convert.ToDecimal(amt[i].ToString());
+            //                oralceComm.Parameters.Add(new OracleParameter("P_DISTCOUNT", OracleType.VarChar)).Value = disc[i].Trim(); ;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_TENDER", OracleType.VarChar)).Value = Tender;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_TRANSNO", OracleType.VarChar)).Value = TtransNo;
 
 
-                            oralceComm.ExecuteNonQuery();
-                            RtnMsg = PRtnMsg.Value.ToString();
-                            RtnMsgNo = PRTNMSGNO.Value.ToString();
+            //                OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+            //                PRtnMsg.Size = 100;
+            //                PRtnMsg.Direction = ParameterDirection.Output;
+            //                oralceComm.Parameters.Add(PRtnMsg);
+
+            //                OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+            //                PRTNMSGNO.Direction = ParameterDirection.Output;
+            //                PRTNMSGNO.Size = 50;
+            //                oralceComm.Parameters.Add(PRTNMSGNO);
 
 
-                        }
-                    }
+            //                oralceComm.ExecuteNonQuery();
+            //                RtnMsg = PRtnMsg.Value.ToString();
+            //                RtnMsgNo = PRTNMSGNO.Value.ToString();
 
-                    result = "1";
-                }
-                catch (Exception e)
-                {
-                    RtnMsgNo = "99";
-                    RtnMsg = "异常情况：" + e.Message.ToString();
 
-                    result = "0";
-                }
-                finally
-                {
+            //            }
+            //        }
 
-                    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                }
-            }
-            return result;
+            //        result = "1";
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        RtnMsgNo = "99";
+            //        RtnMsg = "异常情况：" + e.Message.ToString();
+
+            //        result = "0";
+            //    }
+            //    finally
+            //    {
+
+            //        Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    }
+            //}
+            //return result;
         }
 
 
@@ -1614,7 +1743,24 @@ namespace HexSalesIF_Service
             int SaleId, string StaffNo, string RtnDate, string TtransNo, ref string Sign, out string RtnMsg, out string RtnMsgNo)
         {
 
+            LogHelper.Debug(string.Format("Invoke VoucherTransactionReturn voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+                Sign, HttpContext.Current.Request.Headers.Get("version")));
+            string result = "0";
+           
 
+            VoucherTransactionReturnController c = new VoucherTransactionReturnController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherTransactionReturnReq(IsRtn,VoucherNo,StoreNo,TillNo,SaleId,StaffNo,
+                RtnDate,TtransNo,Sign));
+            if (resp.isExcuteSuccess())
+            {
+                 result = "1";
+            }
+
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
+
+            return result;
             // --老接口 注释
             //string parString = "";
 
@@ -1693,112 +1839,112 @@ namespace HexSalesIF_Service
             //}
             // --老接口 注释结束
 
-            string result = "0";
-            OrderedDictionary voucherQueryDict = new OrderedDictionary
-            {
-                { "voucherNo", VoucherNo },
-                { "storeNo", StoreNo},
-                {"isRtn",IsRtn },
-                {"tillNo",TillNo },
-                {"saleId",SaleId },
-                {"rtnDate",RtnDate },
-                {"ttransNo",TtransNo },
-                {"staffNo",StaffNo }
-            };
+            //string result = "0";
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary
+            //{
+            //    { "voucherNo", VoucherNo },
+            //    { "storeNo", StoreNo},
+            //    {"isRtn",IsRtn },
+            //    {"tillNo",TillNo },
+            //    {"saleId",SaleId },
+            //    {"rtnDate",RtnDate },
+            //    {"ttransNo",TtransNo },
+            //    {"staffNo",StaffNo }
+            //};
 
 
 
-            LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
-                 Sign, HttpContext.Current.Request.Headers.Get("version")));
+            //LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+            //     Sign, HttpContext.Current.Request.Headers.Get("version")));
 
 
-            WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
+            //WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
 
 
-            if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
-            {
-                RtnMsg = "参数验证失败";
-                RtnMsgNo = "90";
-                Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                return result;
-            }
+            //if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
+            //{
+            //    RtnMsg = "参数验证失败";
+            //    RtnMsgNo = "90";
+            //    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    return result;
+            //}
 
 
-            //VoucherNo:string;StoreNo:string;var ItemNo:string
+            ////VoucherNo:string;StoreNo:string;var ItemNo:string
 
-            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+            //string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
 
-            using (OracleConnection dbConn = new OracleConnection(databasedws))
-            {
-                //  OracleConnection dbConn = new OracleConnection(databasedws);
-                dbConn.Open();
+            //using (OracleConnection dbConn = new OracleConnection(databasedws))
+            //{
+            //    //  OracleConnection dbConn = new OracleConnection(databasedws);
+            //    dbConn.Open();
 
-                RtnMsg = "";
-                RtnMsgNo = "";
+            //    RtnMsg = "";
+            //    RtnMsgNo = "";
 
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERTRANSACTION_RETURN", dbConn);//调用存储过程的方法
-                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
-                try
-                {
+            //    OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERTRANSACTION_RETURN", dbConn);//调用存储过程的方法
+            //    oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+            //    try
+            //    {
 
-                    string[] vous = VoucherNo.Split(',');
-
-
-                    for (int i = 0; i < vous.Length; i++)
-                    {
-
-                        if (vous[i].Trim() != "")
-                        {
-                            oralceComm.Parameters.Clear();
-                            oralceComm.Parameters.Add(new OracleParameter("IsRtn", OracleType.Int32)).Value = IsRtn;
-                            oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = vous[i].Trim();
-                            oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
-                            oralceComm.Parameters.Add(new OracleParameter("P_TILLNO", OracleType.VarChar)).Value = TillNo;
-                            oralceComm.Parameters.Add(new OracleParameter("P_SALEID", OracleType.Int32)).Value = SaleId;
-                            oralceComm.Parameters.Add(new OracleParameter("P_USERCODE", OracleType.VarChar)).Value = StaffNo;
-                            oralceComm.Parameters.Add(new OracleParameter("P_SALEDATE", OracleType.VarChar)).Value = RtnDate;
-
-                            oralceComm.Parameters.Add(new OracleParameter("P_TRANSNO", OracleType.VarChar)).Value = TtransNo;
+            //        string[] vous = VoucherNo.Split(',');
 
 
-                            OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
-                            PRtnMsg.Size = 100;
-                            PRtnMsg.Direction = ParameterDirection.Output;
-                            oralceComm.Parameters.Add(PRtnMsg);
+            //        for (int i = 0; i < vous.Length; i++)
+            //        {
 
-                            OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
-                            PRTNMSGNO.Direction = ParameterDirection.Output;
-                            PRTNMSGNO.Size = 50;
-                            oralceComm.Parameters.Add(PRTNMSGNO);
+            //            if (vous[i].Trim() != "")
+            //            {
+            //                oralceComm.Parameters.Clear();
+            //                oralceComm.Parameters.Add(new OracleParameter("IsRtn", OracleType.Int32)).Value = IsRtn;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = vous[i].Trim();
+            //                oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_TILLNO", OracleType.VarChar)).Value = TillNo;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_SALEID", OracleType.Int32)).Value = SaleId;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_USERCODE", OracleType.VarChar)).Value = StaffNo;
+            //                oralceComm.Parameters.Add(new OracleParameter("P_SALEDATE", OracleType.VarChar)).Value = RtnDate;
 
-
-                            oralceComm.ExecuteNonQuery();
-
-
-
-                            RtnMsg = PRtnMsg.Value.ToString();
-
-                            RtnMsgNo = PRTNMSGNO.Value.ToString();
-
-                        }
-                    }
-
-                    result = "1";
+            //                oralceComm.Parameters.Add(new OracleParameter("P_TRANSNO", OracleType.VarChar)).Value = TtransNo;
 
 
-                }
-                catch (Exception e)
-                {
-                    RtnMsgNo = "99";
-                    RtnMsg = "异常情况：" + e.Message.ToString();
-                    result = "0";
-                }
-                finally
-                {
-                    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                }
-            }
-            return result;
+            //                OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+            //                PRtnMsg.Size = 100;
+            //                PRtnMsg.Direction = ParameterDirection.Output;
+            //                oralceComm.Parameters.Add(PRtnMsg);
+
+            //                OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+            //                PRTNMSGNO.Direction = ParameterDirection.Output;
+            //                PRTNMSGNO.Size = 50;
+            //                oralceComm.Parameters.Add(PRTNMSGNO);
+
+
+            //                oralceComm.ExecuteNonQuery();
+
+
+
+            //                RtnMsg = PRtnMsg.Value.ToString();
+
+            //                RtnMsgNo = PRTNMSGNO.Value.ToString();
+
+            //            }
+            //        }
+
+            //        result = "1";
+
+
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        RtnMsgNo = "99";
+            //        RtnMsg = "异常情况：" + e.Message.ToString();
+            //        result = "0";
+            //    }
+            //    finally
+            //    {
+            //        Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    }
+            //}
+            //return result;
         }
 
 
@@ -1807,7 +1953,25 @@ namespace HexSalesIF_Service
         public string VoucherSalesCheck(string VoucherNo, string StoreNo, ref string Sign, out string ItemNo, out string RtnMsg, out string RtnMsgNo)
         {
 
+            LogHelper.Debug(string.Format("Invoke VoucherSalesCheck voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+                Sign, HttpContext.Current.Request.Headers.Get("version")));
+            string result = "0";
+            ItemNo = "";
 
+            VoucherSalesCheckController c = new VoucherSalesCheckController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherCheckReq(StoreNo, VoucherNo, Sign));
+            if (resp.isExcuteSuccess())
+            {
+                var vcResp = resp as VoucherSalesCheckResp;
+                if (vcResp.ItemNo != "") { result = "1"; }
+                ItemNo = vcResp.ItemNo;
+            }
+
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
+
+            return result;
 
             //string parString = "";
 
@@ -1840,121 +2004,142 @@ namespace HexSalesIF_Service
             //    return "0";
             //}
 
-            string result = "0";
-            ItemNo = "";
-            OrderedDictionary voucherQueryDict = new OrderedDictionary
-            {
-                { "voucherNo", VoucherNo },
-                { "storeNo", StoreNo},
-            };
+            //string result = "0";
+            //ItemNo = "";
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary
+            //{
+            //    { "voucherNo", VoucherNo },
+            //    { "storeNo", StoreNo},
+            //};
 
 
 
-            LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
-                 Sign, HttpContext.Current.Request.Headers.Get("version")));
+            //LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+            //     Sign, HttpContext.Current.Request.Headers.Get("version")));
 
 
-            WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
+            //WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
 
 
-            if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
-            {
-                RtnMsg = "参数验证失败";
-                RtnMsgNo = "90";
-                Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                return result;
-            }
+            //if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
+            //{
+            //    RtnMsg = "参数验证失败";
+            //    RtnMsgNo = "90";
+            //    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    return result;
+            //}
 
-            //VoucherNo:string;StoreNo:string;var ItemNo:string
+            ////VoucherNo:string;StoreNo:string;var ItemNo:string
 
-            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+            //string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
 
-            using (OracleConnection dbConn = new OracleConnection(databasedws))
-            {
+            //using (OracleConnection dbConn = new OracleConnection(databasedws))
+            //{
 
-                //OracleConnection dbConn = new OracleConnection(databasedws);
-                dbConn.Open();
+            //    //OracleConnection dbConn = new OracleConnection(databasedws);
+            //    dbConn.Open();
 
-                ItemNo = "";
-                RtnMsg = "";
-                RtnMsgNo = "";
-
-
-
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERSALESCHECK", dbConn);//调用存储过程的方法
-                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
-                try
-                {
-
-                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
-
-
-                    OracleParameter PItemNo = new OracleParameter("V_ITEMNO", OracleType.VarChar);
-                    PItemNo.Direction = ParameterDirection.Output;
-                    PItemNo.Size = 50;
-                    oralceComm.Parameters.Add(PItemNo);
-
-                    OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
-                    PRtnMsg.Direction = ParameterDirection.Output;
-                    PRtnMsg.Size = 50;
-                    oralceComm.Parameters.Add(PRtnMsg);
-
-                    OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
-                    PRTNMSGNO.Size = 100;
-                    PRTNMSGNO.Direction = ParameterDirection.Output;
-
-
-                    oralceComm.Parameters.Add(PRTNMSGNO);
-
-
-                    oralceComm.ExecuteNonQuery();
+            //    ItemNo = "";
+            //    RtnMsg = "";
+            //    RtnMsgNo = "";
 
 
 
-                    ItemNo = PItemNo.Value.ToString();
+            //    OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERSALESCHECK", dbConn);//调用存储过程的方法
+            //    oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+            //    try
+            //    {
 
-                    RtnMsg = PRtnMsg.Value.ToString();
-
-                    RtnMsgNo = PRTNMSGNO.Value.ToString();
-
-                    //  dbConn.Close();
+            //        oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
 
 
-                    if (ItemNo == "")
-                    {
-                        result = "0";
-                    }
-                    else
-                    {
-                        result = "1";
-                    }
+            //        OracleParameter PItemNo = new OracleParameter("V_ITEMNO", OracleType.VarChar);
+            //        PItemNo.Direction = ParameterDirection.Output;
+            //        PItemNo.Size = 50;
+            //        oralceComm.Parameters.Add(PItemNo);
 
-                }
-                catch (Exception e)
-                {
-                    RtnMsgNo = VoucherNo;
-                    RtnMsg = "异常情况：" + e.Message.ToString();
-                    result = "0";
-                }
-                finally
-                {
-                    Sign = requestGateway.CreateSign(new OrderedDictionary {
-                        { "rtnMsg", RtnMsg},
-                        { "rtnMsgNo", RtnMsgNo},
-                        { "itemNo",ItemNo}
-                    });
-                }
-            }
-            return result;
+            //        OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+            //        PRtnMsg.Direction = ParameterDirection.Output;
+            //        PRtnMsg.Size = 50;
+            //        oralceComm.Parameters.Add(PRtnMsg);
+
+            //        OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+            //        PRTNMSGNO.Size = 100;
+            //        PRTNMSGNO.Direction = ParameterDirection.Output;
+
+
+            //        oralceComm.Parameters.Add(PRTNMSGNO);
+
+
+            //        oralceComm.ExecuteNonQuery();
+
+
+
+            //        ItemNo = PItemNo.Value.ToString();
+
+            //        RtnMsg = PRtnMsg.Value.ToString();
+
+            //        RtnMsgNo = PRTNMSGNO.Value.ToString();
+
+            //        //  dbConn.Close();
+
+
+            //        if (ItemNo == "")
+            //        {
+            //            result = "0";
+            //        }
+            //        else
+            //        {
+            //            result = "1";
+            //        }
+
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        RtnMsgNo = VoucherNo;
+            //        RtnMsg = "异常情况：" + e.Message.ToString();
+            //        result = "0";
+            //    }
+            //    finally
+            //    {
+            //        Sign = requestGateway.CreateSign(new OrderedDictionary {
+            //            { "rtnMsg", RtnMsg},
+            //            { "rtnMsgNo", RtnMsgNo},
+            //            { "itemNo",ItemNo}
+            //        });
+            //    }
+            //}
+            //return result;
         }
 
 
         [WebMethod(Description = "检查电子或者预约券是否可使用")]
-        public string VoucherCheck_BCP(string VoucherNo, string StoreNo, ref string Sign, out string ItemNo, out string DisNo, out string RtnMsg, out string RtnMsgNo)
+        public string VoucherCheck_BCP(string VoucherNo, string StoreNo, ref string Sign, out string ItemNo, out string DisNo, out string RtnMsg, 
+            out string RtnMsgNo)
         {
 
+            LogHelper.Debug(string.Format("Invoke VoucherCheck_BCP voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+                 Sign, HttpContext.Current.Request.Headers.Get("version")));
+            string result = "0";
+            ItemNo = "";
+            DisNo = "";
 
+            VoucherCheckBcpController c = new VoucherCheckBcpController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherCheckReq(StoreNo, VoucherNo, Sign));
+            if (resp.isExcuteSuccess())
+            {
+                var vcResp = resp as VoucherCheckBcpResp;
+                if (vcResp.ItemNo != "") { result = "1"; }
+                ItemNo = vcResp.ItemNo;
+                DisNo = vcResp.DisNo;
+            }
+
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
+
+            return result;
 
             //string parString = "";
 
@@ -1988,125 +2173,126 @@ namespace HexSalesIF_Service
             //    return "0";
             //}
 
-            string result = "0";
-            ItemNo = "";
-            DisNo = "";
-            OrderedDictionary voucherQueryDict = new OrderedDictionary
-            {
-                { "voucherNo", VoucherNo },
-                { "storeNo", StoreNo},
-            };
+            //string result = "0";
+            //ItemNo = "";
+            //DisNo = "";
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary
+            //{
+            //    { "voucherNo", VoucherNo },
+            //    { "storeNo", StoreNo},
+            //};
 
 
 
-            LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
-                 Sign, HttpContext.Current.Request.Headers.Get("version")));
+            //LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+            //     Sign, HttpContext.Current.Request.Headers.Get("version")));
 
 
-            WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
+            //WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
 
 
-            if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
-            {
-                RtnMsg = "参数验证失败";
-                RtnMsgNo = "90";
-                Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                return result;
-            }
+            //if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
+            //{
+            //    RtnMsg = "参数验证失败";
+            //    RtnMsgNo = "90";
+            //    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    return result;
+            //}
 
 
-            //VoucherNo:string;StoreNo:string;var ItemNo:string
+            ////VoucherNo:string;StoreNo:string;var ItemNo:string
 
-            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+            //string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
 
-            using (OracleConnection dbConn = new OracleConnection(databasedws))
-            {
-                //  OracleConnection dbConn = new OracleConnection(databasedws);
-                dbConn.Open();
+            //using (OracleConnection dbConn = new OracleConnection(databasedws))
+            //{
+            //    //  OracleConnection dbConn = new OracleConnection(databasedws);
+            //    dbConn.Open();
 
-                ItemNo = "";
-                RtnMsg = "";
-                RtnMsgNo = "";
-                DisNo = "";
-
-
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERCHECK_BCP", dbConn);//调用存储过程的方法
-                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
-                try
-                {
-
-                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
+            //    ItemNo = "";
+            //    RtnMsg = "";
+            //    RtnMsgNo = "";
+            //    DisNo = "";
 
 
-                    OracleParameter PItemNo = new OracleParameter("V_ITEMNO", OracleType.VarChar);
-                    PItemNo.Direction = ParameterDirection.Output;
-                    PItemNo.Size = 50;
-                    oralceComm.Parameters.Add(PItemNo);
+            //    OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERCHECK_BCP", dbConn);//调用存储过程的方法
+            //    oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+            //    try
+            //    {
 
-                    OracleParameter pDisno = new OracleParameter("V_DISNO", OracleType.VarChar);
-                    pDisno.Direction = ParameterDirection.Output;
-                    pDisno.Size = 50;
-                    oralceComm.Parameters.Add(pDisno);
-
-                    OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
-                    PRtnMsg.Direction = ParameterDirection.Output;
-                    PRtnMsg.Size = 50;
-                    oralceComm.Parameters.Add(PRtnMsg);
-
-                    OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
-                    PRTNMSGNO.Size = 100;
-                    PRTNMSGNO.Direction = ParameterDirection.Output;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
 
 
-                    oralceComm.Parameters.Add(PRTNMSGNO);
+            //        OracleParameter PItemNo = new OracleParameter("V_ITEMNO", OracleType.VarChar);
+            //        PItemNo.Direction = ParameterDirection.Output;
+            //        PItemNo.Size = 50;
+            //        oralceComm.Parameters.Add(PItemNo);
+
+            //        OracleParameter pDisno = new OracleParameter("V_DISNO", OracleType.VarChar);
+            //        pDisno.Direction = ParameterDirection.Output;
+            //        pDisno.Size = 50;
+            //        oralceComm.Parameters.Add(pDisno);
+
+            //        OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+            //        PRtnMsg.Direction = ParameterDirection.Output;
+            //        PRtnMsg.Size = 50;
+            //        oralceComm.Parameters.Add(PRtnMsg);
+
+            //        OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+            //        PRTNMSGNO.Size = 100;
+            //        PRTNMSGNO.Direction = ParameterDirection.Output;
 
 
-                    oralceComm.ExecuteNonQuery();
+            //        oralceComm.Parameters.Add(PRTNMSGNO);
+
+
+            //        oralceComm.ExecuteNonQuery();
 
 
 
-                    ItemNo = PItemNo.Value.ToString();
+            //        ItemNo = PItemNo.Value.ToString();
 
-                    DisNo = pDisno.Value.ToString();
+            //        DisNo = pDisno.Value.ToString();
 
-                    RtnMsg = PRtnMsg.Value.ToString();
+            //        RtnMsg = PRtnMsg.Value.ToString();
 
-                    RtnMsgNo = PRTNMSGNO.Value.ToString();
+            //        RtnMsgNo = PRTNMSGNO.Value.ToString();
 
-                    //    dbConn.Close();
+            //        //    dbConn.Close();
 
 
-                    if (ItemNo != "")
-                    {
-                        result = "1";
-                    }
-                }
-                catch (Exception e)
-                {
-                    // dbConn.Close();
-                    RtnMsgNo = VoucherNo;
-                    RtnMsg = "异常情况：" + e.Message.ToString();
+            //        if (ItemNo != "")
+            //        {
+            //            result = "1";
+            //        }
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        // dbConn.Close();
+            //        RtnMsgNo = VoucherNo;
+            //        RtnMsg = "异常情况：" + e.Message.ToString();
 
-                    result = "0";
-                }
-                finally
-                {
-                    Sign = requestGateway.CreateSign(new OrderedDictionary {
-                        { "rtnMsg", RtnMsg},
-                        { "rtnMsgNo", RtnMsgNo},
-                        { "itemNo",ItemNo},
-                        { "disNo",DisNo}
-                    });
-                }
-            }
-            return result;
+            //        result = "0";
+            //    }
+            //    finally
+            //    {
+            //        Sign = requestGateway.CreateSign(new OrderedDictionary {
+            //            { "rtnMsg", RtnMsg},
+            //            { "rtnMsgNo", RtnMsgNo},
+            //            { "itemNo",ItemNo},
+            //            { "disNo",DisNo}
+            //        });
+            //    }
+            //}
+            //return result;
         }
 
 
 
         [WebMethod(Description = "检查电子或者预约券是否可使用")]
-        public string VoucherCheck_BCPNew(string VoucherNo, string StoreNo, ref string Sign, out string VoucherItemNo, out string ItemNo, out string DisNo, out string NetAmt, out string RtnMsg, out string RtnMsgNo)
+        public string VoucherCheck_BCPNew(string VoucherNo, string StoreNo, ref string Sign, out string VoucherItemNo, out string ItemNo, 
+            out string DisNo, out string NetAmt, out string RtnMsg, out string RtnMsgNo)
         {
 
 
@@ -2144,141 +2330,162 @@ namespace HexSalesIF_Service
             //    return "0";
             //}
 
+            
+            LogHelper.Debug(string.Format("Invoke VoucherCheck_BCPNew voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+                Sign, HttpContext.Current.Request.Headers.Get("version")));
+
             string result = "0";
             ItemNo = "";
             VoucherItemNo = "";
             DisNo = "";
             NetAmt = "";
-            OrderedDictionary voucherQueryDict = new OrderedDictionary
+            VoucherCheckBcpNewController c = new VoucherCheckBcpNewController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherCheckReq(StoreNo, VoucherNo, Sign));
+            if (resp.isExcuteSuccess())
             {
-                { "voucherNo", VoucherNo },
-                { "storeNo", StoreNo},
-            };
-
-
-
-            LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
-                 Sign, HttpContext.Current.Request.Headers.Get("version")));
-
-
-            WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
-
-
-            if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
-            {
-                RtnMsg = "参数验证失败";
-                RtnMsgNo = "90";
-                Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                return result;
+                var vcResp = resp as VoucherCheckBcpNewResp;
+                if (vcResp.ItemNo != "") { result = "1"; }
+                ItemNo = vcResp.ItemNo;
+                VoucherItemNo = vcResp.VoucherItemNo;
+                DisNo = vcResp.DisNo;
+                NetAmt = vcResp.NetAmt;
             }
 
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
 
-
-            //VoucherNo:string;StoreNo:string;var ItemNo:string
-
-            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
-
-            using (OracleConnection dbConn = new OracleConnection(databasedws))
-            {
-                //  OracleConnection dbConn = new OracleConnection(databasedws);
-                dbConn.Open();
-
-                ItemNo = "";
-                RtnMsg = "";
-                RtnMsgNo = "";
-                DisNo = "";
-                NetAmt = "";
-                VoucherItemNo = "";
-
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERCHECK_BCP_NEW", dbConn);//调用存储过程的方法
-                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
-                try
-                {
-
-                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
-
-
-                    OracleParameter PvoucherItemNo = new OracleParameter("V_VOUCHERITEMNO", OracleType.VarChar);
-                    PvoucherItemNo.Direction = ParameterDirection.Output;
-                    PvoucherItemNo.Size = 50;
-                    oralceComm.Parameters.Add(PvoucherItemNo);
-
-
-                    OracleParameter PItemNo = new OracleParameter("V_ITEMNO", OracleType.VarChar);
-                    PItemNo.Direction = ParameterDirection.Output;
-                    PItemNo.Size = 50;
-                    oralceComm.Parameters.Add(PItemNo);
-
-                    OracleParameter pDisno = new OracleParameter("V_DISNO", OracleType.VarChar);
-                    pDisno.Direction = ParameterDirection.Output;
-                    pDisno.Size = 50;
-                    oralceComm.Parameters.Add(pDisno);
-
-                    OracleParameter PnetAmt = new OracleParameter("V_NETAMT", OracleType.VarChar);
-                    PnetAmt.Direction = ParameterDirection.Output;
-                    PnetAmt.Size = 50;
-                    oralceComm.Parameters.Add(PnetAmt);
-
-
-
-                    OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
-                    PRtnMsg.Direction = ParameterDirection.Output;
-                    PRtnMsg.Size = 50;
-                    oralceComm.Parameters.Add(PRtnMsg);
-
-                    OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
-                    PRTNMSGNO.Size = 100;
-                    PRTNMSGNO.Direction = ParameterDirection.Output;
-
-
-                    oralceComm.Parameters.Add(PRTNMSGNO);
-
-
-                    oralceComm.ExecuteNonQuery();
-
-
-                    VoucherItemNo = PvoucherItemNo.Value.ToString();
-
-                    ItemNo = PItemNo.Value.ToString();
-
-                    DisNo = pDisno.Value.ToString();
-
-                    NetAmt = PnetAmt.Value.ToString();
-
-                    RtnMsg = PRtnMsg.Value.ToString();
-
-                    RtnMsgNo = PRTNMSGNO.Value.ToString();
-
-                    //    dbConn.Close();
-
-
-                    if (ItemNo != "")
-                    {
-                        result = "1";
-                    }
-
-                }
-                catch (Exception e)
-                {
-                    // dbConn.Close();
-                    RtnMsgNo = VoucherNo;
-                    RtnMsg = "异常情况：" + e.Message.ToString();
-
-                    result = "0";
-                }
-                finally
-                {
-                    Sign = requestGateway.CreateSign(new OrderedDictionary {
-                        { "rtnMsg", RtnMsg},
-                        { "rtnMsgNo", RtnMsgNo},
-                        { "itemNo",ItemNo},
-                        { "disNo",DisNo},
-                        { "netAmt",NetAmt}
-                    });
-                }
-            }
             return result;
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary
+            //{
+            //    { "voucherNo", VoucherNo },
+            //    { "storeNo", StoreNo},
+            //};
+
+
+
+            //LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+            //     Sign, HttpContext.Current.Request.Headers.Get("version")));
+
+
+            //WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
+
+
+            //if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
+            //{
+            //    RtnMsg = "参数验证失败";
+            //    RtnMsgNo = "90";
+            //    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    return result;
+            //}
+
+
+
+            ////VoucherNo:string;StoreNo:string;var ItemNo:string
+
+            //string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+
+            //using (OracleConnection dbConn = new OracleConnection(databasedws))
+            //{
+            //    //  OracleConnection dbConn = new OracleConnection(databasedws);
+            //    dbConn.Open();
+
+            //    ItemNo = "";
+            //    RtnMsg = "";
+            //    RtnMsgNo = "";
+            //    DisNo = "";
+            //    NetAmt = "";
+            //    VoucherItemNo = "";
+
+            //    OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERCHECK_BCP_NEW", dbConn);//调用存储过程的方法
+            //    oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+            //    try
+            //    {
+
+            //        oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
+
+
+            //        OracleParameter PvoucherItemNo = new OracleParameter("V_VOUCHERITEMNO", OracleType.VarChar);
+            //        PvoucherItemNo.Direction = ParameterDirection.Output;
+            //        PvoucherItemNo.Size = 50;
+            //        oralceComm.Parameters.Add(PvoucherItemNo);
+
+
+            //        OracleParameter PItemNo = new OracleParameter("V_ITEMNO", OracleType.VarChar);
+            //        PItemNo.Direction = ParameterDirection.Output;
+            //        PItemNo.Size = 50;
+            //        oralceComm.Parameters.Add(PItemNo);
+
+            //        OracleParameter pDisno = new OracleParameter("V_DISNO", OracleType.VarChar);
+            //        pDisno.Direction = ParameterDirection.Output;
+            //        pDisno.Size = 50;
+            //        oralceComm.Parameters.Add(pDisno);
+
+            //        OracleParameter PnetAmt = new OracleParameter("V_NETAMT", OracleType.VarChar);
+            //        PnetAmt.Direction = ParameterDirection.Output;
+            //        PnetAmt.Size = 50;
+            //        oralceComm.Parameters.Add(PnetAmt);
+
+
+
+            //        OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+            //        PRtnMsg.Direction = ParameterDirection.Output;
+            //        PRtnMsg.Size = 50;
+            //        oralceComm.Parameters.Add(PRtnMsg);
+
+            //        OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+            //        PRTNMSGNO.Size = 100;
+            //        PRTNMSGNO.Direction = ParameterDirection.Output;
+
+
+            //        oralceComm.Parameters.Add(PRTNMSGNO);
+
+
+            //        oralceComm.ExecuteNonQuery();
+
+
+            //        VoucherItemNo = PvoucherItemNo.Value.ToString();
+
+            //        ItemNo = PItemNo.Value.ToString();
+
+            //        DisNo = pDisno.Value.ToString();
+
+            //        NetAmt = PnetAmt.Value.ToString();
+
+            //        RtnMsg = PRtnMsg.Value.ToString();
+
+            //        RtnMsgNo = PRTNMSGNO.Value.ToString();
+
+            //        //    dbConn.Close();
+
+
+            //        if (ItemNo != "")
+            //        {
+            //            result = "1";
+            //        }
+
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        // dbConn.Close();
+            //        RtnMsgNo = VoucherNo;
+            //        RtnMsg = "异常情况：" + e.Message.ToString();
+
+            //        result = "0";
+            //    }
+            //    finally
+            //    {
+            //        Sign = requestGateway.CreateSign(new OrderedDictionary {
+            //            { "rtnMsg", RtnMsg},
+            //            { "rtnMsgNo", RtnMsgNo},
+            //            { "itemNo",ItemNo},
+            //            { "disNo",DisNo},
+            //            { "netAmt",NetAmt}
+            //        });
+            //    }
+            //}
+            //return result;
         }
 
 
@@ -2295,9 +2502,22 @@ namespace HexSalesIF_Service
         public string VoucherQuery(string VoucherNo, string StoreNo, ref string Sign, out string RtnMsg, out string RtnMsgNo)
         {
 
-            LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}", VoucherNo, StoreNo, Sign));
+            LogHelper.Debug(string.Format("Invoke VoucherQuery voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+                 Sign, HttpContext.Current.Request.Headers.Get("version")));
             string result = "0";
-            string parString = "";
+
+            VoucherQueryController c = new VoucherQueryController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherQueryReq(VoucherNo, StoreNo, Sign));
+            if (resp.isExcuteSuccess())
+            {
+                result = resp.RtnMsgNo;
+            }
+
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
+
+            return result;
             //SortedDictionary<string, string> voucherQueryDict = new SortedDictionary<string, string> {
             //    { "voucherNo", VoucherNo },
             //    { "storeNo", StoreNo}};
@@ -2312,138 +2532,138 @@ namespace HexSalesIF_Service
             //    return "0";
             //}
 
-            OrderedDictionary voucherQueryDict = new OrderedDictionary {
-                { "voucherNo", VoucherNo },
-                { "storeNo", StoreNo}
-            };
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary {
+            //    { "voucherNo", VoucherNo },
+            //    { "storeNo", StoreNo}
+            //};
 
-            WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
+            //WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
 
 
-            if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
-            {
-                RtnMsg = "参数验证失败";
-                RtnMsgNo = "90";
-                Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                return result;
-            }
-
-            // --- 老接口 注释 开始
-
-            //string parString = "";
-            //if (VoucherNo != null)
+            //if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
             //{
-            //    parString = parString + VoucherNo + "~";
+            //    RtnMsg = "参数验证失败";
+            //    RtnMsgNo = "90";
+            //    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    return result;
             //}
-            //else
-            //{
-            //    parString = parString + "~";
-            //}               
 
-            //if (StoreNo != null)
+            //// --- 老接口 注释 开始
+
+            ////string parString = "";
+            ////if (VoucherNo != null)
+            ////{
+            ////    parString = parString + VoucherNo + "~";
+            ////}
+            ////else
+            ////{
+            ////    parString = parString + "~";
+            ////}               
+
+            ////if (StoreNo != null)
+            ////{
+            ////    parString = parString + StoreNo + "~";
+            ////}
+            ////else
+            ////{
+            ////    parString = parString + "~";
+            ////} 
+
+
+            ////if (!CheckSign(parString, Sign, out RtnMsgNo, out RtnMsg))
+            ////{
+
+            ////    return "0";
+            ////}
+            //// --- 老接口 注释 结束
+
+
+
+            //// Tina 需要补充具体的业务逻辑
+
+            ////  RtnMsgNo = "1";
+
+            ////  RtnMsg =           "商品：【"+VoucherNo+"】-尊礼卡1212 \r\n";
+            ////  RtnMsg = RtnMsg +  "折扣：【" + StoreNo + "】-测试折扣 \r\n";
+            ////  RtnMsg = RtnMsg + "状态：一切良好 ";
+
+            ////  return "1";
+
+
+
+            //RtnMsg = "";
+            //RtnMsgNo = "";
+            ////VoucherNo:string;StoreNo:string;var ItemNo:string
+
+            //string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+
+            //using (OracleConnection dbConn = new OracleConnection(databasedws))
             //{
-            //    parString = parString + StoreNo + "~";
+            //    //  OracleConnection dbConn = new OracleConnection(databasedws);
+            //    dbConn.Open();
+
+            //    OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERQUERY", dbConn);//调用存储过程的方法
+            //    oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+            //    try
+            //    {
+
+            //        oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
+
+
+
+
+            //        OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+            //        PRtnMsg.Direction = ParameterDirection.Output;
+            //        PRtnMsg.Size = 500;
+            //        oralceComm.Parameters.Add(PRtnMsg);
+
+            //        OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+            //        PRTNMSGNO.Size = 100;
+            //        PRTNMSGNO.Direction = ParameterDirection.Output;
+
+
+            //        oralceComm.Parameters.Add(PRTNMSGNO);
+
+            //        oralceComm.ExecuteNonQuery();
+
+
+
+            //        RtnMsg = PRtnMsg.Value.ToString();
+
+
+            //        //RtnMsg = RtnMsg.Replace("~", "\r\n");
+
+
+
+            //        //  RtnMsg = RtnMsg + "\r\n sdsaddsa";
+
+            //        RtnMsgNo = PRTNMSGNO.Value.ToString();
+
+            //        //    dbConn.Close(); 
+
+            //        result = RtnMsgNo;
+            //        //return RtnMsgNo;
+
+
+
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        // dbConn.Close();
+            //        RtnMsg = "异常情况：" + e.Message.ToString();
+            //        //Sign = this.serviceCommon.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //        RtnMsgNo = "0";
+            //        result = RtnMsgNo;
+            //    }
+
+            //    finally
+            //    {
+            //        RtnMsg = WebServiceLib.NewLineString(RtnMsg);
+            //        Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    }
             //}
-            //else
-            //{
-            //    parString = parString + "~";
-            //} 
-
-
-            //if (!CheckSign(parString, Sign, out RtnMsgNo, out RtnMsg))
-            //{
-
-            //    return "0";
-            //}
-            // --- 老接口 注释 结束
-
-
-
-            // Tina 需要补充具体的业务逻辑
-
-            //  RtnMsgNo = "1";
-
-            //  RtnMsg =           "商品：【"+VoucherNo+"】-尊礼卡1212 \r\n";
-            //  RtnMsg = RtnMsg +  "折扣：【" + StoreNo + "】-测试折扣 \r\n";
-            //  RtnMsg = RtnMsg + "状态：一切良好 ";
-
-            //  return "1";
-
-
-
-            RtnMsg = "";
-            RtnMsgNo = "";
-            //VoucherNo:string;StoreNo:string;var ItemNo:string
-
-            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
-
-            using (OracleConnection dbConn = new OracleConnection(databasedws))
-            {
-                //  OracleConnection dbConn = new OracleConnection(databasedws);
-                dbConn.Open();
-
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERQUERY", dbConn);//调用存储过程的方法
-                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
-                try
-                {
-
-                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
-
-
-
-
-                    OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
-                    PRtnMsg.Direction = ParameterDirection.Output;
-                    PRtnMsg.Size = 500;
-                    oralceComm.Parameters.Add(PRtnMsg);
-
-                    OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
-                    PRTNMSGNO.Size = 100;
-                    PRTNMSGNO.Direction = ParameterDirection.Output;
-
-
-                    oralceComm.Parameters.Add(PRTNMSGNO);
-
-                    oralceComm.ExecuteNonQuery();
-
-
-
-                    RtnMsg = PRtnMsg.Value.ToString();
-
-
-                    //RtnMsg = RtnMsg.Replace("~", "\r\n");
-
-
-
-                    //  RtnMsg = RtnMsg + "\r\n sdsaddsa";
-
-                    RtnMsgNo = PRTNMSGNO.Value.ToString();
-
-                    //    dbConn.Close(); 
-
-                    result = RtnMsgNo;
-                    //return RtnMsgNo;
-
-
-
-                }
-                catch (Exception e)
-                {
-                    // dbConn.Close();
-                    RtnMsg = "异常情况：" + e.Message.ToString();
-                    //Sign = this.serviceCommon.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                    RtnMsgNo = "0";
-                    result = RtnMsgNo;
-                }
-
-                finally
-                {
-                    RtnMsg = WebServiceLib.NewLineString(RtnMsg);
-                    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                }
-            }
-            return result;
+            //return result;
 
 
         }
@@ -2470,156 +2690,178 @@ namespace HexSalesIF_Service
             StoreNo = "";
             ActivedTime = "";
             CertificatedTime = "";
-
-            OrderedDictionary voucherQueryDict = new OrderedDictionary {
-                { "voucherNo", VoucherNo }
-            };
-
-            WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
-
-
-            if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
+            VoucherQueryNewController c = new VoucherQueryNewController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherQueryNewReq(VoucherNo, Sign));
+            if (resp.isExcuteSuccess())
             {
-                RtnMsg = "参数验证失败";
-                RtnMsgNo = "90";
-                Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", WebServiceLib.NewLineString(RtnMsg), RtnMsgNo));
-                return result;
+                var vcResp = resp as VoucherQueryNewResp;
+                result = vcResp.RtnMsgNo;
+                VoucherType = vcResp.VoucherType;
+                VoucherItemNo = vcResp.VoucherItemNo;
+                VoucherNos = vcResp.VoucherNos;
+                VoucherStatus = vcResp.VoucherStatus;
+                StoreNo = vcResp.StoreNo;
+                ActivedTime = vcResp.ActivedTime;
+                CertificatedTime = vcResp.CertificatedTime;
+
             }
 
-            // --- 老接口 注释开始
-            //string parString = "";
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
 
-            //if (VoucherNo != null)
-            //{
-            //    parString = parString + VoucherNo + "~";
-            //}
-            //else
-            //{
-            //    parString = parString + "~";
-            //}
-
-            //if (!CheckSign(parString, Sign, out RtnMsgNo, out RtnMsg))
-            //{
-            //    VoucherType = "";
-            //    VoucherItemNo = "";
-            //    VoucherNos = "";
-            //    VoucherStatus = "";
-            //    StoreNo = "";
-            //    ActivedTime = "";
-            //    CertificatedTime = "";
-            //    return "0";
-            //}
-
-            // --- 老接口 注释结束
-
-
-
-            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
-
-            using (OracleConnection dbConn = new OracleConnection(databasedws))
-            {
-                dbConn.Open();
-                RtnMsg = "";
-                RtnMsgNo = "";
-
-                //VoucherType = "";
-                //VoucherItemNo = "";
-                //VoucherNos = "";
-                //VoucherStatus = "";
-                //StoreNo = "";
-                //ActivedTime = "";
-                //CertificatedTime = "";
-
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERQUERY_NEW", dbConn);//调用存储过程的方法
-                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
-                try
-                {
-
-                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
-
-                    OracleParameter PVoucherType = new OracleParameter("V_VOUCHERTYPE", OracleType.VarChar);
-                    PVoucherType.Direction = ParameterDirection.Output;
-                    PVoucherType.Size = 500;
-                    oralceComm.Parameters.Add(PVoucherType);
-                    OracleParameter PVoucherItemNo = new OracleParameter("V_VOUCHERITEMNO", OracleType.VarChar);
-                    PVoucherItemNo.Direction = ParameterDirection.Output;
-                    PVoucherItemNo.Size = 500;
-                    oralceComm.Parameters.Add(PVoucherItemNo);
-                    OracleParameter PVoucherNos = new OracleParameter("V_VOUCHERNO", OracleType.VarChar);
-                    PVoucherNos.Direction = ParameterDirection.Output;
-                    PVoucherNos.Size = 500;
-                    oralceComm.Parameters.Add(PVoucherNos);
-                    OracleParameter PVoucherStatus = new OracleParameter("V_VOUCHERSTATUS", OracleType.VarChar);
-                    PVoucherStatus.Direction = ParameterDirection.Output;
-                    PVoucherStatus.Size = 500;
-                    oralceComm.Parameters.Add(PVoucherStatus);
-                    OracleParameter PStoreNo = new OracleParameter("V_STORENO", OracleType.VarChar);
-                    PStoreNo.Direction = ParameterDirection.Output;
-                    PStoreNo.Size = 500;
-                    oralceComm.Parameters.Add(PStoreNo);
-                    OracleParameter PActivedTime = new OracleParameter("V_ACTIVEDTIME", OracleType.VarChar);
-                    PActivedTime.Direction = ParameterDirection.Output;
-                    PActivedTime.Size = 500;
-                    oralceComm.Parameters.Add(PActivedTime);
-                    OracleParameter PCertificatedTime = new OracleParameter("V_CERTIFICATEDTIME", OracleType.VarChar);
-                    PCertificatedTime.Direction = ParameterDirection.Output;
-                    PCertificatedTime.Size = 500;
-                    oralceComm.Parameters.Add(PCertificatedTime);
-
-
-                    OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
-                    PRtnMsg.Direction = ParameterDirection.Output;
-                    PRtnMsg.Size = 500;
-                    oralceComm.Parameters.Add(PRtnMsg);
-
-                    OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
-                    PRTNMSGNO.Size = 100;
-                    PRTNMSGNO.Direction = ParameterDirection.Output;
-                    oralceComm.Parameters.Add(PRTNMSGNO);
-
-                    oralceComm.ExecuteNonQuery();
-
-
-                    VoucherType = PVoucherType.Value.ToString();
-                    VoucherItemNo = PVoucherItemNo.Value.ToString();
-                    VoucherNos = PVoucherNos.Value.ToString();
-                    VoucherStatus = PVoucherStatus.Value.ToString();
-                    StoreNo = PStoreNo.Value.ToString();
-                    ActivedTime = PActivedTime.Value.ToString();
-                    CertificatedTime = PCertificatedTime.Value.ToString();
-
-                    RtnMsg = PRtnMsg.Value.ToString();
-                    //RtnMsg = RtnMsg.Replace("~", "\r\n");
-                    RtnMsgNo = PRTNMSGNO.Value.ToString();
-                    //    dbConn.Close(); 
-                    result = RtnMsgNo;
-                    //return RtnMsgNo;
-
-                }
-                catch (Exception e)
-                {
-                    // dbConn.Close();
-                    RtnMsgNo = "0";
-                    RtnMsg = "异常情况：" + e.Message.ToString();
-                    result = RtnMsgNo;
-                }
-                finally
-                {
-                    RtnMsg = WebServiceLib.NewLineString(RtnMsg);
-                    Sign = requestGateway.CreateSign(new OrderedDictionary {
-                        { "rtnMsg", RtnMsg},
-                        { "rtnMsgNo", RtnMsgNo},
-                        { "voucherType", VoucherType},
-                        { "VoucherItemNo", VoucherItemNo},
-                        { "voucherNos",VoucherNos},
-                        { "voucherStatus",VoucherStatus},
-                        { "storeNo",StoreNo},
-                        { "certificatedTime",CertificatedTime},
-                        { "activedTime",ActivedTime}
-                    });
-                }
-            }
             return result;
+
+
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary {
+            //    { "voucherNo", VoucherNo }
+            //};
+
+            //WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
+
+
+            //if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
+            //{
+            //    RtnMsg = "参数验证失败";
+            //    RtnMsgNo = "90";
+            //    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", WebServiceLib.NewLineString(RtnMsg), RtnMsgNo));
+            //    return result;
+            //}
+
+            //// --- 老接口 注释开始
+            ////string parString = "";
+
+            ////if (VoucherNo != null)
+            ////{
+            ////    parString = parString + VoucherNo + "~";
+            ////}
+            ////else
+            ////{
+            ////    parString = parString + "~";
+            ////}
+
+            ////if (!CheckSign(parString, Sign, out RtnMsgNo, out RtnMsg))
+            ////{
+            ////    VoucherType = "";
+            ////    VoucherItemNo = "";
+            ////    VoucherNos = "";
+            ////    VoucherStatus = "";
+            ////    StoreNo = "";
+            ////    ActivedTime = "";
+            ////    CertificatedTime = "";
+            ////    return "0";
+            ////}
+
+            //// --- 老接口 注释结束
+
+
+
+            //string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+
+            //using (OracleConnection dbConn = new OracleConnection(databasedws))
+            //{
+            //    dbConn.Open();
+            //    RtnMsg = "";
+            //    RtnMsgNo = "";
+
+            //    //VoucherType = "";
+            //    //VoucherItemNo = "";
+            //    //VoucherNos = "";
+            //    //VoucherStatus = "";
+            //    //StoreNo = "";
+            //    //ActivedTime = "";
+            //    //CertificatedTime = "";
+
+            //    OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERQUERY_NEW", dbConn);//调用存储过程的方法
+            //    oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+            //    try
+            //    {
+
+            //        oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
+
+            //        OracleParameter PVoucherType = new OracleParameter("V_VOUCHERTYPE", OracleType.VarChar);
+            //        PVoucherType.Direction = ParameterDirection.Output;
+            //        PVoucherType.Size = 500;
+            //        oralceComm.Parameters.Add(PVoucherType);
+            //        OracleParameter PVoucherItemNo = new OracleParameter("V_VOUCHERITEMNO", OracleType.VarChar);
+            //        PVoucherItemNo.Direction = ParameterDirection.Output;
+            //        PVoucherItemNo.Size = 500;
+            //        oralceComm.Parameters.Add(PVoucherItemNo);
+            //        OracleParameter PVoucherNos = new OracleParameter("V_VOUCHERNO", OracleType.VarChar);
+            //        PVoucherNos.Direction = ParameterDirection.Output;
+            //        PVoucherNos.Size = 500;
+            //        oralceComm.Parameters.Add(PVoucherNos);
+            //        OracleParameter PVoucherStatus = new OracleParameter("V_VOUCHERSTATUS", OracleType.VarChar);
+            //        PVoucherStatus.Direction = ParameterDirection.Output;
+            //        PVoucherStatus.Size = 500;
+            //        oralceComm.Parameters.Add(PVoucherStatus);
+            //        OracleParameter PStoreNo = new OracleParameter("V_STORENO", OracleType.VarChar);
+            //        PStoreNo.Direction = ParameterDirection.Output;
+            //        PStoreNo.Size = 500;
+            //        oralceComm.Parameters.Add(PStoreNo);
+            //        OracleParameter PActivedTime = new OracleParameter("V_ACTIVEDTIME", OracleType.VarChar);
+            //        PActivedTime.Direction = ParameterDirection.Output;
+            //        PActivedTime.Size = 500;
+            //        oralceComm.Parameters.Add(PActivedTime);
+            //        OracleParameter PCertificatedTime = new OracleParameter("V_CERTIFICATEDTIME", OracleType.VarChar);
+            //        PCertificatedTime.Direction = ParameterDirection.Output;
+            //        PCertificatedTime.Size = 500;
+            //        oralceComm.Parameters.Add(PCertificatedTime);
+
+
+            //        OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+            //        PRtnMsg.Direction = ParameterDirection.Output;
+            //        PRtnMsg.Size = 500;
+            //        oralceComm.Parameters.Add(PRtnMsg);
+
+            //        OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+            //        PRTNMSGNO.Size = 100;
+            //        PRTNMSGNO.Direction = ParameterDirection.Output;
+            //        oralceComm.Parameters.Add(PRTNMSGNO);
+
+            //        oralceComm.ExecuteNonQuery();
+
+
+            //        VoucherType = PVoucherType.Value.ToString();
+            //        VoucherItemNo = PVoucherItemNo.Value.ToString();
+            //        VoucherNos = PVoucherNos.Value.ToString();
+            //        VoucherStatus = PVoucherStatus.Value.ToString();
+            //        StoreNo = PStoreNo.Value.ToString();
+            //        ActivedTime = PActivedTime.Value.ToString();
+            //        CertificatedTime = PCertificatedTime.Value.ToString();
+
+            //        RtnMsg = PRtnMsg.Value.ToString();
+            //        //RtnMsg = RtnMsg.Replace("~", "\r\n");
+            //        RtnMsgNo = PRTNMSGNO.Value.ToString();
+            //        //    dbConn.Close(); 
+            //        result = RtnMsgNo;
+            //        //return RtnMsgNo;
+
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        // dbConn.Close();
+            //        RtnMsgNo = "0";
+            //        RtnMsg = "异常情况：" + e.Message.ToString();
+            //        result = RtnMsgNo;
+            //    }
+            //    finally
+            //    {
+            //        RtnMsg = WebServiceLib.NewLineString(RtnMsg);
+            //        Sign = requestGateway.CreateSign(new OrderedDictionary {
+            //            { "rtnMsg", RtnMsg},
+            //            { "rtnMsgNo", RtnMsgNo},
+            //            { "voucherType", VoucherType},
+            //            { "VoucherItemNo", VoucherItemNo},
+            //            { "voucherNos",VoucherNos},
+            //            { "voucherStatus",VoucherStatus},
+            //            { "storeNo",StoreNo},
+            //            { "certificatedTime",CertificatedTime},
+            //            { "activedTime",ActivedTime}
+            //        });
+            //    }
+            //}
+            //return result;
 
 
         }
@@ -2631,6 +2873,22 @@ namespace HexSalesIF_Service
                                                       out string RtnMsg, out string RtnMsgNo)
         {
 
+
+            LogHelper.Debug(string.Format("Invoke VoucherTransactionRetreatRefund voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+                 Sign, HttpContext.Current.Request.Headers.Get("version")));
+            string result = "0";
+
+            VoucherRetreatRefundController c = new VoucherRetreatRefundController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherTransRefundReq(VoucherNo, StoreNo, TransNo, TillNo, SaleId, SaleDate, Remarks1, Remarks2, Sign));
+            if (resp.isExcuteSuccess())
+            {
+                result = "1";
+            }
+
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
+
             //string parString = "";
 
             //if (TransNo != null)
@@ -2708,109 +2966,109 @@ namespace HexSalesIF_Service
             //    return "0";
             //}
 
-            string result = "0";
-            OrderedDictionary voucherQueryDict = new OrderedDictionary
-            {
-                { "voucherNo", VoucherNo },
-                { "storeNo", StoreNo},
-                { "transNo",TransNo},
-                { "tillNo",TillNo},
-                { "saleId",SaleId},
-                { "saleDate",SaleDate},
-                { "remarks1",Remarks1},
-                { "remarks2",Remarks2},
-            };
+            //string result = "0";
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary
+            //{
+            //    { "voucherNo", VoucherNo },
+            //    { "storeNo", StoreNo},
+            //    { "transNo",TransNo},
+            //    { "tillNo",TillNo},
+            //    { "saleId",SaleId},
+            //    { "saleDate",SaleDate},
+            //    { "remarks1",Remarks1},
+            //    { "remarks2",Remarks2},
+            //};
 
 
 
-            LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
-                 Sign, HttpContext.Current.Request.Headers.Get("version")));
+            //LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+            //     Sign, HttpContext.Current.Request.Headers.Get("version")));
 
 
-            WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
+            //WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
 
 
-            if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
-            {
-                RtnMsg = "验签失败";
-                RtnMsgNo = "90";
-                Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                return result;
-            }
+            //if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
+            //{
+            //    RtnMsg = "验签失败";
+            //    RtnMsgNo = "90";
+            //    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    return result;
+            //}
 
 
-            //VoucherNo:string;StoreNo:string;var ItemNo:string
+            ////VoucherNo:string;StoreNo:string;var ItemNo:string
 
-            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+            //string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
 
-            using (OracleConnection dbConn = new OracleConnection(databasedws))
-            {
-                //  OracleConnection dbConn = new OracleConnection(databasedws);
-                dbConn.Open();
+            //using (OracleConnection dbConn = new OracleConnection(databasedws))
+            //{
+            //    //  OracleConnection dbConn = new OracleConnection(databasedws);
+            //    dbConn.Open();
 
-                RtnMsg = "";
-                RtnMsgNo = "";
+            //    RtnMsg = "";
+            //    RtnMsgNo = "";
 
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERTRANSACTION_RETREAT", dbConn);//调用存储过程的方法
-                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
-                try
-                {
+            //    OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERTRANSACTION_RETREAT2", dbConn);//调用存储过程的方法
+            //    oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+            //    try
+            //    {
 
-                    //string[] vous = VoucherNo.Split(',');
+            //        //string[] vous = VoucherNo.Split(',');
 
-                    //for (int i = 0; i < vous.Length; i++)
-                    //{
+            //        //for (int i = 0; i < vous.Length; i++)
+            //        //{
 
-                    //    if (vous[i].Trim() != "")
-                    //    {
+            //        //    if (vous[i].Trim() != "")
+            //        //    {
 
-                    oralceComm.Parameters.Clear();
-                    oralceComm.Parameters.Add(new OracleParameter("P_TRANSNO", OracleType.VarChar)).Value = TransNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_TILLNO", OracleType.VarChar)).Value = TillNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_SALEID", OracleType.Int32)).Value = SaleId;
-                    oralceComm.Parameters.Add(new OracleParameter("P_SALEDATE", OracleType.VarChar)).Value = SaleDate;
-                    oralceComm.Parameters.Add(new OracleParameter("P_REMARKS1", OracleType.VarChar)).Value = Remarks1;
-                    oralceComm.Parameters.Add(new OracleParameter("P_REMARKS2", OracleType.VarChar)).Value = Remarks2;
-
-
-                    OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
-                    PRtnMsg.Size = 100;
-                    PRtnMsg.Direction = ParameterDirection.Output;
-                    oralceComm.Parameters.Add(PRtnMsg);
+            //        oralceComm.Parameters.Clear();
+            //        oralceComm.Parameters.Add(new OracleParameter("P_TRANSNO", OracleType.VarChar)).Value = TransNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_TILLNO", OracleType.VarChar)).Value = TillNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_SALEID", OracleType.Int32)).Value = SaleId;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_SALEDATE", OracleType.VarChar)).Value = SaleDate;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_REMARKS1", OracleType.VarChar)).Value = Remarks1;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_REMARKS2", OracleType.VarChar)).Value = Remarks2;
 
 
-                    OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
-                    PRTNMSGNO.Direction = ParameterDirection.Output;
-                    PRTNMSGNO.Size = 50;
-                    oralceComm.Parameters.Add(PRTNMSGNO);
+            //        OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+            //        PRtnMsg.Size = 100;
+            //        PRtnMsg.Direction = ParameterDirection.Output;
+            //        oralceComm.Parameters.Add(PRtnMsg);
 
-                    oralceComm.ExecuteNonQuery();
 
-                    RtnMsg = PRtnMsg.Value.ToString();
+            //        OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+            //        PRTNMSGNO.Direction = ParameterDirection.Output;
+            //        PRTNMSGNO.Size = 50;
+            //        oralceComm.Parameters.Add(PRTNMSGNO);
 
-                    RtnMsgNo = PRTNMSGNO.Value.ToString();
+            //        oralceComm.ExecuteNonQuery();
 
-                    //    }
-                    //}
+            //        RtnMsg = PRtnMsg.Value.ToString();
 
-                    result = "1";
-                }
-                catch (Exception e)
-                {
-                    RtnMsgNo = "99";
-                    RtnMsg = "异常情况：" + e.Message.ToString();
-                    result = "0";
-                }
-                finally
-                {
-                    Sign = requestGateway.CreateSign(new OrderedDictionary {
-                        { "rtnMsg", RtnMsg},
-                        { "rtnMsgNo", RtnMsgNo}
-                    });
-                }
-            }
+            //        RtnMsgNo = PRTNMSGNO.Value.ToString();
+
+            //        //    }
+            //        //}
+
+            //        result = "1";
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        RtnMsgNo = "99";
+            //        RtnMsg = "异常情况：" + e.Message.ToString();
+            //        result = "0";
+            //    }
+            //    finally
+            //    {
+            //        Sign = requestGateway.CreateSign(new OrderedDictionary {
+            //            { "rtnMsg", RtnMsg},
+            //            { "rtnMsgNo", RtnMsgNo}
+            //        });
+            //    }
+            //}
             return result;
 
         }
@@ -2820,6 +3078,21 @@ namespace HexSalesIF_Service
                                                       int SaleId, string SaleDate, string Remarks1, string Remarks2,
                                                       out string RtnMsg, out string RtnMsgNo)
         {
+            LogHelper.Debug(string.Format("Invoke VoucherTransactionWriteOffRefund voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+                 Sign, HttpContext.Current.Request.Headers.Get("version")));
+            string result = "0";
+
+            VoucherTransRefundController c = new VoucherTransRefundController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherTransRefundReq(VoucherNo,StoreNo,TransNo,TillNo,SaleId,SaleDate, Remarks1, Remarks2, Sign));
+            if (resp.isExcuteSuccess())
+            {
+                result = "1";
+            }
+
+            RtnMsg = resp.RtnMsg;
+            RtnMsgNo = resp.RtnMsgNo;
+            Sign = resp.Sign;
+            return result;
 
             //string parString = "";
 
@@ -2898,115 +3171,115 @@ namespace HexSalesIF_Service
             //    return "0";
             //}
 
-            string result = "0";
-            OrderedDictionary voucherQueryDict = new OrderedDictionary
-            {
-                { "voucherNo", VoucherNo },
-                { "storeNo", StoreNo},
-                { "transNo",TransNo},
-                { "tillNo",TillNo},
-                { "saleId",SaleId},
-                { "saleDate",SaleDate},
-                { "remarks1",Remarks1},
-                { "remarks2",Remarks2},
-            };
+            //string result = "0";
+            //OrderedDictionary voucherQueryDict = new OrderedDictionary
+            //{
+            //    { "voucherNo", VoucherNo },
+            //    { "storeNo", StoreNo},
+            //    { "transNo",TransNo},
+            //    { "tillNo",TillNo},
+            //    { "saleId",SaleId},
+            //    { "saleDate",SaleDate},
+            //    { "remarks1",Remarks1},
+            //    { "remarks2",Remarks2},
+            //};
 
 
 
-            LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
-                 Sign, HttpContext.Current.Request.Headers.Get("version")));
+            //LogHelper.Debug(string.Format("请求参数 voucherNo:{0}, storeNo:{1}, sign:{2}, version:{3}", VoucherNo, StoreNo,
+            //     Sign, HttpContext.Current.Request.Headers.Get("version")));
 
 
-            WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
+            //WebRequestGateway requestGateway = new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version"));
 
 
-            if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
-            {
-                RtnMsg = "参数验证失败";
-                RtnMsgNo = "90";
-                Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
-                return result;
-            }
+            //if (!requestGateway.VerifyRequestDataSign(voucherQueryDict, Sign))
+            //{
+            //    RtnMsg = "参数验证失败";
+            //    RtnMsgNo = "90";
+            //    Sign = requestGateway.CreateSign(string.Format("rtnMsg={0}&rtnMsgNo={1}", RtnMsg, RtnMsgNo));
+            //    return result;
+            //}
 
 
-            //VoucherNo:string;StoreNo:string;var ItemNo:string
+            ////VoucherNo:string;StoreNo:string;var ItemNo:string
 
-            string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
+            //string databasedws = System.Configuration.ConfigurationManager.AppSettings["DbConn"];
 
-            using (OracleConnection dbConn = new OracleConnection(databasedws))
-            {
-                //  OracleConnection dbConn = new OracleConnection(databasedws);
-                dbConn.Open();
+            //using (OracleConnection dbConn = new OracleConnection(databasedws))
+            //{
+            //    //  OracleConnection dbConn = new OracleConnection(databasedws);
+            //    dbConn.Open();
 
-                RtnMsg = "";
-                RtnMsgNo = "";
+            //    RtnMsg = "";
+            //    RtnMsgNo = "";
 
-                OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERTRANSACTION_REFUND2", dbConn);//调用存储过程的方法
-                oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
-                try
-                {
+            //    OracleCommand oralceComm = new OracleCommand("PG_VOUCHER.SP_VOUCHERTRANSACTION_REFUND2", dbConn);//调用存储过程的方法
+            //    oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
+            //    try
+            //    {
 
-                    //string[] vous = VoucherNo.Split(',');
+            //        //string[] vous = VoucherNo.Split(',');
 
-                    //for (int i = 0; i < vous.Length; i++)
-                    //{
+            //        //for (int i = 0; i < vous.Length; i++)
+            //        //{
 
-                    //    if (vous[i].Trim() != "")
-                    //    {
+            //        //    if (vous[i].Trim() != "")
+            //        //    {
 
-                    oralceComm.Parameters.Clear();
-                    oralceComm.Parameters.Add(new OracleParameter("P_TRANSNO", OracleType.VarChar)).Value = TransNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_TILLNO", OracleType.VarChar)).Value = TillNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_SALEID", OracleType.Int32)).Value = SaleId;
-                    oralceComm.Parameters.Add(new OracleParameter("P_SALEDATE", OracleType.VarChar)).Value = SaleDate;
-                    oralceComm.Parameters.Add(new OracleParameter("P_REMARKS1", OracleType.VarChar)).Value = Remarks1;
-                    oralceComm.Parameters.Add(new OracleParameter("P_REMARKS2", OracleType.VarChar)).Value = Remarks2;
-
-
-                    OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
-                    PRtnMsg.Size = 100;
-                    PRtnMsg.Direction = ParameterDirection.Output;
-                    oralceComm.Parameters.Add(PRtnMsg);
+            //        oralceComm.Parameters.Clear();
+            //        oralceComm.Parameters.Add(new OracleParameter("P_TRANSNO", OracleType.VarChar)).Value = TransNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = VoucherNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_STORENO", OracleType.VarChar)).Value = StoreNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_TILLNO", OracleType.VarChar)).Value = TillNo;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_SALEID", OracleType.Int32)).Value = SaleId;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_SALEDATE", OracleType.VarChar)).Value = SaleDate;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_REMARKS1", OracleType.VarChar)).Value = Remarks1;
+            //        oralceComm.Parameters.Add(new OracleParameter("P_REMARKS2", OracleType.VarChar)).Value = Remarks2;
 
 
-                    OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
-                    PRTNMSGNO.Direction = ParameterDirection.Output;
-                    PRTNMSGNO.Size = 50;
-                    oralceComm.Parameters.Add(PRTNMSGNO);
-
-                    oralceComm.ExecuteNonQuery();
-
-                    RtnMsg = PRtnMsg.Value.ToString();
-
-                    RtnMsgNo = PRTNMSGNO.Value.ToString();
-
-                    //    }
-                    //}
-
-                    //dbConn.Close();
-                    result = "1";
+            //        OracleParameter PRtnMsg = new OracleParameter("V_RTNMSG", OracleType.VarChar);
+            //        PRtnMsg.Size = 100;
+            //        PRtnMsg.Direction = ParameterDirection.Output;
+            //        oralceComm.Parameters.Add(PRtnMsg);
 
 
-                }
-                catch (Exception e)
-                {
-                    //dbConn.Close();
+            //        OracleParameter PRTNMSGNO = new OracleParameter("V_RTNMSGNO", OracleType.VarChar);
+            //        PRTNMSGNO.Direction = ParameterDirection.Output;
+            //        PRTNMSGNO.Size = 50;
+            //        oralceComm.Parameters.Add(PRTNMSGNO);
 
-                    RtnMsgNo = "99";
-                    RtnMsg = "异常情况：" + e.Message.ToString();
-                    result = "0";
-                }
-                finally
-                {
-                    Sign = requestGateway.CreateSign(new OrderedDictionary {
-                        { "rtnMsg", RtnMsg},
-                        { "rtnMsgNo", RtnMsgNo}
-                    });
-                }
-            }
-            return result;
+            //        oralceComm.ExecuteNonQuery();
+
+            //        RtnMsg = PRtnMsg.Value.ToString();
+
+            //        RtnMsgNo = PRTNMSGNO.Value.ToString();
+
+            //        //    }
+            //        //}
+
+            //        //dbConn.Close();
+            //        result = "1";
+
+
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        //dbConn.Close();
+
+            //        RtnMsgNo = "99";
+            //        RtnMsg = "异常情况：" + e.Message.ToString();
+            //        result = "0";
+            //    }
+            //    finally
+            //    {
+            //        Sign = requestGateway.CreateSign(new OrderedDictionary {
+            //            { "rtnMsg", RtnMsg},
+            //            { "rtnMsgNo", RtnMsgNo}
+            //        });
+            //    }
+            //}
+            //return result;
         }
 
 
@@ -3020,7 +3293,7 @@ namespace HexSalesIF_Service
              
             string result = "0";
              
-            VoucherObsoleteController c = new VoucherObsoleteController(new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version")));
+            VoucherObsoleteController c = new VoucherObsoleteController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
             var resp = c.ExecuteAll(new VoucherObsoleteReq(VoucherNo, UpdateDate, Remarks1, Remarks2, Sign));
             if (resp.isExcuteSuccess())
             {
@@ -3043,7 +3316,7 @@ namespace HexSalesIF_Service
                  Sign, HttpContext.Current.Request.Headers.Get("version")));
 
             string result = "0";
-            VoucherStoreSyncController c = new VoucherStoreSyncController(new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version")));
+            VoucherStoreSyncController c = new VoucherStoreSyncController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
             var resp = c.ExecuteAll(new VoucherStoreSyncReq(Province, City, Company, StoreNo, StoreName, StoreAddr,
                    StoreEmail, StoreTel, StorePosNum, OperateType, Remarks1, Remarks2, Sign));
             if (resp.isExcuteSuccess())
@@ -3084,8 +3357,9 @@ namespace HexSalesIF_Service
             
             string result = "0";
             SNo = "";
-            VoucherCodeSyncController c = new VoucherCodeSyncController(new WebRequestGateway(HttpContext.Current.Request.Headers.Get("version")));
-            var resp = c.ExecuteAll(new VoucherCodeSyncReq(VoucherName, VoucherNo, Convert.ToInt32(VoucherQty), BarcodeUnit, StartDate,
+            string outVoucherQty = "";
+            VoucherCodeSyncController c = new VoucherCodeSyncController(new WebRequestGate(HttpContext.Current.Request.Headers.Get("version")));
+            var resp = c.ExecuteAll(new VoucherCodeSyncReq(VoucherName, VoucherNo, VoucherQty, BarcodeUnit, StartDate,
                     ExpiredDate, UpdateDate, Remarks1, Remarks2, Sign));
             if (resp.isExcuteSuccess())
             {

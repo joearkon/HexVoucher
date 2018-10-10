@@ -57,7 +57,7 @@ namespace HexSalesIF_Service
         public bool VerifySign(string dataParis, string expectedSign)
         {
             bool isValid = WebSecurity.Verify(dataParis, expectedSign,
-             WebSecurity.GetXmlString(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "Bin\\", "CustomPublicKey.xml")));
+             WebSecurity.GetXmlString(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "sk\\", "CustomPublicKey.xml")));
 
             return isValid;
         }
@@ -73,7 +73,7 @@ namespace HexSalesIF_Service
         {
             var xmlName = isServerXml ? "VendorPublicKey.xml" : "CustomPublicKey.xml";
             bool isValid = WebSecurity.Verify(dataParis, expectedSign,
-             WebSecurity.GetXmlString(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "Bin\\", xmlName)));
+             WebSecurity.GetXmlString(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "sk\\", xmlName)));
 
             return isValid;
         }
@@ -88,7 +88,7 @@ namespace HexSalesIF_Service
         public string CreateSign(string data)
         {
             return WebSecurity.Sign(data,
-                    WebSecurity.GetXmlString(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "Bin\\", "VendorPrivateKey.xml")));
+                    WebSecurity.GetXmlString(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "sk\\", "VendorPrivateKey.xml")));
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace HexSalesIF_Service.controller
         {
         }
 
-        public VoucherCodeSyncController(IWebRequestGateway gate) : base(gate)
+        public VoucherCodeSyncController(IWebRequestGate gate) : base(gate)
         {
         }
 
@@ -36,7 +36,7 @@ namespace HexSalesIF_Service.controller
 
 
         //}
-        public override VoucherBaseResp Execute(VoucherBaseReq baseReq)
+        protected override  VoucherBaseResp Execute(VoucherBaseReq baseReq)
         {
             var newObj = baseReq as VoucherCodeSyncReq; // 强制转换
             VoucherCodeSyncResp resp = new VoucherCodeSyncResp();
@@ -50,10 +50,13 @@ namespace HexSalesIF_Service.controller
                 oralceComm.CommandType = CommandType.StoredProcedure;//存储过程名称
                 try
                 {
+                    int qty = 0;
+                    int.TryParse(newObj.VoucherQty, out qty);
+
                     oralceComm.Parameters.Clear();
                     oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNAME", OracleType.VarChar)).Value = newObj.VoucherName;
                     oralceComm.Parameters.Add(new OracleParameter("P_VOUCHERNO", OracleType.VarChar)).Value = newObj.VoucherNo;
-                    oralceComm.Parameters.Add(new OracleParameter("P_QTY", OracleType.Int32)).Value = Convert.ToInt32(newObj.VoucherQty);
+                    oralceComm.Parameters.Add(new OracleParameter("P_QTY", OracleType.Int32)).Value = qty;
                     oralceComm.Parameters.Add(new OracleParameter("P_BARCODEUNIT", OracleType.VarChar)).Value = newObj.BarcodeUnit;
                     oralceComm.Parameters.Add(new OracleParameter("P_STARTDATE", OracleType.VarChar)).Value = newObj.StartDate;
                     oralceComm.Parameters.Add(new OracleParameter("P_EXPIREDDATE", OracleType.VarChar)).Value = newObj.ExpiredDate;

@@ -14,7 +14,7 @@ namespace UnitTest
         {
             var service = new HexVoucherWebService.Test2Request();
             
-             
+              
             Assert.AreEqual(1,1);
         }
     }

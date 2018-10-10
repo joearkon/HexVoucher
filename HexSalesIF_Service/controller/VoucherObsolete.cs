@@ -9,11 +9,11 @@ namespace HexSalesIF_Service.controller
 {
     public class VoucherObsoleteController : ControllerBase
     {
-        public VoucherObsoleteController(IWebRequestGateway gate) : base(gate)
+        public VoucherObsoleteController(IWebRequestGate gate) : base(gate)
         {
         }
 
-        public override VoucherBaseResp Execute(VoucherBaseReq baseReq)
+        protected override VoucherBaseResp Execute(VoucherBaseReq baseReq)
         {
             var newObj = baseReq as VoucherObsoleteReq; // 强制转换
             VoucherObsoleteResp resp = new VoucherObsoleteResp();

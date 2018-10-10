@@ -4,14 +4,18 @@ using System.Web;
 
 namespace HexSalesIF_Service.model
 {
-    public class VoucherObsoleteReq:VoucherBaseReq
+    public class VoucherObsoleteReq : VoucherBaseReq
     {
+        [VoucherSortNo(n = 1)]
         public string VoucherNo { get; set; }
+        [VoucherSortNo(n = 2)]
         public string UpdateDate { get; set; }
+        [VoucherSortNo(n = 3)]
         public string Remarks1 { get; set; }
+        [VoucherSortNo(n = 4)]
         public string Remarks2 { get; set; }
-         
-        public VoucherObsoleteReq(string voucherNo,string updateDate,string remarks1, string remarks2,string sign)
+
+        public VoucherObsoleteReq(string voucherNo, string updateDate, string remarks1, string remarks2, string sign)
         {
             this.VoucherNo = voucherNo;
             this.UpdateDate = updateDate;
