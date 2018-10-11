@@ -8,7 +8,7 @@ namespace HexSalesIF_Service.util
     public static class LogHelper
     {
           private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger("DEBUG");
-  
+        
           public static void Info(string info)
           {
              Logger.Info(info);
