@@ -145,7 +145,7 @@
       <DependentUpon>VoucherService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WebRequestGateway.cs" />
+    <Compile Include="WebRequestGate.cs" />
     <Compile Include="WebServiceCommon.cs" />
   </ItemGroup>
   <ItemGroup>

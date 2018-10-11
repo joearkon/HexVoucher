@@ -32,6 +32,7 @@ namespace HexSalesIF_Service.model
 
     public class VoucherQueryNewReq: VoucherBaseReq
     {
+        [VoucherSortNo(n =1)]
         public string VoucherNo { get; set; }
      
 
