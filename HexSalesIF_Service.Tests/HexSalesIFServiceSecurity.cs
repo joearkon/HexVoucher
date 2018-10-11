@@ -1,10 +1,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HexSalesIF_Service.util;
+using HexSalesIF_Service;
 using System;
 using System.IO;
 using Moq;
 using System.Collections;
 using System.Security.Cryptography;
+using HexSalesIF_Service.util;
 
 namespace UnitTest
 {
@@ -18,7 +19,7 @@ namespace UnitTest
         [TestCategory("security")]
         public void SignTestTrue()
         {
-            var s = WebSecurity.Sign("a=1&b=2", WebSecurity.GetXmlString("sk/VendorPrivateKey.xml"));
+            var s =  WebSecurity.Sign("a=1&b=2", WebSecurity.GetXmlString("sk/VendorPrivateKey.xml"));
             Assert.AreEqual(s, "Vz8Zs6PN7EhhtCVhLP5s53vMhWBCG5+6PeUIO6Gnq1ODccNnk9NOVbhV3hHDfz8BQbH6u05x1rE7qg/VdF7OGwpp6TvcS2jdH0zALhyerIL6Sido1fOqcSh0nUalspZEEkSP0UCwsq5tTWxP5Bqg9tBlA8vNmgmYuAcsDyk/bTVxfv/PQ5FRofRNjIoBjHbjfeWXJZSs0oK+PaiQH8bViifAp5qgHqEqhdULOPzOWXOHBgZNgPUNftjCxRuzX/C80Rw/m6VU0wqKBhgrc9xSpfq4OeDihFgClcmjoQfjogwfwm3fb61lfdCZ6nTDZF0KizpDr5l1ba5/xyHpD08fSw==");
         }
 
@@ -126,7 +127,7 @@ namespace UnitTest
                 "hZ1wPz6XesDebwpMHvotRBea4Uw8RKSoFcl1uSdyd5nuFaCTWU9UDPHLtwMlUiAnL5hJX0fvVuqhNrEqcklv+FDC4fdmIY++VeQXalpBab+ogd/5DKsZtXOoax8uhzhMbftOucNOgReCB0rHu+QPWAJCOXLtjDAPxjVsZjZooAqSjhgeaAGKGoN4uNVQpfDg/wxhAucmA93O/5GNY7wvstjFvWhU2fF3QkQNglzUYgEmu99EDEZcT7ZfG7wtS06fCfgsNzfwWQa2JF8t98xjVhO41xQbikqng8/SWgDjHJ3Pgv0D2E2bOE6wv3jVxAZW0j6X33KSiPJMPuFuw4zwQg==");
             Assert.IsTrue(valid);
 
-             
+
 
         }
     }

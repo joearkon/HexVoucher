@@ -6,7 +6,7 @@
   },
   "ExtendedData": {
     "Uri": "http://localhost:13728/voucherService.asmx",
-    "Namespace": "HexVoucherWebService",
+    "Namespace": "VoucherService",
     "SelectedAccessLevelForGeneratedClass": "Public",
     "GenerateMessageContract": false,
     "ReuseTypesinReferencedAssemblies": true,
@@ -21,7 +21,7 @@
     },
     "CheckedReferencedAssemblies": [],
     "InstanceId": null,
-    "Name": "HexVoucherWebService",
+    "Name": "VoucherService",
     "Metadata": {}
   }
 }

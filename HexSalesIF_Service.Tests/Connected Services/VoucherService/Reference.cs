@@ -7,74 +7,74 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace HexVoucherWebService
+namespace VoucherService
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.1")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="HexVoucherWebService.VoucherServiceSoap")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="VoucherService.VoucherServiceSoap")]
     public interface VoucherServiceSoap
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherOO", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherOOResponse> VoucherOOAsync(HexVoucherWebService.VoucherOORequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherOOResponse> VoucherOOAsync(VoucherService.VoucherOORequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherCheck", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheckResponse> VoucherCheckAsync(HexVoucherWebService.VoucherCheckRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherCheckResponse> VoucherCheckAsync(VoucherService.VoucherCheckRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherCheckNew", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheckNewResponse> VoucherCheckNewAsync(HexVoucherWebService.VoucherCheckNewRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherCheckNewResponse> VoucherCheckNewAsync(VoucherService.VoucherCheckNewRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherCheckReturn", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheckReturnResponse> VoucherCheckReturnAsync(HexVoucherWebService.VoucherCheckReturnRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherCheckReturnResponse> VoucherCheckReturnAsync(VoucherService.VoucherCheckReturnRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherCheck_OO", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheck_OOResponse> VoucherCheck_OOAsync(HexVoucherWebService.VoucherCheck_OORequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherCheck_OOResponse> VoucherCheck_OOAsync(VoucherService.VoucherCheck_OORequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Test", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.TestResponse> TestAsync(HexVoucherWebService.TestRequest request);
+        System.Threading.Tasks.Task<VoucherService.TestResponse> TestAsync(VoucherService.TestRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Test2", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.Test2Response> Test2Async(HexVoucherWebService.Test2Request request);
+        System.Threading.Tasks.Task<VoucherService.Test2Response> Test2Async(VoucherService.Test2Request request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherTransaction", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionResponse> VoucherTransactionAsync(HexVoucherWebService.VoucherTransactionRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherTransactionResponse> VoucherTransactionAsync(VoucherService.VoucherTransactionRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherTransactionNew", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionNewResponse> VoucherTransactionNewAsync(HexVoucherWebService.VoucherTransactionNewRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherTransactionNewResponse> VoucherTransactionNewAsync(VoucherService.VoucherTransactionNewRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherTransactionReturn", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionReturnResponse> VoucherTransactionReturnAsync(HexVoucherWebService.VoucherTransactionReturnRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherTransactionReturnResponse> VoucherTransactionReturnAsync(VoucherService.VoucherTransactionReturnRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherSalesCheck", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherSalesCheckResponse> VoucherSalesCheckAsync(HexVoucherWebService.VoucherSalesCheckRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherSalesCheckResponse> VoucherSalesCheckAsync(VoucherService.VoucherSalesCheckRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherCheck_BCP", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheck_BCPResponse> VoucherCheck_BCPAsync(HexVoucherWebService.VoucherCheck_BCPRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherCheck_BCPResponse> VoucherCheck_BCPAsync(VoucherService.VoucherCheck_BCPRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherCheck_BCPNew", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheck_BCPNewResponse> VoucherCheck_BCPNewAsync(HexVoucherWebService.VoucherCheck_BCPNewRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherCheck_BCPNewResponse> VoucherCheck_BCPNewAsync(VoucherService.VoucherCheck_BCPNewRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherQuery", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherQueryResponse> VoucherQueryAsync(HexVoucherWebService.VoucherQueryRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherQueryResponse> VoucherQueryAsync(VoucherService.VoucherQueryRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherQueryNew", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherQueryNewResponse> VoucherQueryNewAsync(HexVoucherWebService.VoucherQueryNewRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherQueryNewResponse> VoucherQueryNewAsync(VoucherService.VoucherQueryNewRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherTransactionRetreatRefund", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionRetreatRefundResponse> VoucherTransactionRetreatRefundAsync(HexVoucherWebService.VoucherTransactionRetreatRefundRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherTransactionRetreatRefundResponse> VoucherTransactionRetreatRefundAsync(VoucherService.VoucherTransactionRetreatRefundRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherTransactionWriteOffRefund", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionWriteOffRefundResponse> VoucherTransactionWriteOffRefundAsync(HexVoucherWebService.VoucherTransactionWriteOffRefundRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherTransactionWriteOffRefundResponse> VoucherTransactionWriteOffRefundAsync(VoucherService.VoucherTransactionWriteOffRefundRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherObsolete", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherObsoleteResponse> VoucherObsoleteAsync(HexVoucherWebService.VoucherObsoleteRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherObsoleteResponse> VoucherObsoleteAsync(VoucherService.VoucherObsoleteRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/StoreInformationSynchronize", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.StoreInformationSynchronizeResponse> StoreInformationSynchronizeAsync(HexVoucherWebService.StoreInformationSynchronizeRequest request);
+        System.Threading.Tasks.Task<VoucherService.StoreInformationSynchronizeResponse> StoreInformationSynchronizeAsync(VoucherService.StoreInformationSynchronizeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/VoucherCodeSynchronize", ReplyAction="*")]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherCodeSynchronizeResponse> VoucherCodeSynchronizeAsync(HexVoucherWebService.VoucherCodeSynchronizeRequest request);
+        System.Threading.Tasks.Task<VoucherService.VoucherCodeSynchronizeResponse> VoucherCodeSynchronizeAsync(VoucherService.VoucherCodeSynchronizeRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -84,13 +84,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherOO", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherOORequestBody Body;
+        public VoucherService.VoucherOORequestBody Body;
         
         public VoucherOORequest()
         {
         }
         
-        public VoucherOORequest(HexVoucherWebService.VoucherOORequestBody Body)
+        public VoucherOORequest(VoucherService.VoucherOORequestBody Body)
         {
             this.Body = Body;
         }
@@ -162,13 +162,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherOOResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherOOResponseBody Body;
+        public VoucherService.VoucherOOResponseBody Body;
         
         public VoucherOOResponse()
         {
         }
         
-        public VoucherOOResponse(HexVoucherWebService.VoucherOOResponseBody Body)
+        public VoucherOOResponse(VoucherService.VoucherOOResponseBody Body)
         {
             this.Body = Body;
         }
@@ -184,27 +184,31 @@ namespace HexVoucherWebService
         public string VoucherOOResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string RtnTransTp;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string RtnMsg;
+        public string RtnTransTp;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string RtnMsgNo;
+        public string RtnMsg;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
-        public string RtnVoucherBcd;
+        public string RtnMsgNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string RtnVoucherBcd;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
         public string RtnVoucherItem;
         
         public VoucherOOResponseBody()
         {
         }
         
-        public VoucherOOResponseBody(string VoucherOOResult, string RtnTransTp, string RtnMsg, string RtnMsgNo, string RtnVoucherBcd, string RtnVoucherItem)
+        public VoucherOOResponseBody(string VoucherOOResult, string Sign, string RtnTransTp, string RtnMsg, string RtnMsgNo, string RtnVoucherBcd, string RtnVoucherItem)
         {
             this.VoucherOOResult = VoucherOOResult;
+            this.Sign = Sign;
             this.RtnTransTp = RtnTransTp;
             this.RtnMsg = RtnMsg;
             this.RtnMsgNo = RtnMsgNo;
@@ -220,13 +224,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherCheck", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherCheckRequestBody Body;
+        public VoucherService.VoucherCheckRequestBody Body;
         
         public VoucherCheckRequest()
         {
         }
         
-        public VoucherCheckRequest(HexVoucherWebService.VoucherCheckRequestBody Body)
+        public VoucherCheckRequest(VoucherService.VoucherCheckRequestBody Body)
         {
             this.Body = Body;
         }
@@ -266,13 +270,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherCheckResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherCheckResponseBody Body;
+        public VoucherService.VoucherCheckResponseBody Body;
         
         public VoucherCheckResponse()
         {
         }
         
-        public VoucherCheckResponse(HexVoucherWebService.VoucherCheckResponseBody Body)
+        public VoucherCheckResponse(VoucherService.VoucherCheckResponseBody Body)
         {
             this.Body = Body;
         }
@@ -288,21 +292,25 @@ namespace HexVoucherWebService
         public string VoucherCheckResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string DisNo;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string RtnMsg;
+        public string DisNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
         public string RtnMsgNo;
         
         public VoucherCheckResponseBody()
         {
         }
         
-        public VoucherCheckResponseBody(string VoucherCheckResult, string DisNo, string RtnMsg, string RtnMsgNo)
+        public VoucherCheckResponseBody(string VoucherCheckResult, string Sign, string DisNo, string RtnMsg, string RtnMsgNo)
         {
             this.VoucherCheckResult = VoucherCheckResult;
+            this.Sign = Sign;
             this.DisNo = DisNo;
             this.RtnMsg = RtnMsg;
             this.RtnMsgNo = RtnMsgNo;
@@ -316,13 +324,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherCheckNew", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherCheckNewRequestBody Body;
+        public VoucherService.VoucherCheckNewRequestBody Body;
         
         public VoucherCheckNewRequest()
         {
         }
         
-        public VoucherCheckNewRequest(HexVoucherWebService.VoucherCheckNewRequestBody Body)
+        public VoucherCheckNewRequest(VoucherService.VoucherCheckNewRequestBody Body)
         {
             this.Body = Body;
         }
@@ -362,13 +370,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherCheckNewResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherCheckNewResponseBody Body;
+        public VoucherService.VoucherCheckNewResponseBody Body;
         
         public VoucherCheckNewResponse()
         {
         }
         
-        public VoucherCheckNewResponse(HexVoucherWebService.VoucherCheckNewResponseBody Body)
+        public VoucherCheckNewResponse(VoucherService.VoucherCheckNewResponseBody Body)
         {
             this.Body = Body;
         }
@@ -384,27 +392,31 @@ namespace HexVoucherWebService
         public string VoucherCheckNewResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string VoucherItemNo;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string DisNo;
+        public string VoucherItemNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string NetAmt;
+        public string DisNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
-        public string RtnMsg;
+        public string NetAmt;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
         public string RtnMsgNo;
         
         public VoucherCheckNewResponseBody()
         {
         }
         
-        public VoucherCheckNewResponseBody(string VoucherCheckNewResult, string VoucherItemNo, string DisNo, string NetAmt, string RtnMsg, string RtnMsgNo)
+        public VoucherCheckNewResponseBody(string VoucherCheckNewResult, string Sign, string VoucherItemNo, string DisNo, string NetAmt, string RtnMsg, string RtnMsgNo)
         {
             this.VoucherCheckNewResult = VoucherCheckNewResult;
+            this.Sign = Sign;
             this.VoucherItemNo = VoucherItemNo;
             this.DisNo = DisNo;
             this.NetAmt = NetAmt;
@@ -420,13 +432,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherCheckReturn", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherCheckReturnRequestBody Body;
+        public VoucherService.VoucherCheckReturnRequestBody Body;
         
         public VoucherCheckReturnRequest()
         {
         }
         
-        public VoucherCheckReturnRequest(HexVoucherWebService.VoucherCheckReturnRequestBody Body)
+        public VoucherCheckReturnRequest(VoucherService.VoucherCheckReturnRequestBody Body)
         {
             this.Body = Body;
         }
@@ -466,13 +478,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherCheckReturnResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherCheckReturnResponseBody Body;
+        public VoucherService.VoucherCheckReturnResponseBody Body;
         
         public VoucherCheckReturnResponse()
         {
         }
         
-        public VoucherCheckReturnResponse(HexVoucherWebService.VoucherCheckReturnResponseBody Body)
+        public VoucherCheckReturnResponse(VoucherService.VoucherCheckReturnResponseBody Body)
         {
             this.Body = Body;
         }
@@ -488,30 +500,34 @@ namespace HexVoucherWebService
         public string VoucherCheckReturnResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string DisNo;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string NetAmt;
+        public string DisNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string ItemNo;
+        public string NetAmt;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
-        public string TenderNo;
+        public string ItemNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
-        public string RtnMsg;
+        public string TenderNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
         public string RtnMsgNo;
         
         public VoucherCheckReturnResponseBody()
         {
         }
         
-        public VoucherCheckReturnResponseBody(string VoucherCheckReturnResult, string DisNo, string NetAmt, string ItemNo, string TenderNo, string RtnMsg, string RtnMsgNo)
+        public VoucherCheckReturnResponseBody(string VoucherCheckReturnResult, string Sign, string DisNo, string NetAmt, string ItemNo, string TenderNo, string RtnMsg, string RtnMsgNo)
         {
             this.VoucherCheckReturnResult = VoucherCheckReturnResult;
+            this.Sign = Sign;
             this.DisNo = DisNo;
             this.NetAmt = NetAmt;
             this.ItemNo = ItemNo;
@@ -528,13 +544,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherCheck_OO", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherCheck_OORequestBody Body;
+        public VoucherService.VoucherCheck_OORequestBody Body;
         
         public VoucherCheck_OORequest()
         {
         }
         
-        public VoucherCheck_OORequest(HexVoucherWebService.VoucherCheck_OORequestBody Body)
+        public VoucherCheck_OORequest(VoucherService.VoucherCheck_OORequestBody Body)
         {
             this.Body = Body;
         }
@@ -574,13 +590,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherCheck_OOResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherCheck_OOResponseBody Body;
+        public VoucherService.VoucherCheck_OOResponseBody Body;
         
         public VoucherCheck_OOResponse()
         {
         }
         
-        public VoucherCheck_OOResponse(HexVoucherWebService.VoucherCheck_OOResponseBody Body)
+        public VoucherCheck_OOResponse(VoucherService.VoucherCheck_OOResponseBody Body)
         {
             this.Body = Body;
         }
@@ -596,21 +612,25 @@ namespace HexVoucherWebService
         public string VoucherCheck_OOResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string DisNo;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string RtnMsg;
+        public string DisNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
         public string RtnMsgNo;
         
         public VoucherCheck_OOResponseBody()
         {
         }
         
-        public VoucherCheck_OOResponseBody(string VoucherCheck_OOResult, string DisNo, string RtnMsg, string RtnMsgNo)
+        public VoucherCheck_OOResponseBody(string VoucherCheck_OOResult, string Sign, string DisNo, string RtnMsg, string RtnMsgNo)
         {
             this.VoucherCheck_OOResult = VoucherCheck_OOResult;
+            this.Sign = Sign;
             this.DisNo = DisNo;
             this.RtnMsg = RtnMsg;
             this.RtnMsgNo = RtnMsgNo;
@@ -625,13 +645,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="Test", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.TestRequestBody Body;
+        public VoucherService.TestRequestBody Body;
         
         public TestRequest()
         {
         }
         
-        public TestRequest(HexVoucherWebService.TestRequestBody Body)
+        public TestRequest(VoucherService.TestRequestBody Body)
         {
             this.Body = Body;
         }
@@ -657,13 +677,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="TestResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.TestResponseBody Body;
+        public VoucherService.TestResponseBody Body;
         
         public TestResponse()
         {
         }
         
-        public TestResponse(HexVoucherWebService.TestResponseBody Body)
+        public TestResponse(VoucherService.TestResponseBody Body)
         {
             this.Body = Body;
         }
@@ -697,13 +717,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="Test2", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.Test2RequestBody Body;
+        public VoucherService.Test2RequestBody Body;
         
         public Test2Request()
         {
         }
         
-        public Test2Request(HexVoucherWebService.Test2RequestBody Body)
+        public Test2Request(VoucherService.Test2RequestBody Body)
         {
             this.Body = Body;
         }
@@ -729,13 +749,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="Test2Response", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.Test2ResponseBody Body;
+        public VoucherService.Test2ResponseBody Body;
         
         public Test2Response()
         {
         }
         
-        public Test2Response(HexVoucherWebService.Test2ResponseBody Body)
+        public Test2Response(VoucherService.Test2ResponseBody Body)
         {
             this.Body = Body;
         }
@@ -768,13 +788,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherTransaction", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherTransactionRequestBody Body;
+        public VoucherService.VoucherTransactionRequestBody Body;
         
         public VoucherTransactionRequest()
         {
         }
         
-        public VoucherTransactionRequest(HexVoucherWebService.VoucherTransactionRequestBody Body)
+        public VoucherTransactionRequest(VoucherService.VoucherTransactionRequestBody Body)
         {
             this.Body = Body;
         }
@@ -834,13 +854,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherTransactionResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherTransactionResponseBody Body;
+        public VoucherService.VoucherTransactionResponseBody Body;
         
         public VoucherTransactionResponse()
         {
         }
         
-        public VoucherTransactionResponse(HexVoucherWebService.VoucherTransactionResponseBody Body)
+        public VoucherTransactionResponse(VoucherService.VoucherTransactionResponseBody Body)
         {
             this.Body = Body;
         }
@@ -856,18 +876,22 @@ namespace HexVoucherWebService
         public string VoucherTransactionResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string RtnMsg;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
         public string RtnMsgNo;
         
         public VoucherTransactionResponseBody()
         {
         }
         
-        public VoucherTransactionResponseBody(string VoucherTransactionResult, string RtnMsg, string RtnMsgNo)
+        public VoucherTransactionResponseBody(string VoucherTransactionResult, string Sign, string RtnMsg, string RtnMsgNo)
         {
             this.VoucherTransactionResult = VoucherTransactionResult;
+            this.Sign = Sign;
             this.RtnMsg = RtnMsg;
             this.RtnMsgNo = RtnMsgNo;
         }
@@ -880,13 +904,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherTransactionNew", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherTransactionNewRequestBody Body;
+        public VoucherService.VoucherTransactionNewRequestBody Body;
         
         public VoucherTransactionNewRequest()
         {
         }
         
-        public VoucherTransactionNewRequest(HexVoucherWebService.VoucherTransactionNewRequestBody Body)
+        public VoucherTransactionNewRequest(VoucherService.VoucherTransactionNewRequestBody Body)
         {
             this.Body = Body;
         }
@@ -962,13 +986,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherTransactionNewResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherTransactionNewResponseBody Body;
+        public VoucherService.VoucherTransactionNewResponseBody Body;
         
         public VoucherTransactionNewResponse()
         {
         }
         
-        public VoucherTransactionNewResponse(HexVoucherWebService.VoucherTransactionNewResponseBody Body)
+        public VoucherTransactionNewResponse(VoucherService.VoucherTransactionNewResponseBody Body)
         {
             this.Body = Body;
         }
@@ -984,18 +1008,22 @@ namespace HexVoucherWebService
         public string VoucherTransactionNewResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string RtnMsg;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
         public string RtnMsgNo;
         
         public VoucherTransactionNewResponseBody()
         {
         }
         
-        public VoucherTransactionNewResponseBody(string VoucherTransactionNewResult, string RtnMsg, string RtnMsgNo)
+        public VoucherTransactionNewResponseBody(string VoucherTransactionNewResult, string Sign, string RtnMsg, string RtnMsgNo)
         {
             this.VoucherTransactionNewResult = VoucherTransactionNewResult;
+            this.Sign = Sign;
             this.RtnMsg = RtnMsg;
             this.RtnMsgNo = RtnMsgNo;
         }
@@ -1008,13 +1036,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherTransactionReturn", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherTransactionReturnRequestBody Body;
+        public VoucherService.VoucherTransactionReturnRequestBody Body;
         
         public VoucherTransactionReturnRequest()
         {
         }
         
-        public VoucherTransactionReturnRequest(HexVoucherWebService.VoucherTransactionReturnRequestBody Body)
+        public VoucherTransactionReturnRequest(VoucherService.VoucherTransactionReturnRequestBody Body)
         {
             this.Body = Body;
         }
@@ -1078,13 +1106,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherTransactionReturnResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherTransactionReturnResponseBody Body;
+        public VoucherService.VoucherTransactionReturnResponseBody Body;
         
         public VoucherTransactionReturnResponse()
         {
         }
         
-        public VoucherTransactionReturnResponse(HexVoucherWebService.VoucherTransactionReturnResponseBody Body)
+        public VoucherTransactionReturnResponse(VoucherService.VoucherTransactionReturnResponseBody Body)
         {
             this.Body = Body;
         }
@@ -1100,18 +1128,22 @@ namespace HexVoucherWebService
         public string VoucherTransactionReturnResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string RtnMsg;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
         public string RtnMsgNo;
         
         public VoucherTransactionReturnResponseBody()
         {
         }
         
-        public VoucherTransactionReturnResponseBody(string VoucherTransactionReturnResult, string RtnMsg, string RtnMsgNo)
+        public VoucherTransactionReturnResponseBody(string VoucherTransactionReturnResult, string Sign, string RtnMsg, string RtnMsgNo)
         {
             this.VoucherTransactionReturnResult = VoucherTransactionReturnResult;
+            this.Sign = Sign;
             this.RtnMsg = RtnMsg;
             this.RtnMsgNo = RtnMsgNo;
         }
@@ -1124,13 +1156,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherSalesCheck", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherSalesCheckRequestBody Body;
+        public VoucherService.VoucherSalesCheckRequestBody Body;
         
         public VoucherSalesCheckRequest()
         {
         }
         
-        public VoucherSalesCheckRequest(HexVoucherWebService.VoucherSalesCheckRequestBody Body)
+        public VoucherSalesCheckRequest(VoucherService.VoucherSalesCheckRequestBody Body)
         {
             this.Body = Body;
         }
@@ -1170,13 +1202,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherSalesCheckResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherSalesCheckResponseBody Body;
+        public VoucherService.VoucherSalesCheckResponseBody Body;
         
         public VoucherSalesCheckResponse()
         {
         }
         
-        public VoucherSalesCheckResponse(HexVoucherWebService.VoucherSalesCheckResponseBody Body)
+        public VoucherSalesCheckResponse(VoucherService.VoucherSalesCheckResponseBody Body)
         {
             this.Body = Body;
         }
@@ -1192,21 +1224,25 @@ namespace HexVoucherWebService
         public string VoucherSalesCheckResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string ItemNo;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string RtnMsg;
+        public string ItemNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
         public string RtnMsgNo;
         
         public VoucherSalesCheckResponseBody()
         {
         }
         
-        public VoucherSalesCheckResponseBody(string VoucherSalesCheckResult, string ItemNo, string RtnMsg, string RtnMsgNo)
+        public VoucherSalesCheckResponseBody(string VoucherSalesCheckResult, string Sign, string ItemNo, string RtnMsg, string RtnMsgNo)
         {
             this.VoucherSalesCheckResult = VoucherSalesCheckResult;
+            this.Sign = Sign;
             this.ItemNo = ItemNo;
             this.RtnMsg = RtnMsg;
             this.RtnMsgNo = RtnMsgNo;
@@ -1220,13 +1256,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherCheck_BCP", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherCheck_BCPRequestBody Body;
+        public VoucherService.VoucherCheck_BCPRequestBody Body;
         
         public VoucherCheck_BCPRequest()
         {
         }
         
-        public VoucherCheck_BCPRequest(HexVoucherWebService.VoucherCheck_BCPRequestBody Body)
+        public VoucherCheck_BCPRequest(VoucherService.VoucherCheck_BCPRequestBody Body)
         {
             this.Body = Body;
         }
@@ -1266,13 +1302,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherCheck_BCPResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherCheck_BCPResponseBody Body;
+        public VoucherService.VoucherCheck_BCPResponseBody Body;
         
         public VoucherCheck_BCPResponse()
         {
         }
         
-        public VoucherCheck_BCPResponse(HexVoucherWebService.VoucherCheck_BCPResponseBody Body)
+        public VoucherCheck_BCPResponse(VoucherService.VoucherCheck_BCPResponseBody Body)
         {
             this.Body = Body;
         }
@@ -1288,24 +1324,28 @@ namespace HexVoucherWebService
         public string VoucherCheck_BCPResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string ItemNo;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string DisNo;
+        public string ItemNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string RtnMsg;
+        public string DisNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
         public string RtnMsgNo;
         
         public VoucherCheck_BCPResponseBody()
         {
         }
         
-        public VoucherCheck_BCPResponseBody(string VoucherCheck_BCPResult, string ItemNo, string DisNo, string RtnMsg, string RtnMsgNo)
+        public VoucherCheck_BCPResponseBody(string VoucherCheck_BCPResult, string Sign, string ItemNo, string DisNo, string RtnMsg, string RtnMsgNo)
         {
             this.VoucherCheck_BCPResult = VoucherCheck_BCPResult;
+            this.Sign = Sign;
             this.ItemNo = ItemNo;
             this.DisNo = DisNo;
             this.RtnMsg = RtnMsg;
@@ -1320,13 +1360,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherCheck_BCPNew", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherCheck_BCPNewRequestBody Body;
+        public VoucherService.VoucherCheck_BCPNewRequestBody Body;
         
         public VoucherCheck_BCPNewRequest()
         {
         }
         
-        public VoucherCheck_BCPNewRequest(HexVoucherWebService.VoucherCheck_BCPNewRequestBody Body)
+        public VoucherCheck_BCPNewRequest(VoucherService.VoucherCheck_BCPNewRequestBody Body)
         {
             this.Body = Body;
         }
@@ -1366,13 +1406,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherCheck_BCPNewResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherCheck_BCPNewResponseBody Body;
+        public VoucherService.VoucherCheck_BCPNewResponseBody Body;
         
         public VoucherCheck_BCPNewResponse()
         {
         }
         
-        public VoucherCheck_BCPNewResponse(HexVoucherWebService.VoucherCheck_BCPNewResponseBody Body)
+        public VoucherCheck_BCPNewResponse(VoucherService.VoucherCheck_BCPNewResponseBody Body)
         {
             this.Body = Body;
         }
@@ -1388,30 +1428,34 @@ namespace HexVoucherWebService
         public string VoucherCheck_BCPNewResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string VoucherItemNo;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string ItemNo;
+        public string VoucherItemNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string DisNo;
+        public string ItemNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
-        public string NetAmt;
+        public string DisNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
-        public string RtnMsg;
+        public string NetAmt;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
         public string RtnMsgNo;
         
         public VoucherCheck_BCPNewResponseBody()
         {
         }
         
-        public VoucherCheck_BCPNewResponseBody(string VoucherCheck_BCPNewResult, string VoucherItemNo, string ItemNo, string DisNo, string NetAmt, string RtnMsg, string RtnMsgNo)
+        public VoucherCheck_BCPNewResponseBody(string VoucherCheck_BCPNewResult, string Sign, string VoucherItemNo, string ItemNo, string DisNo, string NetAmt, string RtnMsg, string RtnMsgNo)
         {
             this.VoucherCheck_BCPNewResult = VoucherCheck_BCPNewResult;
+            this.Sign = Sign;
             this.VoucherItemNo = VoucherItemNo;
             this.ItemNo = ItemNo;
             this.DisNo = DisNo;
@@ -1428,13 +1472,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherQuery", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherQueryRequestBody Body;
+        public VoucherService.VoucherQueryRequestBody Body;
         
         public VoucherQueryRequest()
         {
         }
         
-        public VoucherQueryRequest(HexVoucherWebService.VoucherQueryRequestBody Body)
+        public VoucherQueryRequest(VoucherService.VoucherQueryRequestBody Body)
         {
             this.Body = Body;
         }
@@ -1474,13 +1518,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherQueryResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherQueryResponseBody Body;
+        public VoucherService.VoucherQueryResponseBody Body;
         
         public VoucherQueryResponse()
         {
         }
         
-        public VoucherQueryResponse(HexVoucherWebService.VoucherQueryResponseBody Body)
+        public VoucherQueryResponse(VoucherService.VoucherQueryResponseBody Body)
         {
             this.Body = Body;
         }
@@ -1524,13 +1568,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherQueryNew", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherQueryNewRequestBody Body;
+        public VoucherService.VoucherQueryNewRequestBody Body;
         
         public VoucherQueryNewRequest()
         {
         }
         
-        public VoucherQueryNewRequest(HexVoucherWebService.VoucherQueryNewRequestBody Body)
+        public VoucherQueryNewRequest(VoucherService.VoucherQueryNewRequestBody Body)
         {
             this.Body = Body;
         }
@@ -1566,13 +1610,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherQueryNewResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherQueryNewResponseBody Body;
+        public VoucherService.VoucherQueryNewResponseBody Body;
         
         public VoucherQueryNewResponse()
         {
         }
         
-        public VoucherQueryNewResponse(HexVoucherWebService.VoucherQueryNewResponseBody Body)
+        public VoucherQueryNewResponse(VoucherService.VoucherQueryNewResponseBody Body)
         {
             this.Body = Body;
         }
@@ -1588,39 +1632,43 @@ namespace HexVoucherWebService
         public string VoucherQueryNewResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string VoucherType;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string VoucherItemNo;
+        public string VoucherType;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string VoucherNos;
+        public string VoucherItemNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
-        public string VoucherStatus;
+        public string VoucherNos;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
-        public string StoreNo;
+        public string VoucherStatus;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
-        public string ActivedTime;
+        public string StoreNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
-        public string CertificatedTime;
+        public string ActivedTime;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
-        public string RtnMsg;
+        public string CertificatedTime;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=10)]
         public string RtnMsgNo;
         
         public VoucherQueryNewResponseBody()
         {
         }
         
-        public VoucherQueryNewResponseBody(string VoucherQueryNewResult, string VoucherType, string VoucherItemNo, string VoucherNos, string VoucherStatus, string StoreNo, string ActivedTime, string CertificatedTime, string RtnMsg, string RtnMsgNo)
+        public VoucherQueryNewResponseBody(string VoucherQueryNewResult, string Sign, string VoucherType, string VoucherItemNo, string VoucherNos, string VoucherStatus, string StoreNo, string ActivedTime, string CertificatedTime, string RtnMsg, string RtnMsgNo)
         {
             this.VoucherQueryNewResult = VoucherQueryNewResult;
+            this.Sign = Sign;
             this.VoucherType = VoucherType;
             this.VoucherItemNo = VoucherItemNo;
             this.VoucherNos = VoucherNos;
@@ -1640,13 +1688,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherTransactionRetreatRefund", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherTransactionRetreatRefundRequestBody Body;
+        public VoucherService.VoucherTransactionRetreatRefundRequestBody Body;
         
         public VoucherTransactionRetreatRefundRequest()
         {
         }
         
-        public VoucherTransactionRetreatRefundRequest(HexVoucherWebService.VoucherTransactionRetreatRefundRequestBody Body)
+        public VoucherTransactionRetreatRefundRequest(VoucherService.VoucherTransactionRetreatRefundRequestBody Body)
         {
             this.Body = Body;
         }
@@ -1710,13 +1758,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherTransactionRetreatRefundResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherTransactionRetreatRefundResponseBody Body;
+        public VoucherService.VoucherTransactionRetreatRefundResponseBody Body;
         
         public VoucherTransactionRetreatRefundResponse()
         {
         }
         
-        public VoucherTransactionRetreatRefundResponse(HexVoucherWebService.VoucherTransactionRetreatRefundResponseBody Body)
+        public VoucherTransactionRetreatRefundResponse(VoucherService.VoucherTransactionRetreatRefundResponseBody Body)
         {
             this.Body = Body;
         }
@@ -1732,18 +1780,22 @@ namespace HexVoucherWebService
         public string VoucherTransactionRetreatRefundResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string RtnMsg;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
         public string RtnMsgNo;
         
         public VoucherTransactionRetreatRefundResponseBody()
         {
         }
         
-        public VoucherTransactionRetreatRefundResponseBody(string VoucherTransactionRetreatRefundResult, string RtnMsg, string RtnMsgNo)
+        public VoucherTransactionRetreatRefundResponseBody(string VoucherTransactionRetreatRefundResult, string Sign, string RtnMsg, string RtnMsgNo)
         {
             this.VoucherTransactionRetreatRefundResult = VoucherTransactionRetreatRefundResult;
+            this.Sign = Sign;
             this.RtnMsg = RtnMsg;
             this.RtnMsgNo = RtnMsgNo;
         }
@@ -1756,13 +1808,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherTransactionWriteOffRefund", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherTransactionWriteOffRefundRequestBody Body;
+        public VoucherService.VoucherTransactionWriteOffRefundRequestBody Body;
         
         public VoucherTransactionWriteOffRefundRequest()
         {
         }
         
-        public VoucherTransactionWriteOffRefundRequest(HexVoucherWebService.VoucherTransactionWriteOffRefundRequestBody Body)
+        public VoucherTransactionWriteOffRefundRequest(VoucherService.VoucherTransactionWriteOffRefundRequestBody Body)
         {
             this.Body = Body;
         }
@@ -1826,13 +1878,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherTransactionWriteOffRefundResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherTransactionWriteOffRefundResponseBody Body;
+        public VoucherService.VoucherTransactionWriteOffRefundResponseBody Body;
         
         public VoucherTransactionWriteOffRefundResponse()
         {
         }
         
-        public VoucherTransactionWriteOffRefundResponse(HexVoucherWebService.VoucherTransactionWriteOffRefundResponseBody Body)
+        public VoucherTransactionWriteOffRefundResponse(VoucherService.VoucherTransactionWriteOffRefundResponseBody Body)
         {
             this.Body = Body;
         }
@@ -1848,18 +1900,22 @@ namespace HexVoucherWebService
         public string VoucherTransactionWriteOffRefundResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string RtnMsg;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
         public string RtnMsgNo;
         
         public VoucherTransactionWriteOffRefundResponseBody()
         {
         }
         
-        public VoucherTransactionWriteOffRefundResponseBody(string VoucherTransactionWriteOffRefundResult, string RtnMsg, string RtnMsgNo)
+        public VoucherTransactionWriteOffRefundResponseBody(string VoucherTransactionWriteOffRefundResult, string Sign, string RtnMsg, string RtnMsgNo)
         {
             this.VoucherTransactionWriteOffRefundResult = VoucherTransactionWriteOffRefundResult;
+            this.Sign = Sign;
             this.RtnMsg = RtnMsg;
             this.RtnMsgNo = RtnMsgNo;
         }
@@ -1872,13 +1928,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherObsolete", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherObsoleteRequestBody Body;
+        public VoucherService.VoucherObsoleteRequestBody Body;
         
         public VoucherObsoleteRequest()
         {
         }
         
-        public VoucherObsoleteRequest(HexVoucherWebService.VoucherObsoleteRequestBody Body)
+        public VoucherObsoleteRequest(VoucherService.VoucherObsoleteRequestBody Body)
         {
             this.Body = Body;
         }
@@ -1926,13 +1982,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherObsoleteResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherObsoleteResponseBody Body;
+        public VoucherService.VoucherObsoleteResponseBody Body;
         
         public VoucherObsoleteResponse()
         {
         }
         
-        public VoucherObsoleteResponse(HexVoucherWebService.VoucherObsoleteResponseBody Body)
+        public VoucherObsoleteResponse(VoucherService.VoucherObsoleteResponseBody Body)
         {
             this.Body = Body;
         }
@@ -1948,18 +2004,22 @@ namespace HexVoucherWebService
         public string VoucherObsoleteResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string RtnMsg;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
         public string RtnMsgNo;
         
         public VoucherObsoleteResponseBody()
         {
         }
         
-        public VoucherObsoleteResponseBody(string VoucherObsoleteResult, string RtnMsg, string RtnMsgNo)
+        public VoucherObsoleteResponseBody(string VoucherObsoleteResult, string Sign, string RtnMsg, string RtnMsgNo)
         {
             this.VoucherObsoleteResult = VoucherObsoleteResult;
+            this.Sign = Sign;
             this.RtnMsg = RtnMsg;
             this.RtnMsgNo = RtnMsgNo;
         }
@@ -1972,13 +2032,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="StoreInformationSynchronize", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.StoreInformationSynchronizeRequestBody Body;
+        public VoucherService.StoreInformationSynchronizeRequestBody Body;
         
         public StoreInformationSynchronizeRequest()
         {
         }
         
-        public StoreInformationSynchronizeRequest(HexVoucherWebService.StoreInformationSynchronizeRequestBody Body)
+        public StoreInformationSynchronizeRequest(VoucherService.StoreInformationSynchronizeRequestBody Body)
         {
             this.Body = Body;
         }
@@ -2058,13 +2118,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="StoreInformationSynchronizeResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.StoreInformationSynchronizeResponseBody Body;
+        public VoucherService.StoreInformationSynchronizeResponseBody Body;
         
         public StoreInformationSynchronizeResponse()
         {
         }
         
-        public StoreInformationSynchronizeResponse(HexVoucherWebService.StoreInformationSynchronizeResponseBody Body)
+        public StoreInformationSynchronizeResponse(VoucherService.StoreInformationSynchronizeResponseBody Body)
         {
             this.Body = Body;
         }
@@ -2080,18 +2140,22 @@ namespace HexVoucherWebService
         public string StoreInformationSynchronizeResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string RtnMsg;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string RtnMsg;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
         public string RtnMsgNo;
         
         public StoreInformationSynchronizeResponseBody()
         {
         }
         
-        public StoreInformationSynchronizeResponseBody(string StoreInformationSynchronizeResult, string RtnMsg, string RtnMsgNo)
+        public StoreInformationSynchronizeResponseBody(string StoreInformationSynchronizeResult, string Sign, string RtnMsg, string RtnMsgNo)
         {
             this.StoreInformationSynchronizeResult = StoreInformationSynchronizeResult;
+            this.Sign = Sign;
             this.RtnMsg = RtnMsg;
             this.RtnMsgNo = RtnMsgNo;
         }
@@ -2104,13 +2168,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherCodeSynchronize", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherCodeSynchronizeRequestBody Body;
+        public VoucherService.VoucherCodeSynchronizeRequestBody Body;
         
         public VoucherCodeSynchronizeRequest()
         {
         }
         
-        public VoucherCodeSynchronizeRequest(HexVoucherWebService.VoucherCodeSynchronizeRequestBody Body)
+        public VoucherCodeSynchronizeRequest(VoucherService.VoucherCodeSynchronizeRequestBody Body)
         {
             this.Body = Body;
         }
@@ -2129,34 +2193,38 @@ namespace HexVoucherWebService
         public string VoucherNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string Sign;
+        public string VoucherQty;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string BarcodeUnit;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
-        public string StartDate;
+        public string BarcodeUnit;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
-        public string ExpiredDate;
+        public string StartDate;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
-        public string UpdateDate;
+        public string ExpiredDate;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
-        public string Remarks1;
+        public string UpdateDate;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        public string Remarks1;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
         public string Remarks2;
         
         public VoucherCodeSynchronizeRequestBody()
         {
         }
         
-        public VoucherCodeSynchronizeRequestBody(string VoucherName, string VoucherNo, string Sign, string BarcodeUnit, string StartDate, string ExpiredDate, string UpdateDate, string Remarks1, string Remarks2)
+        public VoucherCodeSynchronizeRequestBody(string VoucherName, string VoucherNo, string VoucherQty, string Sign, string BarcodeUnit, string StartDate, string ExpiredDate, string UpdateDate, string Remarks1, string Remarks2)
         {
             this.VoucherName = VoucherName;
             this.VoucherNo = VoucherNo;
+            this.VoucherQty = VoucherQty;
             this.Sign = Sign;
             this.BarcodeUnit = BarcodeUnit;
             this.StartDate = StartDate;
@@ -2174,13 +2242,13 @@ namespace HexVoucherWebService
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="VoucherCodeSynchronizeResponse", Namespace="http://tempuri.org/", Order=0)]
-        public HexVoucherWebService.VoucherCodeSynchronizeResponseBody Body;
+        public VoucherService.VoucherCodeSynchronizeResponseBody Body;
         
         public VoucherCodeSynchronizeResponse()
         {
         }
         
-        public VoucherCodeSynchronizeResponse(HexVoucherWebService.VoucherCodeSynchronizeResponseBody Body)
+        public VoucherCodeSynchronizeResponse(VoucherService.VoucherCodeSynchronizeResponseBody Body)
         {
             this.Body = Body;
         }
@@ -2196,43 +2264,39 @@ namespace HexVoucherWebService
         public string VoucherCodeSynchronizeResult;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string RtnMsg;
+        public string Sign;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string RtnMsgNo;
+        public string RtnMsg;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string RtnVoucherName;
+        public string RtnMsgNo;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
-        public string RtnVoucherNo;
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
-        public string RtnVoucherBCD;
+        public string SNo;
         
         public VoucherCodeSynchronizeResponseBody()
         {
         }
         
-        public VoucherCodeSynchronizeResponseBody(string VoucherCodeSynchronizeResult, string RtnMsg, string RtnMsgNo, string RtnVoucherName, string RtnVoucherNo, string RtnVoucherBCD)
+        public VoucherCodeSynchronizeResponseBody(string VoucherCodeSynchronizeResult, string Sign, string RtnMsg, string RtnMsgNo, string SNo)
         {
             this.VoucherCodeSynchronizeResult = VoucherCodeSynchronizeResult;
+            this.Sign = Sign;
             this.RtnMsg = RtnMsg;
             this.RtnMsgNo = RtnMsgNo;
-            this.RtnVoucherName = RtnVoucherName;
-            this.RtnVoucherNo = RtnVoucherNo;
-            this.RtnVoucherBCD = RtnVoucherBCD;
+            this.SNo = SNo;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.1")]
-    public interface VoucherServiceSoapChannel : HexVoucherWebService.VoucherServiceSoap, System.ServiceModel.IClientChannel
+    public interface VoucherServiceSoapChannel : VoucherService.VoucherServiceSoap, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "1.0.0.1")]
-    public partial class VoucherServiceSoapClient : System.ServiceModel.ClientBase<HexVoucherWebService.VoucherServiceSoap>, HexVoucherWebService.VoucherServiceSoap
+    public partial class VoucherServiceSoapClient : System.ServiceModel.ClientBase<VoucherService.VoucherServiceSoap>, VoucherService.VoucherServiceSoap
     {
         
     /// <summary>
@@ -2269,15 +2333,15 @@ namespace HexVoucherWebService
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherOOResponse> HexVoucherWebService.VoucherServiceSoap.VoucherOOAsync(HexVoucherWebService.VoucherOORequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherOOResponse> VoucherService.VoucherServiceSoap.VoucherOOAsync(VoucherService.VoucherOORequest request)
         {
             return base.Channel.VoucherOOAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherOOResponse> VoucherOOAsync(string trans_tp, string voucher_no, string voucher_qty, string voucher_bcd, string bizdt_ord, string net_no_ord, string cust_name, string cust_tel, string cust_rmk, string rmk, string Sign)
+        public System.Threading.Tasks.Task<VoucherService.VoucherOOResponse> VoucherOOAsync(string trans_tp, string voucher_no, string voucher_qty, string voucher_bcd, string bizdt_ord, string net_no_ord, string cust_name, string cust_tel, string cust_rmk, string rmk, string Sign)
         {
-            HexVoucherWebService.VoucherOORequest inValue = new HexVoucherWebService.VoucherOORequest();
-            inValue.Body = new HexVoucherWebService.VoucherOORequestBody();
+            VoucherService.VoucherOORequest inValue = new VoucherService.VoucherOORequest();
+            inValue.Body = new VoucherService.VoucherOORequestBody();
             inValue.Body.trans_tp = trans_tp;
             inValue.Body.voucher_no = voucher_no;
             inValue.Body.voucher_qty = voucher_qty;
@@ -2289,109 +2353,109 @@ namespace HexVoucherWebService
             inValue.Body.cust_rmk = cust_rmk;
             inValue.Body.rmk = rmk;
             inValue.Body.Sign = Sign;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherOOAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherOOAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheckResponse> HexVoucherWebService.VoucherServiceSoap.VoucherCheckAsync(HexVoucherWebService.VoucherCheckRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherCheckResponse> VoucherService.VoucherServiceSoap.VoucherCheckAsync(VoucherService.VoucherCheckRequest request)
         {
             return base.Channel.VoucherCheckAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheckResponse> VoucherCheckAsync(string VoucherNo, string StoreNo, string Sign)
+        public System.Threading.Tasks.Task<VoucherService.VoucherCheckResponse> VoucherCheckAsync(string VoucherNo, string StoreNo, string Sign)
         {
-            HexVoucherWebService.VoucherCheckRequest inValue = new HexVoucherWebService.VoucherCheckRequest();
-            inValue.Body = new HexVoucherWebService.VoucherCheckRequestBody();
+            VoucherService.VoucherCheckRequest inValue = new VoucherService.VoucherCheckRequest();
+            inValue.Body = new VoucherService.VoucherCheckRequestBody();
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.StoreNo = StoreNo;
             inValue.Body.Sign = Sign;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherCheckAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherCheckAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheckNewResponse> HexVoucherWebService.VoucherServiceSoap.VoucherCheckNewAsync(HexVoucherWebService.VoucherCheckNewRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherCheckNewResponse> VoucherService.VoucherServiceSoap.VoucherCheckNewAsync(VoucherService.VoucherCheckNewRequest request)
         {
             return base.Channel.VoucherCheckNewAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheckNewResponse> VoucherCheckNewAsync(string VoucherNo, string StoreNo, string Sign)
+        public System.Threading.Tasks.Task<VoucherService.VoucherCheckNewResponse> VoucherCheckNewAsync(string VoucherNo, string StoreNo, string Sign)
         {
-            HexVoucherWebService.VoucherCheckNewRequest inValue = new HexVoucherWebService.VoucherCheckNewRequest();
-            inValue.Body = new HexVoucherWebService.VoucherCheckNewRequestBody();
+            VoucherService.VoucherCheckNewRequest inValue = new VoucherService.VoucherCheckNewRequest();
+            inValue.Body = new VoucherService.VoucherCheckNewRequestBody();
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.StoreNo = StoreNo;
             inValue.Body.Sign = Sign;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherCheckNewAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherCheckNewAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheckReturnResponse> HexVoucherWebService.VoucherServiceSoap.VoucherCheckReturnAsync(HexVoucherWebService.VoucherCheckReturnRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherCheckReturnResponse> VoucherService.VoucherServiceSoap.VoucherCheckReturnAsync(VoucherService.VoucherCheckReturnRequest request)
         {
             return base.Channel.VoucherCheckReturnAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheckReturnResponse> VoucherCheckReturnAsync(string VoucherNo, string StoreNo, string Sign)
+        public System.Threading.Tasks.Task<VoucherService.VoucherCheckReturnResponse> VoucherCheckReturnAsync(string VoucherNo, string StoreNo, string Sign)
         {
-            HexVoucherWebService.VoucherCheckReturnRequest inValue = new HexVoucherWebService.VoucherCheckReturnRequest();
-            inValue.Body = new HexVoucherWebService.VoucherCheckReturnRequestBody();
+            VoucherService.VoucherCheckReturnRequest inValue = new VoucherService.VoucherCheckReturnRequest();
+            inValue.Body = new VoucherService.VoucherCheckReturnRequestBody();
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.StoreNo = StoreNo;
             inValue.Body.Sign = Sign;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherCheckReturnAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherCheckReturnAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheck_OOResponse> HexVoucherWebService.VoucherServiceSoap.VoucherCheck_OOAsync(HexVoucherWebService.VoucherCheck_OORequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherCheck_OOResponse> VoucherService.VoucherServiceSoap.VoucherCheck_OOAsync(VoucherService.VoucherCheck_OORequest request)
         {
             return base.Channel.VoucherCheck_OOAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheck_OOResponse> VoucherCheck_OOAsync(string VoucherNo, string StoreNo, string Sign)
+        public System.Threading.Tasks.Task<VoucherService.VoucherCheck_OOResponse> VoucherCheck_OOAsync(string VoucherNo, string StoreNo, string Sign)
         {
-            HexVoucherWebService.VoucherCheck_OORequest inValue = new HexVoucherWebService.VoucherCheck_OORequest();
-            inValue.Body = new HexVoucherWebService.VoucherCheck_OORequestBody();
+            VoucherService.VoucherCheck_OORequest inValue = new VoucherService.VoucherCheck_OORequest();
+            inValue.Body = new VoucherService.VoucherCheck_OORequestBody();
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.StoreNo = StoreNo;
             inValue.Body.Sign = Sign;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherCheck_OOAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherCheck_OOAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.TestResponse> HexVoucherWebService.VoucherServiceSoap.TestAsync(HexVoucherWebService.TestRequest request)
+        System.Threading.Tasks.Task<VoucherService.TestResponse> VoucherService.VoucherServiceSoap.TestAsync(VoucherService.TestRequest request)
         {
             return base.Channel.TestAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.TestResponse> TestAsync()
+        public System.Threading.Tasks.Task<VoucherService.TestResponse> TestAsync()
         {
-            HexVoucherWebService.TestRequest inValue = new HexVoucherWebService.TestRequest();
-            inValue.Body = new HexVoucherWebService.TestRequestBody();
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).TestAsync(inValue);
+            VoucherService.TestRequest inValue = new VoucherService.TestRequest();
+            inValue.Body = new VoucherService.TestRequestBody();
+            return ((VoucherService.VoucherServiceSoap)(this)).TestAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.Test2Response> HexVoucherWebService.VoucherServiceSoap.Test2Async(HexVoucherWebService.Test2Request request)
+        System.Threading.Tasks.Task<VoucherService.Test2Response> VoucherService.VoucherServiceSoap.Test2Async(VoucherService.Test2Request request)
         {
             return base.Channel.Test2Async(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.Test2Response> Test2Async()
+        public System.Threading.Tasks.Task<VoucherService.Test2Response> Test2Async()
         {
-            HexVoucherWebService.Test2Request inValue = new HexVoucherWebService.Test2Request();
-            inValue.Body = new HexVoucherWebService.Test2RequestBody();
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).Test2Async(inValue);
+            VoucherService.Test2Request inValue = new VoucherService.Test2Request();
+            inValue.Body = new VoucherService.Test2RequestBody();
+            return ((VoucherService.VoucherServiceSoap)(this)).Test2Async(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionResponse> HexVoucherWebService.VoucherServiceSoap.VoucherTransactionAsync(HexVoucherWebService.VoucherTransactionRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherTransactionResponse> VoucherService.VoucherServiceSoap.VoucherTransactionAsync(VoucherService.VoucherTransactionRequest request)
         {
             return base.Channel.VoucherTransactionAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionResponse> VoucherTransactionAsync(int IsSale, string VoucherNo, string StoreNo, string TillNo, int SaleId, string UserCode, string SaleDate, string Sign)
+        public System.Threading.Tasks.Task<VoucherService.VoucherTransactionResponse> VoucherTransactionAsync(int IsSale, string VoucherNo, string StoreNo, string TillNo, int SaleId, string UserCode, string SaleDate, string Sign)
         {
-            HexVoucherWebService.VoucherTransactionRequest inValue = new HexVoucherWebService.VoucherTransactionRequest();
-            inValue.Body = new HexVoucherWebService.VoucherTransactionRequestBody();
+            VoucherService.VoucherTransactionRequest inValue = new VoucherService.VoucherTransactionRequest();
+            inValue.Body = new VoucherService.VoucherTransactionRequestBody();
             inValue.Body.IsSale = IsSale;
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.StoreNo = StoreNo;
@@ -2400,19 +2464,19 @@ namespace HexVoucherWebService
             inValue.Body.UserCode = UserCode;
             inValue.Body.SaleDate = SaleDate;
             inValue.Body.Sign = Sign;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherTransactionAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherTransactionAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionNewResponse> HexVoucherWebService.VoucherServiceSoap.VoucherTransactionNewAsync(HexVoucherWebService.VoucherTransactionNewRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherTransactionNewResponse> VoucherService.VoucherServiceSoap.VoucherTransactionNewAsync(VoucherService.VoucherTransactionNewRequest request)
         {
             return base.Channel.VoucherTransactionNewAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionNewResponse> VoucherTransactionNewAsync(int IsSale, string VoucherNo, string StoreNo, string TillNo, int SaleId, string UserCode, string SaleDate, string NetAmt, string Distcount, string Tender, string TtransNo, string Sign)
+        public System.Threading.Tasks.Task<VoucherService.VoucherTransactionNewResponse> VoucherTransactionNewAsync(int IsSale, string VoucherNo, string StoreNo, string TillNo, int SaleId, string UserCode, string SaleDate, string NetAmt, string Distcount, string Tender, string TtransNo, string Sign)
         {
-            HexVoucherWebService.VoucherTransactionNewRequest inValue = new HexVoucherWebService.VoucherTransactionNewRequest();
-            inValue.Body = new HexVoucherWebService.VoucherTransactionNewRequestBody();
+            VoucherService.VoucherTransactionNewRequest inValue = new VoucherService.VoucherTransactionNewRequest();
+            inValue.Body = new VoucherService.VoucherTransactionNewRequestBody();
             inValue.Body.IsSale = IsSale;
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.StoreNo = StoreNo;
@@ -2425,19 +2489,19 @@ namespace HexVoucherWebService
             inValue.Body.Tender = Tender;
             inValue.Body.TtransNo = TtransNo;
             inValue.Body.Sign = Sign;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherTransactionNewAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherTransactionNewAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionReturnResponse> HexVoucherWebService.VoucherServiceSoap.VoucherTransactionReturnAsync(HexVoucherWebService.VoucherTransactionReturnRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherTransactionReturnResponse> VoucherService.VoucherServiceSoap.VoucherTransactionReturnAsync(VoucherService.VoucherTransactionReturnRequest request)
         {
             return base.Channel.VoucherTransactionReturnAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionReturnResponse> VoucherTransactionReturnAsync(int IsRtn, string VoucherNo, string StoreNo, string TillNo, int SaleId, string StaffNo, string RtnDate, string TtransNo, string Sign)
+        public System.Threading.Tasks.Task<VoucherService.VoucherTransactionReturnResponse> VoucherTransactionReturnAsync(int IsRtn, string VoucherNo, string StoreNo, string TillNo, int SaleId, string StaffNo, string RtnDate, string TtransNo, string Sign)
         {
-            HexVoucherWebService.VoucherTransactionReturnRequest inValue = new HexVoucherWebService.VoucherTransactionReturnRequest();
-            inValue.Body = new HexVoucherWebService.VoucherTransactionReturnRequestBody();
+            VoucherService.VoucherTransactionReturnRequest inValue = new VoucherService.VoucherTransactionReturnRequest();
+            inValue.Body = new VoucherService.VoucherTransactionReturnRequestBody();
             inValue.Body.IsRtn = IsRtn;
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.StoreNo = StoreNo;
@@ -2447,98 +2511,98 @@ namespace HexVoucherWebService
             inValue.Body.RtnDate = RtnDate;
             inValue.Body.TtransNo = TtransNo;
             inValue.Body.Sign = Sign;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherTransactionReturnAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherTransactionReturnAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherSalesCheckResponse> HexVoucherWebService.VoucherServiceSoap.VoucherSalesCheckAsync(HexVoucherWebService.VoucherSalesCheckRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherSalesCheckResponse> VoucherService.VoucherServiceSoap.VoucherSalesCheckAsync(VoucherService.VoucherSalesCheckRequest request)
         {
             return base.Channel.VoucherSalesCheckAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherSalesCheckResponse> VoucherSalesCheckAsync(string VoucherNo, string StoreNo, string Sign)
+        public System.Threading.Tasks.Task<VoucherService.VoucherSalesCheckResponse> VoucherSalesCheckAsync(string VoucherNo, string StoreNo, string Sign)
         {
-            HexVoucherWebService.VoucherSalesCheckRequest inValue = new HexVoucherWebService.VoucherSalesCheckRequest();
-            inValue.Body = new HexVoucherWebService.VoucherSalesCheckRequestBody();
+            VoucherService.VoucherSalesCheckRequest inValue = new VoucherService.VoucherSalesCheckRequest();
+            inValue.Body = new VoucherService.VoucherSalesCheckRequestBody();
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.StoreNo = StoreNo;
             inValue.Body.Sign = Sign;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherSalesCheckAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherSalesCheckAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheck_BCPResponse> HexVoucherWebService.VoucherServiceSoap.VoucherCheck_BCPAsync(HexVoucherWebService.VoucherCheck_BCPRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherCheck_BCPResponse> VoucherService.VoucherServiceSoap.VoucherCheck_BCPAsync(VoucherService.VoucherCheck_BCPRequest request)
         {
             return base.Channel.VoucherCheck_BCPAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheck_BCPResponse> VoucherCheck_BCPAsync(string VoucherNo, string StoreNo, string Sign)
+        public System.Threading.Tasks.Task<VoucherService.VoucherCheck_BCPResponse> VoucherCheck_BCPAsync(string VoucherNo, string StoreNo, string Sign)
         {
-            HexVoucherWebService.VoucherCheck_BCPRequest inValue = new HexVoucherWebService.VoucherCheck_BCPRequest();
-            inValue.Body = new HexVoucherWebService.VoucherCheck_BCPRequestBody();
+            VoucherService.VoucherCheck_BCPRequest inValue = new VoucherService.VoucherCheck_BCPRequest();
+            inValue.Body = new VoucherService.VoucherCheck_BCPRequestBody();
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.StoreNo = StoreNo;
             inValue.Body.Sign = Sign;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherCheck_BCPAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherCheck_BCPAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheck_BCPNewResponse> HexVoucherWebService.VoucherServiceSoap.VoucherCheck_BCPNewAsync(HexVoucherWebService.VoucherCheck_BCPNewRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherCheck_BCPNewResponse> VoucherService.VoucherServiceSoap.VoucherCheck_BCPNewAsync(VoucherService.VoucherCheck_BCPNewRequest request)
         {
             return base.Channel.VoucherCheck_BCPNewAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherCheck_BCPNewResponse> VoucherCheck_BCPNewAsync(string VoucherNo, string StoreNo, string Sign)
+        public System.Threading.Tasks.Task<VoucherService.VoucherCheck_BCPNewResponse> VoucherCheck_BCPNewAsync(string VoucherNo, string StoreNo, string Sign)
         {
-            HexVoucherWebService.VoucherCheck_BCPNewRequest inValue = new HexVoucherWebService.VoucherCheck_BCPNewRequest();
-            inValue.Body = new HexVoucherWebService.VoucherCheck_BCPNewRequestBody();
+            VoucherService.VoucherCheck_BCPNewRequest inValue = new VoucherService.VoucherCheck_BCPNewRequest();
+            inValue.Body = new VoucherService.VoucherCheck_BCPNewRequestBody();
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.StoreNo = StoreNo;
             inValue.Body.Sign = Sign;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherCheck_BCPNewAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherCheck_BCPNewAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherQueryResponse> HexVoucherWebService.VoucherServiceSoap.VoucherQueryAsync(HexVoucherWebService.VoucherQueryRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherQueryResponse> VoucherService.VoucherServiceSoap.VoucherQueryAsync(VoucherService.VoucherQueryRequest request)
         {
             return base.Channel.VoucherQueryAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherQueryResponse> VoucherQueryAsync(string VoucherNo, string StoreNo, string Sign)
+        public System.Threading.Tasks.Task<VoucherService.VoucherQueryResponse> VoucherQueryAsync(string VoucherNo, string StoreNo, string Sign)
         {
-            HexVoucherWebService.VoucherQueryRequest inValue = new HexVoucherWebService.VoucherQueryRequest();
-            inValue.Body = new HexVoucherWebService.VoucherQueryRequestBody();
+            VoucherService.VoucherQueryRequest inValue = new VoucherService.VoucherQueryRequest();
+            inValue.Body = new VoucherService.VoucherQueryRequestBody();
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.StoreNo = StoreNo;
             inValue.Body.Sign = Sign;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherQueryAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherQueryAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherQueryNewResponse> HexVoucherWebService.VoucherServiceSoap.VoucherQueryNewAsync(HexVoucherWebService.VoucherQueryNewRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherQueryNewResponse> VoucherService.VoucherServiceSoap.VoucherQueryNewAsync(VoucherService.VoucherQueryNewRequest request)
         {
             return base.Channel.VoucherQueryNewAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherQueryNewResponse> VoucherQueryNewAsync(string VoucherNo, string Sign)
+        public System.Threading.Tasks.Task<VoucherService.VoucherQueryNewResponse> VoucherQueryNewAsync(string VoucherNo, string Sign)
         {
-            HexVoucherWebService.VoucherQueryNewRequest inValue = new HexVoucherWebService.VoucherQueryNewRequest();
-            inValue.Body = new HexVoucherWebService.VoucherQueryNewRequestBody();
+            VoucherService.VoucherQueryNewRequest inValue = new VoucherService.VoucherQueryNewRequest();
+            inValue.Body = new VoucherService.VoucherQueryNewRequestBody();
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.Sign = Sign;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherQueryNewAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherQueryNewAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionRetreatRefundResponse> HexVoucherWebService.VoucherServiceSoap.VoucherTransactionRetreatRefundAsync(HexVoucherWebService.VoucherTransactionRetreatRefundRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherTransactionRetreatRefundResponse> VoucherService.VoucherServiceSoap.VoucherTransactionRetreatRefundAsync(VoucherService.VoucherTransactionRetreatRefundRequest request)
         {
             return base.Channel.VoucherTransactionRetreatRefundAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionRetreatRefundResponse> VoucherTransactionRetreatRefundAsync(string TransNo, string VoucherNo, string Sign, string StoreNo, string TillNo, int SaleId, string SaleDate, string Remarks1, string Remarks2)
+        public System.Threading.Tasks.Task<VoucherService.VoucherTransactionRetreatRefundResponse> VoucherTransactionRetreatRefundAsync(string TransNo, string VoucherNo, string Sign, string StoreNo, string TillNo, int SaleId, string SaleDate, string Remarks1, string Remarks2)
         {
-            HexVoucherWebService.VoucherTransactionRetreatRefundRequest inValue = new HexVoucherWebService.VoucherTransactionRetreatRefundRequest();
-            inValue.Body = new HexVoucherWebService.VoucherTransactionRetreatRefundRequestBody();
+            VoucherService.VoucherTransactionRetreatRefundRequest inValue = new VoucherService.VoucherTransactionRetreatRefundRequest();
+            inValue.Body = new VoucherService.VoucherTransactionRetreatRefundRequestBody();
             inValue.Body.TransNo = TransNo;
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.Sign = Sign;
@@ -2548,19 +2612,19 @@ namespace HexVoucherWebService
             inValue.Body.SaleDate = SaleDate;
             inValue.Body.Remarks1 = Remarks1;
             inValue.Body.Remarks2 = Remarks2;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherTransactionRetreatRefundAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherTransactionRetreatRefundAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionWriteOffRefundResponse> HexVoucherWebService.VoucherServiceSoap.VoucherTransactionWriteOffRefundAsync(HexVoucherWebService.VoucherTransactionWriteOffRefundRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherTransactionWriteOffRefundResponse> VoucherService.VoucherServiceSoap.VoucherTransactionWriteOffRefundAsync(VoucherService.VoucherTransactionWriteOffRefundRequest request)
         {
             return base.Channel.VoucherTransactionWriteOffRefundAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherTransactionWriteOffRefundResponse> VoucherTransactionWriteOffRefundAsync(string TransNo, string VoucherNo, string Sign, string StoreNo, string TillNo, int SaleId, string SaleDate, string Remarks1, string Remarks2)
+        public System.Threading.Tasks.Task<VoucherService.VoucherTransactionWriteOffRefundResponse> VoucherTransactionWriteOffRefundAsync(string TransNo, string VoucherNo, string Sign, string StoreNo, string TillNo, int SaleId, string SaleDate, string Remarks1, string Remarks2)
         {
-            HexVoucherWebService.VoucherTransactionWriteOffRefundRequest inValue = new HexVoucherWebService.VoucherTransactionWriteOffRefundRequest();
-            inValue.Body = new HexVoucherWebService.VoucherTransactionWriteOffRefundRequestBody();
+            VoucherService.VoucherTransactionWriteOffRefundRequest inValue = new VoucherService.VoucherTransactionWriteOffRefundRequest();
+            inValue.Body = new VoucherService.VoucherTransactionWriteOffRefundRequestBody();
             inValue.Body.TransNo = TransNo;
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.Sign = Sign;
@@ -2570,37 +2634,37 @@ namespace HexVoucherWebService
             inValue.Body.SaleDate = SaleDate;
             inValue.Body.Remarks1 = Remarks1;
             inValue.Body.Remarks2 = Remarks2;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherTransactionWriteOffRefundAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherTransactionWriteOffRefundAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherObsoleteResponse> HexVoucherWebService.VoucherServiceSoap.VoucherObsoleteAsync(HexVoucherWebService.VoucherObsoleteRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherObsoleteResponse> VoucherService.VoucherServiceSoap.VoucherObsoleteAsync(VoucherService.VoucherObsoleteRequest request)
         {
             return base.Channel.VoucherObsoleteAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherObsoleteResponse> VoucherObsoleteAsync(string VoucherNo, string UpdateDate, string Sign, string Remarks1, string Remarks2)
+        public System.Threading.Tasks.Task<VoucherService.VoucherObsoleteResponse> VoucherObsoleteAsync(string VoucherNo, string UpdateDate, string Sign, string Remarks1, string Remarks2)
         {
-            HexVoucherWebService.VoucherObsoleteRequest inValue = new HexVoucherWebService.VoucherObsoleteRequest();
-            inValue.Body = new HexVoucherWebService.VoucherObsoleteRequestBody();
+            VoucherService.VoucherObsoleteRequest inValue = new VoucherService.VoucherObsoleteRequest();
+            inValue.Body = new VoucherService.VoucherObsoleteRequestBody();
             inValue.Body.VoucherNo = VoucherNo;
             inValue.Body.UpdateDate = UpdateDate;
             inValue.Body.Sign = Sign;
             inValue.Body.Remarks1 = Remarks1;
             inValue.Body.Remarks2 = Remarks2;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherObsoleteAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherObsoleteAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.StoreInformationSynchronizeResponse> HexVoucherWebService.VoucherServiceSoap.StoreInformationSynchronizeAsync(HexVoucherWebService.StoreInformationSynchronizeRequest request)
+        System.Threading.Tasks.Task<VoucherService.StoreInformationSynchronizeResponse> VoucherService.VoucherServiceSoap.StoreInformationSynchronizeAsync(VoucherService.StoreInformationSynchronizeRequest request)
         {
             return base.Channel.StoreInformationSynchronizeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.StoreInformationSynchronizeResponse> StoreInformationSynchronizeAsync(string Province, string City, string Sign, string Company, string StoreNo, string StoreName, string StoreAddr, string StoreEmail, string StoreTel, string StorePosNum, string OperateType, string Remarks1, string Remarks2)
+        public System.Threading.Tasks.Task<VoucherService.StoreInformationSynchronizeResponse> StoreInformationSynchronizeAsync(string Province, string City, string Sign, string Company, string StoreNo, string StoreName, string StoreAddr, string StoreEmail, string StoreTel, string StorePosNum, string OperateType, string Remarks1, string Remarks2)
         {
-            HexVoucherWebService.StoreInformationSynchronizeRequest inValue = new HexVoucherWebService.StoreInformationSynchronizeRequest();
-            inValue.Body = new HexVoucherWebService.StoreInformationSynchronizeRequestBody();
+            VoucherService.StoreInformationSynchronizeRequest inValue = new VoucherService.StoreInformationSynchronizeRequest();
+            inValue.Body = new VoucherService.StoreInformationSynchronizeRequestBody();
             inValue.Body.Province = Province;
             inValue.Body.City = City;
             inValue.Body.Sign = Sign;
@@ -2614,21 +2678,22 @@ namespace HexVoucherWebService
             inValue.Body.OperateType = OperateType;
             inValue.Body.Remarks1 = Remarks1;
             inValue.Body.Remarks2 = Remarks2;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).StoreInformationSynchronizeAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).StoreInformationSynchronizeAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<HexVoucherWebService.VoucherCodeSynchronizeResponse> HexVoucherWebService.VoucherServiceSoap.VoucherCodeSynchronizeAsync(HexVoucherWebService.VoucherCodeSynchronizeRequest request)
+        System.Threading.Tasks.Task<VoucherService.VoucherCodeSynchronizeResponse> VoucherService.VoucherServiceSoap.VoucherCodeSynchronizeAsync(VoucherService.VoucherCodeSynchronizeRequest request)
         {
             return base.Channel.VoucherCodeSynchronizeAsync(request);
         }
         
-        public System.Threading.Tasks.Task<HexVoucherWebService.VoucherCodeSynchronizeResponse> VoucherCodeSynchronizeAsync(string VoucherName, string VoucherNo, string Sign, string BarcodeUnit, string StartDate, string ExpiredDate, string UpdateDate, string Remarks1, string Remarks2)
+        public System.Threading.Tasks.Task<VoucherService.VoucherCodeSynchronizeResponse> VoucherCodeSynchronizeAsync(string VoucherName, string VoucherNo, string VoucherQty, string Sign, string BarcodeUnit, string StartDate, string ExpiredDate, string UpdateDate, string Remarks1, string Remarks2)
         {
-            HexVoucherWebService.VoucherCodeSynchronizeRequest inValue = new HexVoucherWebService.VoucherCodeSynchronizeRequest();
-            inValue.Body = new HexVoucherWebService.VoucherCodeSynchronizeRequestBody();
+            VoucherService.VoucherCodeSynchronizeRequest inValue = new VoucherService.VoucherCodeSynchronizeRequest();
+            inValue.Body = new VoucherService.VoucherCodeSynchronizeRequestBody();
             inValue.Body.VoucherName = VoucherName;
             inValue.Body.VoucherNo = VoucherNo;
+            inValue.Body.VoucherQty = VoucherQty;
             inValue.Body.Sign = Sign;
             inValue.Body.BarcodeUnit = BarcodeUnit;
             inValue.Body.StartDate = StartDate;
@@ -2636,7 +2701,7 @@ namespace HexVoucherWebService
             inValue.Body.UpdateDate = UpdateDate;
             inValue.Body.Remarks1 = Remarks1;
             inValue.Body.Remarks2 = Remarks2;
-            return ((HexVoucherWebService.VoucherServiceSoap)(this)).VoucherCodeSynchronizeAsync(inValue);
+            return ((VoucherService.VoucherServiceSoap)(this)).VoucherCodeSynchronizeAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -2680,11 +2745,11 @@ namespace HexVoucherWebService
         {
             if ((endpointConfiguration == EndpointConfiguration.VoucherServiceSoap))
             {
-                return new System.ServiceModel.EndpointAddress("http://localhost:13728/VoucherService.asmx");
+                return new System.ServiceModel.EndpointAddress("http://localhost:13728/voucherService.asmx");
             }
             if ((endpointConfiguration == EndpointConfiguration.VoucherServiceSoap12))
             {
-                return new System.ServiceModel.EndpointAddress("http://localhost:13728/VoucherService.asmx");
+                return new System.ServiceModel.EndpointAddress("http://localhost:13728/voucherService.asmx");
             }
             throw new System.InvalidOperationException(string.Format("找不到名称为“{0}”的终结点。", endpointConfiguration));
         }
